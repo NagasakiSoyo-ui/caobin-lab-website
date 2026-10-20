@@ -1,0 +1,12 @@
+/research/
+/import_students.py
+/verify.cjs
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+*.xlsx
+*.docx
+*.zip
+.env
+.env.*

@@ -1,0 +1,631 @@
+{
+  "name": "曹彬课题组",
+  "subtitle": "呼吸道感染与临床转化研究",
+  "research": [
+    {
+      "title": "病毒性肺炎与病毒性感染中毒症（viral sepsis）",
+      "text": "围绕流感、腺病毒、新冠等呼吸道病毒肺炎，开展流行病学与临床表型研究；阐释病毒性感染中毒症理论，解析病毒诱发肺损伤、多器官功能障碍的宿主免疫致病机制，对比病毒性感染中毒症与细菌性脓毒症的异同，发掘宿主干预靶点；依托临床队列，探究呼吸道感染后综合征（长新冠）的临床表型、病毒残留、恢复生物学特征及干预策略。"
+    },
+    {
+      "title": "呼吸道病原体与精准感染诊断",
+      "text": "依托 CAPChina 全国多中心平台开展社区获得性肺炎病原谱研究；解析呼吸道细菌、支原体、真菌的耐药机制，研发快速病原诊断技术；开展重症细菌性、真菌性肺炎的临床特征与救治策略研究。"
+    },
+    {
+      "title": "抗病毒药物临床评价与新药转化",
+      "text": "建立被 WHO、CDE 采纳的病毒性肺炎抗病毒疗效评价体系（7 等级临床终点、核心症状评价量表）；牵头抗流感、抗新冠创新药物 II/III 期临床试验，支撑国产 I 类抗病毒新药上市，探索重症呼吸道感染抗病毒联合治疗方案。"
+    },
+    {
+      "title": "急性呼吸道感染的真实世界临床研究",
+      "text": "基于多中心真实世界队列开展呼吸道病原体动态监测，解析病原谱时序变迁与流行特征；利用真实世界数据阐明不同病原体感染的临床表型、治疗方案及预后影响因素，挖掘病原宿主临床结局关联证据，为呼吸道感染流行病学防控与精准诊疗提供真实世界证据。"
+    },
+    {
+      "title": "呼吸道微生物组研究",
+      "text": "聚焦急性呼吸道感染进程中呼吸道微生态动态变化，探索病原扰动下呼吸道菌群结构、代谢特征的演变规律；阐释呼吸道微生物组与宿主免疫、疾病严重程度及感染后转归的关联，挖掘微生态相关预后标志物与潜在干预靶点。"
+    },
+    {
+      "title": "临床转化方向",
+      "text": "研发呼吸道病原快速多维检测技术；探索宿主导向治疗策略；构建呼吸道感染预后预测模型；推动临床研究证据转化为诊疗规范与公共防控策略。"
+    }
+  ],
+  "projects": [
+    {
+      "program": "科技部国家重大专项",
+      "dates": "2024.12-2027.11",
+      "title": "社区呼吸道感染重点人群精准诊疗及长期健康研究",
+      "code": "2024ZD0522500"
+    },
+    {
+      "program": "科技部国家重点研发计划项目",
+      "dates": "2022.12-2027.11",
+      "title": "呼吸道微生物组特征及在呼吸道感染中免疫调控机制研究",
+      "code": "2022YFA1304300"
+    },
+    {
+      "program": "国自然重点项目",
+      "dates": "2026.01-2030.12",
+      "title": "病毒性肺炎中IL-1通路诱导CXCR4hi中性粒细胞自噬异常升高致肺损伤的机制研究",
+      "code": "82530002"
+    },
+    {
+      "program": "研究型病房卓越临床研究计划项目",
+      "dates": "2024.11-2027.10",
+      "title": "下呼吸道感染预防和诊疗评估关键技术的开发和临床验证研究",
+      "code": "BRWEP2024W114060100"
+    }
+  ],
+  "leader": {
+    "name": "曹彬",
+    "photo": "assets/caobin.jpeg",
+    "role": "主任医师 · 教授 · 博士研究生导师",
+    "bio": [
+      "曹彬，博士，主任医师、教授、博士研究生导师，著名呼吸与危重症医学专家，中华医学会呼吸病学分会主任委员、世界卫生组织（WHO）流感临床研究专家组组长。长期致力于呼吸系统感染性疾病的临床诊疗与转化研究，在病毒性呼吸道感染、重症肺炎及新发突发传染病领域具有重要国际影响力。",
+      "曾获国家杰出青年科学基金资助、教育部长江学者特聘教授等荣誉，入选国家级高层次人才计划，获呼吸领域重要学术奖项及吴阶平医学奖相关荣誉。主持国家科技重大专项、国家重点研发计划、国家自然科学基金重点项目及新基石研究员项目等30余项科研课题。",
+      "以通讯作者（含共同通讯作者）在国际高水平期刊发表 SCI 论文220余篇，其中包括 The New England Journal of Medicine（NEJM）5篇、The Lancet 6篇、Nature Medicine 1篇及 The Lancet Respiratory Medicine 2篇；拥有 ESI 高被引论文16篇，论文总被引次数超过14万次（Google Scholar），入选全球前2%顶尖科学家终身影响力榜单。",
+      "在国际学术组织与指南制定方面，担任WHO流感临床研究专家组组长，参与国际指南制定6部，主持制定国家级指南与专家共识10余部，并在推动流感临床研究、呼吸道感染诊疗规范化及国际多中心临床研究合作方面发挥重要作用。以第一完成人获得北京市科学技术进步奖一等奖、华夏医学科技奖一等奖等科技奖励。"
+    ]
+  },
+  "members": [
+    "王一民",
+    "王业明",
+    "邹晓辉",
+    "李辉",
+    "李海波",
+    "谷晓颖",
+    "王在",
+    "周飞"
+  ],
+  "contact": {
+    "name": "刘医生",
+    "email": "liudongdoc@163.com"
+  },
+  "resources": [
+    {
+      "id": "resource-05",
+      "filename": "中国流感治疗与药物预防临床实践指南（2025版） (1).pdf",
+      "path": "documents/resource-05.pdf",
+      "pages": 18,
+      "bytes": 2821242,
+      "sha256": "34f09404cec8e1765d34d2e5c73bc4342788ab1079f103fc2b071d22fa306ae0",
+      "title": "中国流感治疗与药物预防临床实践指南（2025版）",
+      "kind": "指南",
+      "disease": "呼吸道感染",
+      "year": "2026",
+      "version": "2025版 · 2026年刊出",
+      "journal": "中华医学杂志",
+      "cover": "assets/covers/resource-05.jpg"
+    },
+    {
+      "id": "resource-08",
+      "filename": "支气管哮喘防治指南（2024年版）.pdf",
+      "path": "documents/resource-08.pdf",
+      "pages": 41,
+      "bytes": 5601462,
+      "sha256": "8c79ad2cc8ec85af72b2e05c65684cb1524f0ca6719375ac37c0af688a298325",
+      "title": "支气管哮喘防治指南（2024年版）",
+      "kind": "指南",
+      "disease": "哮喘",
+      "year": "2025",
+      "version": "2024年版 · 2025年刊出",
+      "journal": "中华结核和呼吸杂志",
+      "cover": "assets/covers/resource-08.jpg"
+    },
+    {
+      "id": "resource-07",
+      "filename": "慢性阻塞性肺疾病急性加重围出院期管理与随访指南（2024年版）.pdf",
+      "path": "documents/resource-07.pdf",
+      "pages": 21,
+      "bytes": 3300472,
+      "sha256": "2c4f2eeb5a2075ebd347d0e83ccdda6668532119312c93f70a7faf9d9942db4e",
+      "title": "慢性阻塞性肺疾病急性加重围出院期管理与随访指南（2024年版）",
+      "kind": "指南",
+      "disease": "慢阻肺",
+      "year": "2024",
+      "version": "2024年版",
+      "journal": "中华结核和呼吸杂志",
+      "cover": "assets/covers/resource-07.jpg"
+    },
+    {
+      "id": "resource-09",
+      "filename": "疑似呼吸道感染.pdf",
+      "path": "documents/resource-09.pdf",
+      "pages": 4,
+      "bytes": 1053894,
+      "sha256": "23bde89da0053f49779ccfad07cd97ec23c09ccc5a22d7a416800666666b56af",
+      "title": "疑似急性呼吸道感染：16岁以上人群初诊评估与初始管理——NICE指南摘要",
+      "kind": "指南摘要",
+      "disease": "呼吸道感染",
+      "year": "2024",
+      "version": "2024年刊出 · 英文",
+      "journal": "BMJ",
+      "cover": "assets/covers/resource-09.jpg",
+      "english": "Suspected acute respiratory infection in over 16s: assessment at first presentation and initial management—summary of NICE guidance"
+    },
+    {
+      "id": "resource-01",
+      "filename": "1.2.29+慢性阻塞性肺疾病急性加重高风险患者识别与管理中国专家共识.pdf",
+      "path": "documents/resource-01.pdf",
+      "pages": 19,
+      "bytes": 3571253,
+      "sha256": "e1d7ce788faaeadd310d5590ff4dd3e8d9465cc837831114ca79079a6cb468b3",
+      "title": "慢性阻塞性肺疾病急性加重高风险患者识别与管理中国专家共识",
+      "kind": "专家共识",
+      "disease": "慢阻肺",
+      "year": "2022",
+      "version": "2022年刊出",
+      "journal": "国际呼吸杂志",
+      "cover": "assets/covers/resource-01.jpg"
+    },
+    {
+      "id": "resource-03",
+      "filename": "COPD指南（2021更新版）-中华医学会-2021.pdf",
+      "path": "documents/resource-03.pdf",
+      "pages": 36,
+      "bytes": 3094438,
+      "sha256": "44274cf766eb264a582f21c8cde4f2a11b488dcc62d58bd9c3f950fdf478177e",
+      "title": "慢性阻塞性肺疾病诊治指南（2021年修订版）",
+      "kind": "指南",
+      "disease": "慢阻肺",
+      "year": "2021",
+      "version": "2021年修订版",
+      "journal": "中华结核和呼吸杂志",
+      "cover": "assets/covers/resource-03.jpg"
+    },
+    {
+      "id": "resource-04",
+      "filename": "中国成人支气管扩张症诊断与治疗专家共识.pdf",
+      "path": "documents/resource-04.pdf",
+      "pages": 11,
+      "bytes": 1409752,
+      "sha256": "086a098927010001e8ec5bac859ef9e5e863d0d799ad648cb8a1f271a5072f2c",
+      "title": "中国成人支气管扩张症诊断与治疗专家共识",
+      "kind": "专家共识",
+      "disease": "支气管扩张",
+      "year": "2021",
+      "version": "2021年刊出",
+      "journal": "中华结核和呼吸杂志",
+      "cover": "assets/covers/resource-04.jpg"
+    },
+    {
+      "id": "resource-06",
+      "filename": "急性上呼吸道感染基层诊疗指南(实践版·2018).pdf",
+      "path": "documents/resource-06.pdf",
+      "pages": 4,
+      "bytes": 250284,
+      "sha256": "e0bdd7a705c53f0ba2984a0a23fa6458d18911843dabd4f9e0e31fc49f4c4feb",
+      "title": "急性上呼吸道感染基层诊疗指南（实践版·2018）",
+      "kind": "指南",
+      "disease": "呼吸道感染",
+      "year": "2019",
+      "version": "实践版·2018 · 2019年刊出",
+      "journal": "中华全科医师杂志",
+      "cover": "assets/covers/resource-06.jpg"
+    },
+    {
+      "id": "resource-02",
+      "filename": "CAP2016指南.pdf",
+      "path": "documents/resource-02.pdf",
+      "pages": 27,
+      "bytes": 2664677,
+      "sha256": "41d92805dc7054a8bacb840a940233d8f4fd1cda7b4ba2ceb541cebaa4cc15c1",
+      "title": "中国成人社区获得性肺炎诊断和治疗指南（2016年版）",
+      "kind": "指南",
+      "disease": "呼吸道感染",
+      "year": "2016",
+      "version": "2016年版",
+      "journal": "中华结核和呼吸杂志",
+      "cover": "assets/covers/resource-02.jpg"
+    }
+  ],
+  "trainees": [
+    {
+      "id": "member-01",
+      "name": "刘东",
+      "school": "首都医科大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2024",
+      "group": "students",
+      "photo": ""
+    },
+    {
+      "id": "member-02",
+      "name": "褚子逸",
+      "school": "北京协和医学院",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2024",
+      "group": "students",
+      "photo": "assets/people/member-02.jpg"
+    },
+    {
+      "id": "member-03",
+      "name": "袁英瑛",
+      "school": "首都医科大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2026",
+      "group": "students",
+      "photo": "assets/people/member-03.jpg"
+    },
+    {
+      "id": "member-04",
+      "name": "梁礼芳",
+      "school": "首都医科大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2024",
+      "group": "students",
+      "photo": "assets/people/member-04.jpg"
+    },
+    {
+      "id": "member-05",
+      "name": "黄一皎",
+      "school": "清华大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2022",
+      "group": "students",
+      "photo": "assets/people/member-05.jpg"
+    },
+    {
+      "id": "member-06",
+      "name": "郭桦",
+      "school": "北京协和医学院",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2026",
+      "group": "students",
+      "photo": "assets/people/member-06.jpg"
+    },
+    {
+      "id": "member-07",
+      "name": "宋融融",
+      "school": "北京协和医学院",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2024",
+      "group": "students",
+      "photo": "assets/people/member-07.jpg"
+    },
+    {
+      "id": "member-08",
+      "name": "王威扬",
+      "school": "北京协和医学院",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2023级直博",
+      "group": "students",
+      "photo": "assets/people/member-08.jpg"
+    },
+    {
+      "id": "member-09",
+      "name": "向春燕",
+      "school": "首都医科大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2024年",
+      "group": "students",
+      "photo": "assets/people/member-09.jpg"
+    },
+    {
+      "id": "member-10",
+      "name": "顾思维",
+      "school": "首都医科大学",
+      "stage": "硕士研究生",
+      "workplace": "",
+      "cohort": "2024",
+      "group": "students",
+      "photo": "assets/people/member-10.jpg"
+    },
+    {
+      "id": "member-11",
+      "name": "侯昊昱",
+      "school": "中日友好临床医学研究所",
+      "stage": "硕士研究生",
+      "workplace": "",
+      "cohort": "2025",
+      "group": "students",
+      "photo": "assets/people/member-11.jpg"
+    },
+    {
+      "id": "member-12",
+      "name": "蒲丹妮",
+      "school": "北京协和医学院",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2024",
+      "group": "students",
+      "photo": "assets/people/member-12.jpg"
+    },
+    {
+      "id": "member-13",
+      "name": "姚晓旋",
+      "school": "北京协和医学院",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2024",
+      "group": "students",
+      "photo": "assets/people/member-13.jpg"
+    },
+    {
+      "id": "member-14",
+      "name": "李妍妍",
+      "school": "首都医科大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2025级",
+      "group": "students",
+      "photo": "assets/people/member-14.jpg"
+    },
+    {
+      "id": "member-15",
+      "name": "穆昱先",
+      "school": "北京协和医学院",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2023",
+      "group": "students",
+      "photo": "assets/people/member-15.jpg"
+    },
+    {
+      "id": "member-16",
+      "name": "于洁",
+      "school": "中日友好临床医学研究所",
+      "stage": "硕士研究生",
+      "workplace": "",
+      "cohort": "2026",
+      "group": "students",
+      "photo": "assets/people/member-16.jpg"
+    },
+    {
+      "id": "member-17",
+      "name": "刘岩",
+      "school": "",
+      "stage": "已毕业",
+      "workplace": "山东医药大学烟台附属医院",
+      "cohort": "2024",
+      "group": "alumni",
+      "photo": "assets/people/member-17.jpg"
+    },
+    {
+      "id": "member-18",
+      "name": "段生琛",
+      "school": "首都医科大学",
+      "stage": "已毕业",
+      "workplace": "北京安贞医院呼吸科",
+      "cohort": "2020",
+      "group": "alumni",
+      "photo": "assets/people/member-18.jpg"
+    },
+    {
+      "id": "member-19",
+      "name": "李辉",
+      "school": "首都医科大学",
+      "stage": "已毕业",
+      "workplace": "中日友好医院呼吸与危重症医学科",
+      "cohort": "2011",
+      "group": "alumni",
+      "photo": "assets/people/member-19.jpg"
+    },
+    {
+      "id": "member-20",
+      "name": "彭文余",
+      "school": "清华大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2018",
+      "group": "students",
+      "photo": "assets/people/member-20.jpg"
+    },
+    {
+      "id": "member-21",
+      "name": "冯晓轩",
+      "school": "北京协和医学院",
+      "stage": "已毕业",
+      "workplace": "郑州大学第一附属医院 呼吸与危重症医学科",
+      "cohort": "2018",
+      "group": "alumni",
+      "photo": "assets/people/member-21.jpg"
+    },
+    {
+      "id": "member-22",
+      "name": "韩秀迪",
+      "school": "",
+      "stage": "已毕业",
+      "workplace": "青岛市市立医院本部呼吸与危重症医学科",
+      "cohort": "2014",
+      "group": "alumni",
+      "photo": "assets/people/member-22.jpg"
+    },
+    {
+      "id": "member-23",
+      "name": "王阳",
+      "school": "陆军军医大学附属第一医院",
+      "stage": "博士后",
+      "workplace": "",
+      "cohort": "2017",
+      "group": "postdocs",
+      "photo": "assets/people/member-23.jpg"
+    },
+    {
+      "id": "member-24",
+      "name": "刘红玉",
+      "school": "首都医科大学",
+      "stage": "已毕业",
+      "workplace": "西安交通大学第一附属医院呼吸与危重症医学科",
+      "cohort": "2021",
+      "group": "alumni",
+      "photo": "assets/people/member-24.jpg"
+    },
+    {
+      "id": "member-25",
+      "name": "常康",
+      "school": "南京医科大学",
+      "stage": "已毕业",
+      "workplace": "苏州市立医院呼吸与危重症医学科",
+      "cohort": "2017",
+      "group": "alumni",
+      "photo": "assets/people/member-25.jpg"
+    },
+    {
+      "id": "member-26",
+      "name": "张博良",
+      "school": "北京协和医学院",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2024",
+      "group": "students",
+      "photo": "assets/people/member-26.jpg"
+    },
+    {
+      "id": "member-27",
+      "name": "吴旭",
+      "school": "首都医科大学",
+      "stage": "已毕业",
+      "workplace": "南华大学附属第二医院 呼吸与危重症医学科",
+      "cohort": "2017",
+      "group": "alumni",
+      "photo": "assets/people/member-27.jpg"
+    },
+    {
+      "id": "member-28",
+      "name": "张飞龙",
+      "school": "北京协和医学院",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2024级",
+      "group": "students",
+      "photo": "assets/people/member-28.jpg"
+    },
+    {
+      "id": "member-29",
+      "name": "卓献霞",
+      "school": "首都医科大学",
+      "stage": "已毕业",
+      "workplace": "广西医科大学第一附属医院",
+      "cohort": "2019级",
+      "group": "alumni",
+      "photo": "assets/people/member-29.jpg"
+    },
+    {
+      "id": "member-30",
+      "name": "刘亚雪",
+      "school": "清华大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2021级",
+      "group": "students",
+      "photo": "assets/people/member-30.jpg"
+    },
+    {
+      "id": "member-31",
+      "name": "王琳",
+      "school": "北京中医药大学",
+      "stage": "硕士研究生",
+      "workplace": "",
+      "cohort": "2025级",
+      "group": "students",
+      "photo": "assets/people/member-31.jpg"
+    },
+    {
+      "id": "member-32",
+      "name": "张焕腾",
+      "school": "北京大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2025",
+      "group": "students",
+      "photo": "assets/people/member-32.jpg"
+    },
+    {
+      "id": "member-33",
+      "name": "仝一好",
+      "school": "中日友好临床医学研究所",
+      "stage": "硕士研究生",
+      "workplace": "",
+      "cohort": "2026",
+      "group": "students",
+      "photo": "assets/people/member-33.jpg"
+    },
+    {
+      "id": "member-34",
+      "name": "魏甜",
+      "school": "中日友好临床医学研究所",
+      "stage": "硕士研究生",
+      "workplace": "",
+      "cohort": "2025级",
+      "group": "students",
+      "photo": "assets/people/member-34.jpg"
+    },
+    {
+      "id": "member-35",
+      "name": "左文婷",
+      "school": "北京协和医学院",
+      "stage": "已毕业",
+      "workplace": "中日友好医院呼吸与危重症医学科",
+      "cohort": "2021",
+      "group": "alumni",
+      "photo": "assets/people/member-35.jpg"
+    },
+    {
+      "id": "member-36",
+      "name": "王金祥",
+      "school": "首都医科大学",
+      "stage": "已毕业",
+      "workplace": "首都医科大学附属北京潞河医院呼吸与危重症医学科",
+      "cohort": "2013级",
+      "group": "alumni",
+      "photo": "assets/people/member-36.jpg"
+    },
+    {
+      "id": "member-37",
+      "name": "王漫妮",
+      "school": "首都医科大学",
+      "stage": "博士研究生",
+      "workplace": "",
+      "cohort": "2025级",
+      "group": "students",
+      "photo": "assets/people/member-37.jpg"
+    },
+    {
+      "id": "member-38",
+      "name": "尚聪聪",
+      "school": "郑州大学",
+      "stage": "博士后",
+      "workplace": "郑州大学第一附属医院 呼吸与危重症医学科",
+      "cohort": "2022",
+      "group": "postdocs",
+      "photo": "assets/people/member-38.jpg"
+    },
+    {
+      "id": "member-39",
+      "name": "曹文浩",
+      "school": "",
+      "stage": "已毕业",
+      "workplace": "武汉大学人民医院 呼吸与危重症医学科",
+      "cohort": "2023",
+      "group": "alumni",
+      "photo": "assets/people/member-39.jpg"
+    },
+    {
+      "id": "member-40",
+      "name": "穆生瑞",
+      "school": "首都医科大学",
+      "stage": "已毕业",
+      "workplace": "西安交通大学第一附属医院呼吸与危重症医学科",
+      "cohort": "2018年",
+      "group": "alumni",
+      "photo": "assets/people/member-40.jpg"
+    },
+    {
+      "id": "member-41",
+      "name": "张庆",
+      "school": "北京协和医学院",
+      "stage": "已毕业",
+      "workplace": "西安交通大学第一附属医院呼吸与危重症医学科",
+      "cohort": "2023",
+      "group": "alumni",
+      "photo": "assets/people/member-41.jpg"
+    }
+  ]
+}
