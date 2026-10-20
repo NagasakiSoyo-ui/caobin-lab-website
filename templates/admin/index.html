@@ -1,0 +1,2 @@
+{% extends "admin/index.html" %}
+{% block content %}<div class="dashboard-intro"><p class="dashboard-kicker">CONTENT WORKSPACE</p><h2>把研究进展带到网站上。</h2><p>选择下方栏目开始编辑。勾选“在网站公开”并保存后，内容会立即显示在前台；未勾选的条目保留为草稿。</p><p><a href="/" target="_blank" rel="noopener">查看网站 ↗</a> <span> · </span><a href="{% url 'export_site' %}">下载当前离线快照 ↓</a></p></div>{{ block.super }}{% endblock %}

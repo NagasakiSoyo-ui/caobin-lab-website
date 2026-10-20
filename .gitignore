@@ -10,3 +10,10 @@ Thumbs.db
 *.zip
 .env
 .env.*
+/.venv/
+/data/
+/exports/
+/dist/
+/local-access.txt
+*.sqlite3
+*.sqlite3-*
