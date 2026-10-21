@@ -1,0 +1,433 @@
+{
+  "about": "曹彬课题组首批代表性成果。元数据逐条来自 NCBI PubMed E-utilities efetch，作者单位用于身份核验；原图来自 PMC Cloud Service（pmc-oa-opendata，NCBI 官方开放数据渠道），按 md5 校验后原样保存；中文概述依据原文摘要撰写。这是持续整理中的代表性目录，并非全部成果。",
+  "retrieved": "2026-10-21",
+  "publications": [
+    {
+      "pmid": "32311318",
+      "doi": "10.1016/s0140-6736(20)30920-x",
+      "pmcid": "PMC7164875",
+      "slug": "2020-sars-cov-2-viral-sepsis",
+      "title": "SARS-CoV-2 and viral sepsis: observations and hypotheses",
+      "authors": "Li H, Liu L, Zhang D, Xu J, Dai H, Tang N, Su X, Cao B",
+      "journal": "Lancet",
+      "year": 2020,
+      "citation": "395(10235):1517-1520",
+      "publication_types": "Journal Article",
+      "summary": "新冠疫情早期，临床观察到许多重症或危重症 COVID-19 患者即使没有明显低血压，也出现肢端发冷、外周脉搏微弱等休克表现。作者结合 COVID-19 尸检研究以及 SARS-CoV-2、SARS-CoV 的基础研究证据，经基础研究人员、病理学家与一线临床医生多轮讨论，提出“病毒性感染中毒症（viral sepsis）”可能是 COVID-19 发病机制关键环节的若干假说。作者明确说明这些观点日后可能被证明不完善甚至错误，目的是为当时的基础研究提供思路与方向。",
+      "directions": [
+        "viral-sepsis"
+      ],
+      "featured": true,
+      "lab_role": "lead",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 32311318），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 8/8：Cao Bin；单位匹配：Department of Pulmonary and Critical Care Medicine, China-Japan Friendship Hospital, Center of Respiratory Medicine, National Clinical Research Center for Respiratory Diseases, Beijing, China; Institute of Respiratory Medicine, Chinese Academy of Medical Sciences and Peking Union Medical College, Beijing, China. Electronic address: caobin_ben@163.com.\n课题组角色依据：PubMed 记录中曹彬单位附有通讯邮箱 caobin_ben@163.com。",
+      "figures": [
+        {
+          "file": "figures/pmid32311318-figure.jpg",
+          "label": "Figure",
+          "title": "SARS-CoV-2 病毒性感染中毒症的发生与转归（原文假说示意图）",
+          "caption": "原文图题：Occurrence and outcome of severe acute respiratory syndrome coronavirus 2 viral sepsis。图中示意轻症与重症感染时肺泡内免疫细胞的差异、淋巴结中的抗原呈递细胞与效应 T 细胞、血管内细胞因子、细胞死亡与淋巴细胞减少、纤维蛋白网与活化血小板、血管收缩，以及心、肾、肝等肺外器官受累，并对应无症状、轻症与重症三种感染结局。该图是作者在观点文章中提出的假说框架，不是实验结论。",
+          "alt": "示意图：病毒感染肺部后，免疫细胞、血管与多器官受累形成不同感染结局的假说框架",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7164875/figure/fig1/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC7164875.1/gr1_lrg.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。PMC 版权声明：© 2020 Elsevier Ltd，经 Elsevier COVID-19 资源中心许可收录于 PMC。",
+          "directions": [
+            "viral-sepsis"
+          ],
+          "position": 1,
+          "credit": "Li H, et al. Lancet. 2020;395(10235):1517-1520. doi:10.1016/s0140-6736(20)30920-x. Figure"
+        }
+      ]
+    },
+    {
+      "pmid": "40367638",
+      "doi": "10.1016/j.ebiom.2025.105738",
+      "pmcid": "PMC12142562",
+      "slug": "2025-influenza-viral-sepsis-dissemination",
+      "title": "Influenza A virus dissemination and infection leads to tissue resident cell injury and dysfunction in viral sepsis",
+      "authors": "Zheng Y, He D, Zuo W, Wang W, Wu K, Wu H, Yuan Y, Huang Y, Li H, Lu Y, Zhao L, Wang X, Wang J, Zhang Y, Zou G, Li H, Wang Z, Cao B",
+      "journal": "EBioMedicine",
+      "year": 2025,
+      "citation": "116:105738",
+      "publication_types": "Journal Article",
+      "summary": "重症呼吸道病毒感染可导致病毒性感染中毒症（viral sepsis, VS），但其病理过程尚不清楚，尤其是细胞因子风暴与病毒直接感染分别如何造成肺外器官损伤。研究以不同剂量 PR8/H1N1 流感病毒经鼻感染 C57BL/6J 雄性小鼠，建立 VS 存活与致死模型，并以肺炎链球菌所致细菌性脓毒症（BS）作为参照，检测病毒血症与肺外播散，并在不同感染天数对肺和肝进行单细胞测序。结果显示，细菌可在肺外器官广泛播散定植并造成多器官损伤，流感病毒则主要在肺部细胞复制并致损；血液和肺外器官中可分离到活病毒，病毒经血流一过性感染肝和脾，引起肝功能异常和脾萎缩，但未影响肾功能。与 BS 相比，VS 小鼠肺内肺泡巨噬细胞、上皮细胞、内皮细胞和成纤维细胞以及肝内皮细胞和 Kupffer 细胞比例下降更明显，伴 PANoptosis 通路激活时间更长、屏障功能与抗原呈递相关基因下调。作者认为，H1N1 流感病毒经血流播散并不同程度感染肺外器官，可能导致细胞死亡差异与器官功能障碍并触发 VS。本研究为小鼠模型研究。",
+      "directions": [
+        "viral-sepsis"
+      ],
+      "featured": true,
+      "lab_role": "unverified",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 40367638），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 18/18：Cao Bin；单位匹配：Department of Pulmonary and Critical Care Medicine, China-Japan Friendship Hospital, Capital Medical University, Beijing, 100054, China; National Center for Respiratory Medicine, State Key Laboratory of Respiratory Health and Multimorbidity, National Clinical Research Center for Respiratory Diseases, Institute of Respiratory Medicine, Chinese Academy of Medical Sciences, Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing, 100029, China; Peking Union Medical College, Chinese Academy of Medical Sciences, Beijing, 100730, China; Tsinghua University-Peking University Joint Center for Life Sciences, Beijing, 100084, China; New Cornerstone Science Laboratory, Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing, 100029, China. Electronic address: caobin_ben@163.com.",
+      "figures": [
+        {
+          "file": "figures/pmid40367638-fig2.jpg",
+          "label": "Fig. 2",
+          "title": "流感病毒向肺外器官播散",
+          "caption": "(a) qRT-PCR 检测致死模型（VSL）小鼠肺、心、肝、脾、肾、脑中的病毒 RNA；(b) 感染第 3 天不同毒株感染小鼠各组织空斑实验检出活病毒的频率；(c) 第 3 天各组织实质细胞中的病毒 RNA；(d) 第 0、2、5 天肾和肝的流感病毒 NP 免疫荧光；(e、f) 外周血乏血小板血浆、血小板和血细胞中的病毒分离率与病毒 RNA；(g–i) 10³ PFU PR8、10⁵ PFU PR8 与 H1N1(WS) 感染后第 3 天各组织病毒 RNA。均为小鼠实验数据。",
+          "alt": "多面板数据图：小鼠各器官与血液成分中流感病毒 RNA、活病毒检出及免疫荧光结果",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12142562/figure/fig2/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12142562.1/gr2.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY-NC-ND 4.0。",
+          "directions": [
+            "viral-sepsis"
+          ],
+          "position": 1,
+          "credit": "Zheng Y, et al. EBioMedicine. 2025;116:105738. doi:10.1016/j.ebiom.2025.105738. Fig. 2"
+        },
+        {
+          "file": "figures/pmid40367638-fig1.jpg",
+          "label": "Fig. 1",
+          "title": "病毒性感染中毒症存活、致死小鼠模型与细菌性脓毒症模型的建立",
+          "caption": "(a) 动物模型与实验设计示意，分别经鼻给予 1×10³ PFU PR8、1×10⁵ PFU PR8 和 2×10⁶ CFU 肺炎链球菌建立 VSS、VSL 与 BS 模型（原文注明该示意由 BioRender.com 绘制）；(b) 各组生存率；(c) 感染后不同天数血清细胞因子水平；(d) 血液生化检测；(e) 第 0 与第 7 天肺、心、肝、肾、脾 H&E 染色。",
+          "alt": "多面板图：小鼠模型实验设计示意、生存曲线、血清细胞因子、生化指标及器官病理切片",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12142562/figure/fig1/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12142562.1/gr1.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY-NC-ND 4.0；第三方元素：Fig. 1a 原文注明 Created with BioRender.com。",
+          "directions": [],
+          "position": 2,
+          "credit": "Zheng Y, et al. EBioMedicine. 2025;116:105738. doi:10.1016/j.ebiom.2025.105738. Fig. 1"
+        }
+      ]
+    },
+    {
+      "pmid": "40858544",
+      "doi": "10.1038/s41392-025-02365-x",
+      "pmcid": "PMC12381301",
+      "slug": "2025-streptococcus-oralis-influenza",
+      "title": "Enrichment of Streptococcus oralis in respiratory microbiome enhance innate immunity and protects against influenza infection",
+      "authors": "Zou X, Cao H, Hong L, Suo L, Wang C, Chang K, Ni Y, Liu B, Cao B",
+      "journal": "Signal Transduct Target Ther",
+      "year": 2025,
+      "citation": "10(1):272",
+      "publication_types": "Journal Article; Research Support, Non-U.S. Gov't",
+      "summary": "呼吸道菌群失调与社区获得性肺炎（CAP）的发生和进展有关，但呼吸道菌群的动态变化及其与宿主反应的相互作用仍不清楚。研究对 38 例 CAP 患者纵向采集的样本开展呼吸道和肠道菌群宏基因组分析及血液转录组分析。CAP 患者在住院早、中、晚期均存在痰液菌群紊乱，以链球菌属为主贡献的肽聚糖合成与免疫逃逸相关微生物通路富集，部分链球菌菌株在呼吸道与肠道菌群间存在相关。整合宿主反应数据后发现，口腔链球菌（Streptococcus oralis, SOR）与感染相关的先天免疫通路相关，该关联在新入组的 22 例流感 CAP 队列中得到重复。在小鼠模型中，预先经鼻给予 SOR 对流感病毒感染的保护作用与已知呼吸道益生菌鼠李糖乳杆菌 GG 相当，可减轻体重下降和肺部炎症、降低病毒载量；SOR 预处理在感染早期激活更强的先天免疫反应，并在宿主恢复时及时消退。作者提出，呼吸道共生菌可能通过诱导及时的先天免疫反应发挥免疫保护作用。",
+      "directions": [
+        "microbiome"
+      ],
+      "featured": true,
+      "lab_role": "unverified",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 40858544），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 9/9：Cao Bin；单位匹配：National Center for Respiratory Medicine; State Key Laboratory of Respiratory Health and Multimorbidity; National Clinical Research Center for Respiratory Diseases; Institute of Respiratory Medicine, Chinese Academy of Medical Sciences; Beijing Key Laboratory of Surveillance, Early Warning and Pathogen Research on Emerging Infectious Diseases; Laboratory of Clinical Microbiology and Infectious Diseases, Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing, China. caobin_ben@163.com.；New Cornerstone Science Laboratory, Beijing, China. caobin_ben@163.com.",
+      "figures": [
+        {
+          "file": "figures/pmid40858544-fig6.jpg",
+          "label": "Fig. 6",
+          "title": "口腔链球菌在小鼠模型中对甲型流感病毒感染的保护作用",
+          "caption": "(a) 实验设计：小鼠在流感病毒感染前经鼻预先接种 4 次口腔链球菌（SOR）或鼠李糖乳杆菌 GG（LGG）；(b) 体重变化与生存曲线（每组 10 只）；(c) 感染后 48 小时肺病毒载量（PFU）；(d) 第 6 天肺泡灌洗液 IL-6、TNF-α 与总蛋白；(e) 第 6 天肺组织 H&E 染色；(f、g) 感染后第 2、6 天 SOR 预处理小鼠肺内差异基因与通路。均为小鼠实验数据。",
+          "alt": "多面板图：小鼠预接种口腔链球菌后的流感感染实验设计、体重与生存曲线、肺病毒载量、炎症指标与病理切片",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12381301/figure/Fig6/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12381301.1/41392_2025_2365_Fig6_HTML.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY 4.0。",
+          "directions": [
+            "microbiome"
+          ],
+          "position": 1,
+          "credit": "Zou X, et al. Signal Transduct Target Ther. 2025;10(1):272. doi:10.1038/s41392-025-02365-x. Fig. 6"
+        },
+        {
+          "file": "figures/pmid40858544-fig1.jpg",
+          "label": "Fig. 1",
+          "title": "CAP 患者与健康对照的呼吸道菌群差异及研究设计",
+          "caption": "(a) 研究设计：住院 CAP 患者在住院期间（T1–T3）及出院后 4 个月随访时采集痰液、粪便和 PAXgene 血液，分别进行呼吸道菌群、肠道菌群和宿主反应分析，并在小鼠模型中验证；(b、c) 与健康对照相比，CAP 患者入院时及整个病程中呼吸道菌群多样性（Shannon 指数）较低，随访时仍未恢复；(d) 基于 Bray–Curtis 距离的 PCoA；(e–g) 健康对照、CAP 患者与随访样本的菌群共现网络。",
+          "alt": "多面板图：纵向采样研究设计流程，以及菌群多样性箱线图、主坐标分析散点图和菌群共现网络",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12381301/figure/Fig1/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12381301.1/41392_2025_2365_Fig1_HTML.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY 4.0。",
+          "directions": [
+            "microbiome"
+          ],
+          "position": 2,
+          "credit": "Zou X, et al. Signal Transduct Target Ther. 2025;10(1):272. doi:10.1038/s41392-025-02365-x. Fig. 1"
+        }
+      ]
+    },
+    {
+      "pmid": "38231624",
+      "doi": "10.1056/nejmoa2301425",
+      "pmcid": "PMC11156186",
+      "slug": "2024-oral-simnotrelvir-covid-19",
+      "title": "Oral Simnotrelvir for Adult Patients with Mild-to-Moderate Covid-19",
+      "authors": "Cao B, Wang Y, Lu H, Huang C, Yang Y, Shang L, Chen Z, Jiang R, Liu Y, Lin L, Peng P, Wang F, Gong F, Hu H, Cheng C, Yao X, Ye X, Zhou H, Shen Y, Liu C, Wang C, Yi Z, Hu B, Xu J, Gu X, Shen J, Xu Y, Zhang L, Fan J, Tang R, Wang C",
+      "journal": "N Engl J Med",
+      "year": 2024,
+      "citation": "390(3):230-241",
+      "publication_types": "Clinical Trial, Phase II; Clinical Trial, Phase III; Journal Article; Multicenter Study; Randomized Controlled Trial",
+      "summary": "先诺特韦（simnotrelvir）是一种口服 3CL 蛋白酶抑制剂。这项在中国 35 个中心开展的 2–3 期双盲、随机、安慰剂对照试验，纳入症状出现 3 天内的轻中度 COVID-19 成人患者 1208 例，按 1:1 分配接受先诺特韦 750 mg 联合利托那韦 100 mg 或安慰剂，每日 2 次，共 5 天。主要终点为 11 项 COVID-19 相关症状持续缓解的时间。在症状出现 72 小时内首次用药的改良意向治疗人群中，先诺特韦组症状持续缓解时间短于安慰剂组（180.1 小时对 216.0 小时，中位差 −35.8 小时，95% CI −60.1 至 −12.4；P=0.006）；第 5 天病毒载量较基线的下降幅度更大。治疗期间不良事件发生率先诺特韦组高于安慰剂组（29.0% 对 21.6%），多为轻中度。作者结论为早期使用先诺特韦联合利托那韦可缩短症状缓解时间，未见明显安全性问题。（ClinicalTrials.gov：NCT05506176）",
+      "directions": [
+        "antiviral-evaluation"
+      ],
+      "featured": true,
+      "lab_role": "lead",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 38231624），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 1/31：Cao Bin；单位匹配：From the Departments of Pulmonary and Critical Care Medicine (B.C., Y.W., L.S., J.X., Chen Wang) and Clinical Research and Data Management (X.G.), Institute of Respiratory Medicine in the Chinese Academy of Medical Sciences, National Clinical Research Center for Respiratory Diseases, National Center for Respiratory Medicine, China-Japan Friendship Hospital, Changping Laboratory (B.C., Chen Wang), the Department of Medicine, Non-oncology, Jiangsu Simcere Pharmaceutical (Y.Y.), Clinical and Research Center of Infectious Diseases Beijing Ditan Hospital, Capital Medical University (R.J.), and Chinese Academy of Medical Sciences and Peking Union Medical College (Chen Wang), Beijing, the Department of Infectious Diseases, Third People's Hospital of Shenzhen, National Clinical Research Center for Infectious Diseases, Shenzhen (H.L., F.W.), Jin Yin-tan Hospital (C.H., F.G.) and Wuhan Institute of Virology, Chinese Academy of Sciences (L.Z.), Wuhan, the Public Health Clinical Center of Chengdu, Chengdu (Z.C.), Tianjin First Central Hospital, Tianjin (Y.L.), the Department of Cardiology, Hainan Third People's Hospital, Sanya (L.L.), the Department of Respiratory Medicine, Guangzhou Eighth People's Hospital, Guangzhou (P.P.), the Department of Clinical Statistics and Data Management, Jiangsu Simcere Pharmaceutical (H.H.), the Department of Infection and Immunity, Shanghai Public Health Clinical Center (Y.S.), and the Department of Infectious Diseases, Zhongshan Hospital (B.H.), Fudan University, State Key Laboratory of Drug Research, Shanghai Institute of Materia Medica, Chinese Academy of Sciences (J.S., Y.X.), and the Department of Liver Surgery and Transplantation, Liver Cancer Institute, Zhongshan Hospital, Fudan University, and Key Laboratory of Carcinogenesis and Cancer Invasion of the Ministry of Education (J.F.), Shanghai, the Second Hospital of Nanjing (C.C.), Jiangsu Simcere Pharmaceutical (R.T.), and State Key Laboratory of Neurology and Oncology Drug Development (R.T.), Nanjing, the First Affiliated Hospital of Xiamen University, Xiamen (X. Yao), Guizhou Provincial People's Hospital, Guiyang (X. Ye, H.Z.), the Second Department of Infection, Shandong Public Health Clinical Center, Jinan (C.L.), Xuzhou Infectious Diseases Hospital, Xuzhou (Chunying Wang), and Central People's Hospital of Zhanjiang, Zhanjiang (Z.Y.) - all in China.\n课题组角色依据：PubMed 作者列表中曹彬为第 1 作者。",
+      "figures": [
+        {
+          "file": "figures/pmid38231624-fig2.jpg",
+          "label": "Figure 2",
+          "title": "COVID-19 症状持续缓解时间（主要终点）",
+          "caption": "(A) 改良意向治疗–1 人群中 11 项目标症状持续缓解时间的 Kaplan–Meier 曲线：先诺特韦联合利托那韦组中位 180.1 小时，安慰剂组 216.0 小时，中位差 −35.8 小时（95% CI −60.1 至 −12.4）；(B) 该终点的亚组分析森林图。",
+          "alt": "临床试验结果图：两组症状持续缓解时间的 Kaplan–Meier 曲线及亚组分析森林图",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11156186/figure/f2/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11156186.1/NEJMoa2301425_f2.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。PMC 版权声明：© 2024 Massachusetts Medical Society。",
+          "directions": [
+            "antiviral-evaluation"
+          ],
+          "position": 1,
+          "credit": "Cao B, et al. N Engl J Med. 2024;390(3):230-241. doi:10.1056/nejmoa2301425. Figure 2"
+        },
+        {
+          "file": "figures/pmid38231624-fig1.jpg",
+          "label": "Figure 1",
+          "title": "筛选、随机分组与 29 天随访流程",
+          "caption": "试验患者筛选、随机分组与 29 天随访流程图。改良意向治疗人群包括至少接受一剂试验药物或安慰剂、RT-PCR 确诊 SARS-CoV-2 感染、无流感病毒感染、基线至少一项 COVID-19 相关症状且至少有一次基线后访视的患者；其中症状出现 72 小时内首次用药者构成改良意向治疗–1 人群。",
+          "alt": "临床试验流程图：患者筛选、随机分组至两组及各分析人群",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11156186/figure/f1/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11156186.1/NEJMoa2301425_f1.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。PMC 版权声明：© 2024 Massachusetts Medical Society。",
+          "directions": [],
+          "position": 2,
+          "credit": "Cao B, et al. N Engl J Med. 2024;390(3):230-241. doi:10.1056/nejmoa2301425. Figure 1"
+        }
+      ]
+    },
+    {
+      "pmid": "40693035",
+      "doi": "10.1016/j.bsheal.2025.05.004",
+      "pmcid": "PMC12276579",
+      "slug": "2025-cap-recovery-host-microbiome",
+      "title": "Longitudinal profiling of host response and oropharyngeal respiratory microbiome reveals dynamic alterations during recovery from community-acquired pneumonia",
+      "authors": "Hong L, Suo L, Chang K, Cao H, Luan J, Zhang F, Yu X, Zou X, Liu B, Cao B, CAP-China Network",
+      "journal": "Biosaf Health",
+      "year": 2025,
+      "citation": "7(3):152-165",
+      "publication_types": "Journal Article",
+      "summary": "社区获得性肺炎（CAP）病程与恢复期宿主基因表达和呼吸道菌群的纵向变化尚缺乏了解。研究从入院至感染后 4 个月纵向采集 CAP 患者外周血（转录组）和口咽拭子（菌群分析），并招募年龄、性别匹配的志愿者作为对照。CAP 患者表现出快速、有效且适度的免疫反应；凝血激活与线粒体功能障碍是与对照差异最显著的通路，后者经外周血单个核细胞 ATP 水平降低得到验证。转录扰动逐渐减轻，但随访期内未完全恢复；口咽菌群失调同样持续存在，表现为 α 多样性显著降低与菌属构成改变（链球菌属、韦荣球菌属、消化链球菌属增加，嗜血杆菌属、奈瑟菌属、卟啉单胞菌属减少）。整合分析显示部分菌属丰度与线粒体结构功能通路、抗病原及干扰素信号通路相关。作者指出 CAP 对宿主免疫和口咽菌群的影响可持续至感染后数月，提示需要长期随访。",
+      "directions": [
+        "microbiome",
+        "real-world-evidence"
+      ],
+      "featured": true,
+      "lab_role": "unverified",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 40693035），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 10/11：Cao Bin；单位匹配：Chinese Academy of Medical Sciences and Peking Union Medical College, Beijing 100730, China.；National Center for Respiratory Medicine, State Key Laboratory of Respiratory Health and Multimorbidity, National Clinical Research Center for Respiratory Diseases, Institute of Respiratory Medicine, Chinese Academy of Medical Sciences, Laboratory of Clinical Microbiology and Infectious Diseases, Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing 100029, China.",
+      "figures": [
+        {
+          "file": "figures/pmid40693035-fig1.jpg",
+          "label": "Fig. 1",
+          "title": "CAP 患者差异表达基因的鉴定与研究设计",
+          "caption": "(A) 研究设计：44 例 CAP 患者在入院（T1）、住院中期（T2）、出院（T3）及约 4 个月随访（T4）四个时间点采集外周血和口咽拭子，以 44 例年龄性别匹配的健康人为对照，分别进行宿主转录组与菌群分析并整合；(B) 各组基因表达谱 PCA；(C) 各时间点相对对照上调、下调差异基因的韦恩图与数量；(D) 各时间点火山图；(E) 各时间点前 10 位蛋白编码差异基因表达热图。",
+          "alt": "多面板图：纵向采样研究设计流程、主成分分析图、差异基因韦恩图、火山图与热图",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12276579/figure/f0005/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12276579.1/gr1.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY-NC-ND 4.0。",
+          "directions": [
+            "real-world-evidence"
+          ],
+          "position": 1,
+          "credit": "Hong L, et al. Biosaf Health. 2025;7(3):152-165. doi:10.1016/j.bsheal.2025.05.004. Fig. 1"
+        }
+      ]
+    },
+    {
+      "pmid": "39692191",
+      "doi": "10.1002/advs.202405087",
+      "pmcid": "PMC11809327",
+      "slug": "2025-lrti-diagnosis-metatranscriptome",
+      "title": "Accurate Diagnosis of Lower Respiratory Infections Using Host Response and Respiratory Microbiome from a Single Metatranscriptome Test of Bronchoalveolar Lavage Fluid",
+      "authors": "Zou X, Yan M, Wang Y, Ni Y, Zhao J, Lu B, Liu B, Cao B",
+      "journal": "Adv Sci (Weinh)",
+      "year": 2025,
+      "citation": "12(6):e2405087",
+      "publication_types": "Journal Article",
+      "summary": "下呼吸道感染（LRTI）与非感染性疾病临床表现相似，诊断困难。研究回顾性纳入疑似 LRTI 并接受支气管肺泡灌洗液（BALF）临床宏转录组检测的患者，对确诊 LRTI（126 例）与非 LRTI（75 例）患者的宿主反应和呼吸道菌群进行分析。LRTI 患者趋化因子与细胞因子反应、中性粒细胞募集与活化通路增强，下呼吸道菌群多样性和均匀度降低，可能与细菌病原体丰度增加有关。基于筛选的宿主标志基因建立的分类器区分 LRTI、非 LRTI 和不确定状态的 AUC 为 0.80–0.86，并在后续入组的队列中得到验证；纳入菌群特征后分类器性能进一步提升。研究表明单次 BALF 宏转录组检测可同时提供宿主反应和呼吸道菌群信息，辅助 LRTI 诊断。",
+      "directions": [
+        "pathogen-diagnosis",
+        "translation"
+      ],
+      "featured": true,
+      "lab_role": "unverified",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 39692191），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 8/8：Cao Bin；单位匹配：National Center for Respiratory Medicine, State Key Laboratory of Respiratory Health and Multimorbidity, National Clinical Research Center for Respiratory Diseases, Institute of Respiratory Medicine, Chinese Academy of Medical Sciences, Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing, 100029, China.",
+      "figures": [
+        {
+          "file": "figures/pmid39692191-fig1.jpg",
+          "label": "Figure 1",
+          "title": "研究流程图",
+          "caption": "疑似 LRTI 且接受 BALF mNGS 检测的患者经临床判定分为确诊 LRTI 与非 LRTI；2019 年 10 月至 2021 年 10 月住院患者构成发现队列，用于宿主反应分析与分类器建立；2021 年 11 月至 2022 年 10 月入院患者构成验证队列。",
+          "alt": "研究流程图：患者纳入、临床判定分组以及发现队列和验证队列",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11809327/figure/advs10477-fig-0001/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11809327.1/ADVS-12-2405087-g003.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY 4.0。",
+          "directions": [
+            "pathogen-diagnosis"
+          ],
+          "position": 1,
+          "credit": "Zou X, et al. Adv Sci (Weinh). 2025;12(6):e2405087. doi:10.1002/advs.202405087. Figure 1"
+        },
+        {
+          "file": "figures/pmid39692191-fig4.jpg",
+          "label": "Figure 4",
+          "title": "宿主基因表达分类器诊断 LRTI 的性能",
+          "caption": "(A) 宿主基因表达分类器在发现队列五折交叉验证及验证队列中的 ROC 曲线与 AUC；(B) 两队列中分类器预测为 LRTI 与非 LRTI 的人数和比例；(C) 发现队列中最终入选的 14 个分类基因的标准化表达；(D) 三分类 SVM 模型 50 个特征基因的系数；(E) 三分类模型各类别的 ROC 与 AUC。",
+          "alt": "多面板图：诊断分类器 ROC 曲线、预测结果条形图与特征基因热图",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11809327/figure/advs10477-fig-0004/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11809327.1/ADVS-12-2405087-g006.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY 4.0。",
+          "directions": [
+            "translation"
+          ],
+          "position": 2,
+          "credit": "Zou X, et al. Adv Sci (Weinh). 2025;12(6):e2405087. doi:10.1002/advs.202405087. Figure 4"
+        }
+      ]
+    },
+    {
+      "pmid": "40470147",
+      "doi": "10.1183/23120541.00836-2024",
+      "pmcid": "PMC12134930",
+      "slug": "2025-respiratory-viral-sepsis-outcomes",
+      "title": "Poor clinical outcomes in respiratory viral sepsis: a retrospective observational study",
+      "authors": "Cao W, Xu J, Liu Z, Wang Z, Zhang X, Zhan Q, Cao B",
+      "journal": "ERJ Open Res",
+      "year": 2025,
+      "citation": "11(3)",
+      "publication_types": "Journal Article",
+      "summary": "该单中心回顾性队列研究纳入 2020 年 10 月至 2024 年 1 月在内科重症监护病房（ICU）住院、诊断为肺炎合并脓毒症的患者，通过全面病原学检测确定原发与继发病原体，比较呼吸道病毒与细菌所致脓毒症的临床差异并寻找病毒性脓毒症死亡危险因素。共纳入 292 例（病毒性 191 例、细菌性 101 例）。与细菌性脓毒症相比，病毒性脓毒症患者入 ICU 时氧合指数更低，急性呼吸窘迫综合征（85% 对 44%）、继发感染（84% 对 39%）比例更高，ICU 病死率更高（57% 对 43%）；校正后病毒性脓毒症 ICU 死亡的 OR 为 2.26（95% CI 1.26–4.07）。年龄、SOFA 评分、继发感染、免疫抑制状态和冠心病是病毒性脓毒症 ICU 死亡的危险因素，亚组分析提示继发感染与更差结局相关。",
+      "directions": [
+        "viral-sepsis",
+        "real-world-evidence"
+      ],
+      "featured": true,
+      "lab_role": "unverified",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 40470147），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 7/7：Cao Bin；单位匹配：National Center for Respiratory Medicine; State Key Laboratory of Respiratory Health and Multimorbidity; National Clinical Research Center for Respiratory Diseases; Institute of Respiratory Medicine, Chinese Academy of Medical Sciences; Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing, China.；New Cornerstone Science Laboratory, Beijing, China.；Qingyuan Zhan and Bin Cao contributed equally to this article as lead authors and supervised the work.",
+      "figures": [
+        {
+          "file": "figures/pmid40470147-fig2.jpg",
+          "label": "FIGURE 2",
+          "title": "病毒性与细菌性脓毒症患者 60 天及总体死亡的生存曲线",
+          "caption": "病毒性脓毒症与细菌性脓毒症患者 60 天死亡率和总体死亡率的 Kaplan–Meier 生存曲线（ICU：重症监护病房）。",
+          "alt": "生存分析图：病毒性与细菌性脓毒症两组患者的 Kaplan–Meier 生存曲线",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12134930/figure/F2/",
+          "file_source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12134930.1/00836-2024.02.jpg",
+          "license_note": "课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY-NC 4.0。",
+          "directions": [
+            "real-world-evidence"
+          ],
+          "position": 1,
+          "credit": "Cao W, et al. ERJ Open Res. 2025;11(3). doi:10.1183/23120541.00836-2024. FIGURE 2"
+        }
+      ]
+    },
+    {
+      "pmid": "39775042",
+      "doi": "10.1038/s41591-024-03419-3",
+      "pmcid": "",
+      "slug": "2025-suraxavir-marboxil-influenza",
+      "title": "Single-dose suraxavir marboxil for acute uncomplicated influenza in adults and adolescents: a multicenter, randomized, double-blind, placebo-controlled phase 3 trial",
+      "authors": "Wang Y, Wang H, Zhang Y, Ma A, Liu D, Li X, Yang G, Deng M, Wang S, Liu Y, Liu C, Ge F, Wang S, Yu Y, Feng G, Xiao Z, Li X, Sun Y, Chen X, Cao Z, Ding Y, Wu X, Wei J, Cao B",
+      "journal": "Nat Med",
+      "year": 2025,
+      "citation": "31(2):639-646",
+      "publication_types": "Journal Article; Randomized Controlled Trial; Clinical Trial, Phase III; Multicenter Study",
+      "summary": "苏拉沙韦玛波西酯（suraxavir marboxil，GP681）是一种抑制流感病毒 RNA 聚合酶 PA 亚基的抗病毒药物。该多中心、随机、双盲、安慰剂对照 3 期试验于 2022 年 7 月至 2023 年 10 月在中国 46 个中心纳入 591 例 5–65 岁单纯性流感门诊患者，按 2:1 在症状出现 2 天内随机接受单剂 40 mg 苏拉沙韦玛波西酯或安慰剂。主要终点流感症状缓解时间的中位数治疗组短于安慰剂组（42.0 小时对 63.0 小时，P=0.002）；用药后第 1 天病毒载量下降更快。不良事件发生率分别为 28.4% 和 23.3%。",
+      "directions": [
+        "antiviral-evaluation"
+      ],
+      "featured": false,
+      "lab_role": "unverified",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 39775042），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 24/24：Cao Bin；单位匹配：National Center for Respiratory Medicine; State Key Laboratory of Respiratory Health and Multimorbidity; New Cornerstone Science Laboratory; National Clinical Research Center for Respiratory Diseases; Department of Respiratory Medicine, Capital Medical University; Institute of Respiratory Medicine of Capital Medical University; Chinese Academy of Medical Sciences; Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing, China. caobin_ben@163.com.",
+      "figures": []
+    },
+    {
+      "pmid": "41457011",
+      "doi": "10.1093/infdis/jiaf651",
+      "pmcid": "",
+      "slug": "2026-rhinovirus-lrti-adults",
+      "title": "Rhinovirus-Associated Lower Respiratory Tract Infection in Hospitalized Adult Patients: A Retrospective Cohort Study",
+      "authors": "Zhang R, Shang X, Wang C, Zhou H, Liu N, Shen X, Wang Z, Xu J, Zhong D, Li H, Cao B",
+      "journal": "J Infect Dis",
+      "year": 2026,
+      "citation": "233(5):868-876",
+      "publication_types": "Journal Article",
+      "summary": "人鼻病毒（HRV）在成人下呼吸道感染中的作用存在争议。该回顾性研究（2020 年 1 月至 2023 年 12 月）纳入所有经 RT-PCR 筛查 HRV 的住院成人患者，HRV 检出率为 4.6%（437/9544），呈 2–4 月和 9–11 月双峰季节分布，合并感染占 49.0%。437 例 HRV 阳性患者中 224 例合并肺炎，仅 34 例（7.8%）符合单纯病毒性肺炎标准；男性、发热和咳嗽是单纯鼻病毒肺炎的独立预测因素。对有肺活检标本的 BALF HRV-RNA 阳性患者进行免疫荧光染色，61.5%（8/13）检出 HRV VP3 蛋白，为免疫功能正常成人 HRV 感染下呼吸道细胞提供了组织学证据。",
+      "directions": [
+        "real-world-evidence"
+      ],
+      "featured": false,
+      "lab_role": "unverified",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 41457011），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 11/11：Cao Bin；单位匹配：Institute of Respiratory Medicine, Chinese Academy of Medical Sciences & Peking Union Medical College, Beijing, China.；Tsinghua University-Peking University Joint Centre for Life Sciences, Tsinghua University, Beijing, China.；National Center for Respiratory Medicine, State Key Laboratory of Respiratory Health and Multimorbidity, National Clinical Research Center for Respiratory Diseases, Institute of Respiratory Medicine, Chinese Academy of Medical Sciences, Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing, China.；Department of Respiratory Medicine, Capital Medical University, Beijing, China.",
+      "figures": []
+    },
+    {
+      "pmid": "40983621",
+      "doi": "10.1038/s41392-025-02391-9",
+      "pmcid": "PMC12454662",
+      "slug": "2025-ninjurin-1-panoptosis-influenza",
+      "title": "Ninjurin-1 mediates cell lysis and detrimental inflammation of PANoptosis during influenza A virus infection",
+      "authors": "Xu Y, Zheng Y, Liu Y, Wei C, Ren J, Zuo W, Gu R, Liu H, Deng X, Liu Y, Shang X, Ge W, Li Z, Huang Y, He D, Shen X, Wang Z, Lyu C, Wang Z, Mu Y, Zhang Z, Wu H, Li H, Cao B",
+      "journal": "Signal Transduct Target Ther",
+      "year": 2025,
+      "citation": "10(1):307",
+      "publication_types": "Journal Article; Research Support, Non-U.S. Gov't",
+      "summary": "甲型流感病毒（IAV）可诱导 ZBP1 介导的 PANoptosis。研究发现 IAV 感染使巨噬细胞中 Ninjurin-1（NINJ1）表达升高并寡聚化，介导细胞裂解；NINJ1 缺失可阻止质膜破裂及 DAMPs 和 IL-1β 释放，但不影响细胞死亡进程。激活任一 PANoptosis 通路即可触发 NINJ1 寡聚化和细胞裂解。小鼠体内敲除 NINJ1 可减轻 IAV 所致肺损伤并降低死亡率；COVID-19 患者中 NINJ1 上调与不良结局相关。作者提出 NINJ1 在 IAV 感染免疫病理中起关键作用，并可能作为病毒性肺炎和病毒性脓毒症严重程度与预后的生物指标。",
+      "directions": [
+        "viral-sepsis"
+      ],
+      "featured": false,
+      "lab_role": "lead",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 40983621），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 24/24：Cao Bin；单位匹配：China-Japan Friendship Hospital (Institute of Clinical Medical Sciences), Chinese Academy of Medical Sciences & Peking Union Medical College, Beijing, China. caobin_ben@163.com.；National Center for Respiratory Medicine; State Key Laboratory of Respiratory Health and Multimorbidity; National Clinical Research Center for Respiratory Diseases; Institute of Respiratory Medicine, Chinese Academy of Medical Sciences; Beijing Key Laboratory of Surveillance, Early Warning and Pathogen Research on Emerging Infectious Diseases; New Cornerstone Science Laboratory; Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing, China. caobin_ben@163.com.；Department of Pulmonary and Critical Care Medicine, China-Japan Friendship Hospital, Capital Medical University, Beijing, China. caobin_ben@163.com.；Department of Pulmonary and Critical Care Medicine, The Second Affiliated Hospital of Harbin Medical University, Harbin, Heilongjiang, China. caobin_ben@163.com.；Tsinghua University-Peking University Joint Centre for Life Sciences, Tsinghua University, Beijing, China. caobin_ben@163.com.\n课题组角色依据：PubMed 记录中曹彬单位附有通讯邮箱 caobin_ben@163.com。",
+      "figures": []
+    },
+    {
+      "pmid": "41551013",
+      "doi": "10.1016/j.pccm.2025.11.006",
+      "pmcid": "PMC12805393",
+      "slug": "2025-lung-transplant-lrt-microbiome",
+      "title": "Enrichment of the commensal microbiome in the lower respiratory tract is associated with improved outcomes following lung transplantation",
+      "authors": "Wang C, Chang K, Chen M, Zou X, Ni Y, Zhang Q, Zhao L, Xing B, Guo L, Chen W, Cao B",
+      "journal": "Chin Med J Pulm Crit Care Med",
+      "year": 2025,
+      "citation": "3(4):308-318",
+      "publication_types": "Journal Article",
+      "summary": "研究对 2023 年采集自中日友好医院 2017–2023 年肺移植受者的 138 份支气管肺泡灌洗液进行宏基因组测序，并结合肺功能、血液学指标、血清细胞因子和前瞻性随访的不良临床事件分析。稳定期受者肺部菌群可分为四个簇，其中最常见、富含口腔来源共生菌（如 Neisseria subflava、Prevotella melaninogenica、Streptococcus mitis）的簇多样性最高，与最低的 C 反应蛋白水平、最少的不良事件和最长的无并发症术后时间相关；以细环病毒和巨细胞病毒富集、多样性降低为特征的簇则与较差结局相关。感染受者菌群失调更严重，合并感染加重了抗体介导排斥相关的肺功能下降。",
+      "directions": [
+        "microbiome"
+      ],
+      "featured": false,
+      "lab_role": "unverified",
+      "source_note": "来源：NCBI PubMed E-utilities efetch（PMID 41551013），检索时间 2026-10-21。\n身份判断依据（PubMed 作者单位）：作者位置 11/11：Cao Bin；单位匹配：National Center for Respiratory Medicine; State Key Laboratory of Respiratory Health and Multimorbidity; National Clinical Research Center for Respiratory Diseases; Institute of Respiratory Medicine, Chinese Academy of Medical Sciences; Laboratory of Clinical Microbiology and Infectious Diseases, Department of Pulmonary and Critical Care Medicine, Center of Respiratory Medicine, China-Japan Friendship Hospital, Beijing 100029, China.",
+      "figures": []
+    }
+  ],
+  "direction_summaries": {
+    "viral-sepsis": "研究流感、腺病毒、新冠等呼吸道病毒肺炎的流行病学与临床表型，解析病毒性感染中毒症的宿主免疫致病机制及其与细菌性脓毒症的异同，并依托队列研究长新冠。",
+    "pathogen-diagnosis": "依托 CAPChina 多中心平台研究社区获得性肺炎病原谱，解析细菌、支原体、真菌耐药机制，研发快速病原诊断技术，研究重症细菌性、真菌性肺炎救治。",
+    "antiviral-evaluation": "建立病毒性肺炎抗病毒疗效评价体系，牵头抗流感、抗新冠创新药物 II/III 期临床试验，并探索重症呼吸道感染抗病毒联合治疗。",
+    "real-world-evidence": "基于多中心真实世界队列动态监测呼吸道病原体，分析不同病原体感染的临床表型、治疗与预后影响因素。",
+    "microbiome": "关注急性呼吸道感染中呼吸道微生态的动态变化，研究菌群结构与代谢特征及其与宿主免疫、疾病严重程度和转归的关联。",
+    "translation": "研发呼吸道病原快速多维检测技术，探索宿主导向治疗，构建预后预测模型，推动研究证据转化为诊疗规范与防控策略。"
+  },
+  "project_directions": {
+    "2024ZD0522500": [
+      "real-world-evidence",
+      "pathogen-diagnosis"
+    ],
+    "2022YFA1304300": [
+      "microbiome"
+    ],
+    "82530002": [
+      "viral-sepsis"
+    ],
+    "BRWEP2024W114060100": [
+      "pathogen-diagnosis",
+      "translation"
+    ]
+  },
+  "schematics": [
+    {
+      "static_asset": "direction-translation.svg",
+      "title": "临床转化方向研究布局（示意图）",
+      "caption": "依据本方向介绍整理的研究布局示意：临床问题对应快速多维病原检测、宿主导向治疗与预后预测模型三条工作线，目标是形成诊疗规范与公共防控策略。图中仅表示工作内容的组织方式，不代表实验结论或因果机制。",
+      "alt": "示意图：三条转化工作线汇聚到诊疗规范与防控策略",
+      "directions": [
+        "translation"
+      ],
+      "position": 50
+    }
+  ]
+}

@@ -43,9 +43,10 @@ class Command(BaseCommand):
             leader_photo=asset(leader["photo"]), contact_name=data["contact"]["name"],
             contact_email=data["contact"]["email"],
         )
-        english = ["Home", "Research", "Publications", "Our Team", "Learning Resources", "Contact"]
+        english = ["Home", "Research", "Research Projects", "Publications", "Our Team", "Learning Resources", "Contact & Join"]
         introductions = ["", "围绕呼吸道感染的临床问题，连接病原、宿主与转化研究。",
-                         "科研项目、研究论文与其他科研成果。", "",
+                         "课题组承担的科研课题档案。",
+                         "代表性研究论文与其他科研成果，目录持续整理。", "",
                          "常见呼吸疾病的指南、专家共识与学习资料。点击卡片阅读 PDF，也可下载保存。",
                          "欢迎开展呼吸道感染与临床转化研究相关的学术交流。"]
         for (slug, title), en, intro in zip(Page.ROUTES, english, introductions):

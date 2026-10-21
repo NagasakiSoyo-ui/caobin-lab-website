@@ -1,0 +1,2 @@
+{% extends "public/base.html" %}{% block content %}{% include "public/intro.html" %}
+<section class="container section"><div class="project-count"><p>共 {{ projects|length }} 项科研课题</p><span>名称、类别、编号与周期</span></div><div class="project-list">{% for project in projects %}{% include "public/project.html" %}{% empty %}<div class="empty-state"><h2>科研课题整理中</h2><p>课题信息将陆续更新。</p></div>{% endfor %}</div></section>{% endblock %}

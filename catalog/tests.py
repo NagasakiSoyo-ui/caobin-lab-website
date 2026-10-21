@@ -175,7 +175,11 @@ class WebsiteTests(TestCase):
         with website_archive() as stream, ZipFile(stream) as archive:
             names = archive.namelist()
             self.assertEqual(sum(name.endswith(".pdf") for name in names), 9)
-            self.assertEqual(sum(name.endswith(".html") for name in names), 6)
+            # Seven section pages plus one stable detail page per published research direction.
+            expected = {f"{slug}.html" for slug, _ in Page.ROUTES} | {
+                f"research-{slug}.html" for slug in ResearchDirection.objects.filter(is_published=True).values_list("slug", flat=True)}
+            self.assertEqual({name for name in names if name.endswith(".html")}, expected)
+            self.assertEqual(len(expected), 13)
             team = archive.read("team.html").decode()
             self.assertNotIn("未公开成员", team)
             self.assertNotIn("/manage/", team)

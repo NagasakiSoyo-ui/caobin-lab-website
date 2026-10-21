@@ -1,0 +1,96 @@
+研究配图来源清单（seed/figures）
+
+均为曹彬课题组自有论文的原图，按课题组授权在网站使用；图像未作裁切、调色或其他修改。
+获取渠道：PMC Cloud Service（NCBI 官方开放数据 pmc-oa-opendata），下载后按官方元数据 md5 校验。
+图号与原文图题依据 NCBI EUtils efetch(db=pmc) 返回的 JATS XML <fig> 元素核对。
+
+figures/pmid32311318-figure.jpg
+  论文：PMID 32311318 · PMC7164875 · doi:10.1016/s0140-6736(20)30920-x
+  原图号：Figure
+  作者与出处：Li H, et al. Lancet. 2020;395(10235):1517-1520. doi:10.1016/s0140-6736(20)30920-x. Figure
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC7164875/figure/fig1/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC7164875.1/gr1_lrg.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。PMC 版权声明：© 2020 Elsevier Ltd，经 Elsevier COVID-19 资源中心许可收录于 PMC。
+
+figures/pmid40367638-fig2.jpg
+  论文：PMID 40367638 · PMC12142562 · doi:10.1016/j.ebiom.2025.105738
+  原图号：Fig. 2
+  作者与出处：Zheng Y, et al. EBioMedicine. 2025;116:105738. doi:10.1016/j.ebiom.2025.105738. Fig. 2
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC12142562/figure/fig2/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC12142562.1/gr2.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY-NC-ND 4.0。
+
+figures/pmid40367638-fig1.jpg
+  论文：PMID 40367638 · PMC12142562 · doi:10.1016/j.ebiom.2025.105738
+  原图号：Fig. 1
+  作者与出处：Zheng Y, et al. EBioMedicine. 2025;116:105738. doi:10.1016/j.ebiom.2025.105738. Fig. 1
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC12142562/figure/fig1/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC12142562.1/gr1.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY-NC-ND 4.0；第三方元素：Fig. 1a 原文注明 Created with BioRender.com。
+
+figures/pmid40858544-fig6.jpg
+  论文：PMID 40858544 · PMC12381301 · doi:10.1038/s41392-025-02365-x
+  原图号：Fig. 6
+  作者与出处：Zou X, et al. Signal Transduct Target Ther. 2025;10(1):272. doi:10.1038/s41392-025-02365-x. Fig. 6
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC12381301/figure/Fig6/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC12381301.1/41392_2025_2365_Fig6_HTML.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY 4.0。
+
+figures/pmid40858544-fig1.jpg
+  论文：PMID 40858544 · PMC12381301 · doi:10.1038/s41392-025-02365-x
+  原图号：Fig. 1
+  作者与出处：Zou X, et al. Signal Transduct Target Ther. 2025;10(1):272. doi:10.1038/s41392-025-02365-x. Fig. 1
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC12381301/figure/Fig1/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC12381301.1/41392_2025_2365_Fig1_HTML.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY 4.0。
+
+figures/pmid38231624-fig2.jpg
+  论文：PMID 38231624 · PMC11156186 · doi:10.1056/nejmoa2301425
+  原图号：Figure 2
+  作者与出处：Cao B, et al. N Engl J Med. 2024;390(3):230-241. doi:10.1056/nejmoa2301425. Figure 2
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC11156186/figure/f2/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC11156186.1/NEJMoa2301425_f2.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。PMC 版权声明：© 2024 Massachusetts Medical Society。
+
+figures/pmid38231624-fig1.jpg
+  论文：PMID 38231624 · PMC11156186 · doi:10.1056/nejmoa2301425
+  原图号：Figure 1
+  作者与出处：Cao B, et al. N Engl J Med. 2024;390(3):230-241. doi:10.1056/nejmoa2301425. Figure 1
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC11156186/figure/f1/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC11156186.1/NEJMoa2301425_f1.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。PMC 版权声明：© 2024 Massachusetts Medical Society。
+
+figures/pmid40693035-fig1.jpg
+  论文：PMID 40693035 · PMC12276579 · doi:10.1016/j.bsheal.2025.05.004
+  原图号：Fig. 1
+  作者与出处：Hong L, et al. Biosaf Health. 2025;7(3):152-165. doi:10.1016/j.bsheal.2025.05.004. Fig. 1
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC12276579/figure/f0005/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC12276579.1/gr1.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY-NC-ND 4.0。
+
+figures/pmid39692191-fig1.jpg
+  论文：PMID 39692191 · PMC11809327 · doi:10.1002/advs.202405087
+  原图号：Figure 1
+  作者与出处：Zou X, et al. Adv Sci (Weinh). 2025;12(6):e2405087. doi:10.1002/advs.202405087. Figure 1
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC11809327/figure/advs10477-fig-0001/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC11809327.1/ADVS-12-2405087-g003.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY 4.0。
+
+figures/pmid39692191-fig4.jpg
+  论文：PMID 39692191 · PMC11809327 · doi:10.1002/advs.202405087
+  原图号：Figure 4
+  作者与出处：Zou X, et al. Adv Sci (Weinh). 2025;12(6):e2405087. doi:10.1002/advs.202405087. Figure 4
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC11809327/figure/advs10477-fig-0004/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC11809327.1/ADVS-12-2405087-g006.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY 4.0。
+
+figures/pmid40470147-fig2.jpg
+  论文：PMID 40470147 · PMC12134930 · doi:10.1183/23120541.00836-2024
+  原图号：FIGURE 2
+  作者与出处：Cao W, et al. ERJ Open Res. 2025;11(3). doi:10.1183/23120541.00836-2024. FIGURE 2
+  原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC12134930/figure/F2/
+  文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC12134930.1/00836-2024.02.jpg
+  使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY-NC 4.0。
+
+static/site/figures/direction-translation.svg
+  课题组网站原创示意图，依据「临床转化方向」介绍整理，不代表实验结论。

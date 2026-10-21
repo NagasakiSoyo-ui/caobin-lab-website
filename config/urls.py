@@ -9,4 +9,7 @@ urlpatterns = [
     path("media/<path:filename>", views.media_file),
     path("manage/export/", views.export_site, name="export_site"),
     path("manage/", admin.site.urls),
+    # Detail pages use the same flat file names as the offline export (see models.direction_filename).
+    path("research-<slug:slug>.html", views.direction_page, name="direction"),
+    path("publication-<slug:slug>.html", views.publication_page, name="publication"),
 ] + [path(f"{slug}.html", views.public_page, {"slug": slug}, name=slug) for slug, _ in Page.ROUTES]

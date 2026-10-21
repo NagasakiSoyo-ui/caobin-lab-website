@@ -4,27 +4,63 @@
   "research": [
     {
       "title": "病毒性肺炎与病毒性感染中毒症（viral sepsis）",
-      "text": "围绕流感、腺病毒、新冠等呼吸道病毒肺炎，开展流行病学与临床表型研究；阐释病毒性感染中毒症理论，解析病毒诱发肺损伤、多器官功能障碍的宿主免疫致病机制，对比病毒性感染中毒症与细菌性脓毒症的异同，发掘宿主干预靶点；依托临床队列，探究呼吸道感染后综合征（长新冠）的临床表型、病毒残留、恢复生物学特征及干预策略。"
+      "text": "围绕流感、腺病毒、新冠等呼吸道病毒肺炎，开展流行病学与临床表型研究；阐释病毒性感染中毒症理论，解析病毒诱发肺损伤、多器官功能障碍的宿主免疫致病机制，对比病毒性感染中毒症与细菌性脓毒症的异同，发掘宿主干预靶点；依托临床队列，探究呼吸道感染后综合征（长新冠）的临床表型、病毒残留、恢复生物学特征及干预策略。",
+      "slug": "viral-sepsis",
+      "short_title": "病毒性感染中毒症",
+      "covers_pathogen": true,
+      "covers_host": true,
+      "covers_clinical": true,
+      "covers_intervention": true
     },
     {
       "title": "呼吸道病原体与精准感染诊断",
-      "text": "依托 CAPChina 全国多中心平台开展社区获得性肺炎病原谱研究；解析呼吸道细菌、支原体、真菌的耐药机制，研发快速病原诊断技术；开展重症细菌性、真菌性肺炎的临床特征与救治策略研究。"
+      "text": "依托 CAPChina 全国多中心平台开展社区获得性肺炎病原谱研究；解析呼吸道细菌、支原体、真菌的耐药机制，研发快速病原诊断技术；开展重症细菌性、真菌性肺炎的临床特征与救治策略研究。",
+      "slug": "pathogen-diagnosis",
+      "short_title": "病原与精准诊断",
+      "covers_pathogen": true,
+      "covers_host": false,
+      "covers_clinical": true,
+      "covers_intervention": true
     },
     {
       "title": "抗病毒药物临床评价与新药转化",
-      "text": "建立被 WHO、CDE 采纳的病毒性肺炎抗病毒疗效评价体系（7 等级临床终点、核心症状评价量表）；牵头抗流感、抗新冠创新药物 II/III 期临床试验，支撑国产 I 类抗病毒新药上市，探索重症呼吸道感染抗病毒联合治疗方案。"
+      "text": "建立被 WHO、CDE 采纳的病毒性肺炎抗病毒疗效评价体系（7 等级临床终点、核心症状评价量表）；牵头抗流感、抗新冠创新药物 II/III 期临床试验，支撑国产 I 类抗病毒新药上市，探索重症呼吸道感染抗病毒联合治疗方案。",
+      "slug": "antiviral-evaluation",
+      "short_title": "抗病毒药物评价",
+      "covers_pathogen": false,
+      "covers_host": false,
+      "covers_clinical": true,
+      "covers_intervention": true
     },
     {
       "title": "急性呼吸道感染的真实世界临床研究",
-      "text": "基于多中心真实世界队列开展呼吸道病原体动态监测，解析病原谱时序变迁与流行特征；利用真实世界数据阐明不同病原体感染的临床表型、治疗方案及预后影响因素，挖掘病原宿主临床结局关联证据，为呼吸道感染流行病学防控与精准诊疗提供真实世界证据。"
+      "text": "基于多中心真实世界队列开展呼吸道病原体动态监测，解析病原谱时序变迁与流行特征；利用真实世界数据阐明不同病原体感染的临床表型、治疗方案及预后影响因素，挖掘病原宿主临床结局关联证据，为呼吸道感染流行病学防控与精准诊疗提供真实世界证据。",
+      "slug": "real-world-evidence",
+      "short_title": "真实世界研究",
+      "covers_pathogen": true,
+      "covers_host": true,
+      "covers_clinical": true,
+      "covers_intervention": false
     },
     {
       "title": "呼吸道微生物组研究",
-      "text": "聚焦急性呼吸道感染进程中呼吸道微生态动态变化，探索病原扰动下呼吸道菌群结构、代谢特征的演变规律；阐释呼吸道微生物组与宿主免疫、疾病严重程度及感染后转归的关联，挖掘微生态相关预后标志物与潜在干预靶点。"
+      "text": "聚焦急性呼吸道感染进程中呼吸道微生态动态变化，探索病原扰动下呼吸道菌群结构、代谢特征的演变规律；阐释呼吸道微生物组与宿主免疫、疾病严重程度及感染后转归的关联，挖掘微生态相关预后标志物与潜在干预靶点。",
+      "slug": "microbiome",
+      "short_title": "呼吸道微生物组",
+      "covers_pathogen": true,
+      "covers_host": true,
+      "covers_clinical": true,
+      "covers_intervention": true
     },
     {
       "title": "临床转化方向",
-      "text": "研发呼吸道病原快速多维检测技术；探索宿主导向治疗策略；构建呼吸道感染预后预测模型；推动临床研究证据转化为诊疗规范与公共防控策略。"
+      "text": "研发呼吸道病原快速多维检测技术；探索宿主导向治疗策略；构建呼吸道感染预后预测模型；推动临床研究证据转化为诊疗规范与公共防控策略。",
+      "slug": "translation",
+      "short_title": "临床转化",
+      "covers_pathogen": true,
+      "covers_host": true,
+      "covers_clinical": true,
+      "covers_intervention": true
     }
   ],
   "projects": [

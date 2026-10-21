@@ -22,6 +22,7 @@ from django.core.management import call_command
 from django.contrib.auth import get_user_model
 call_command("migrate", interactive=False)
 call_command("seed_site")
+call_command("seed_publications")
 call_command("collectstatic", interactive=False, verbosity=0)
 if not args.no_admin and not get_user_model().objects.filter(is_superuser=True).exists():
     print("请设置管理员账号和密码。密码输入时不回显，至少 12 位。")

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" width="960" height="1200" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+  <title>临床转化方向研究布局（示意图）</title>
+  <desc>临床问题对应快速多维病原检测、宿主导向治疗和预后预测模型三条工作线，目标是形成诊疗规范与公共防控策略。仅表示工作组织方式。</desc>
+  <rect width="480" height="600" fill="#f4f8fc"/>
+  <rect x="0" y="0" width="480" height="6" fill="#0d3b66"/>
+  <text x="24" y="44" font-size="16" fill="#4f6b88" letter-spacing="2">示意图 · 研究布局</text>
+  <text x="24" y="72" font-size="26" font-weight="700" fill="#0b2545">临床转化方向</text>
+  <rect x="24" y="96" width="432" height="72" rx="14" fill="#0d3b66"/>
+  <text x="44" y="124" font-size="16" fill="#9cc9ee">起点</text>
+  <text x="44" y="154" font-size="22" font-weight="600" fill="#ffffff">呼吸道感染的临床问题</text>
+  <path d="M240 168v22" stroke="#1f7fbf" stroke-width="2.5"/>
+  <path d="M60 190h360" stroke="#1f7fbf" stroke-width="2.5" fill="none"/>
+  <g font-size="22" fill="#0b2545">
+    <rect x="24" y="206" width="432" height="74" rx="12" fill="#ffffff" stroke="#9cc0e0" stroke-width="1.5"/>
+    <rect x="24" y="206" width="8" height="74" rx="4" fill="#1f9ec9"/>
+    <text x="48" y="236" font-size="16" fill="#1f7fbf">研发</text>
+    <text x="48" y="262" font-weight="600">呼吸道病原快速多维检测技术</text>
+    <rect x="24" y="294" width="432" height="74" rx="12" fill="#ffffff" stroke="#9cc0e0" stroke-width="1.5"/>
+    <rect x="24" y="294" width="8" height="74" rx="4" fill="#2bb3a3"/>
+    <text x="48" y="324" font-size="16" fill="#1f7fbf">探索</text>
+    <text x="48" y="350" font-weight="600">宿主导向治疗策略</text>
+    <rect x="24" y="382" width="432" height="74" rx="12" fill="#ffffff" stroke="#9cc0e0" stroke-width="1.5"/>
+    <rect x="24" y="382" width="8" height="74" rx="4" fill="#5b7fd6"/>
+    <text x="48" y="412" font-size="16" fill="#1f7fbf">构建</text>
+    <text x="48" y="438" font-weight="600">呼吸道感染预后预测模型</text>
+  </g>
+  <path d="M240 456v26" stroke="#1f7fbf" stroke-width="2.5"/>
+  <path d="M232 474l8 10 8-10" stroke="#1f7fbf" stroke-width="2.5" fill="none"/>
+  <rect x="24" y="490" width="432" height="72" rx="14" fill="#e3f1fb" stroke="#1f7fbf" stroke-width="1.5"/>
+  <text x="44" y="518" font-size="16" fill="#1f7fbf">推动研究证据转化为</text>
+  <text x="44" y="544" font-size="22" font-weight="700" fill="#0b2545">诊疗规范与公共防控策略</text>
+  <text x="24" y="588" font-size="14" fill="#6a7f95">示意图，不代表实验结论或因果机制。</text>
+</svg>

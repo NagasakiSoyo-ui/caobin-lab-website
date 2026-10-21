@@ -4,15 +4,33 @@ from django.contrib import admin
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, FileResponse, Http404
 from django.views.decorators.http import require_GET
-from .presentation import render_website
+from .presentation import render_website, render_direction, render_publication
 from .exporting import website_archive
+
+CSP = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+
+
+def _public(html):
+    if html is None:
+        raise Http404
+    response = HttpResponse(html)
+    response["Content-Security-Policy"] = CSP
+    return response
 
 
 @require_GET
 def public_page(request, slug="index"):
-    response = HttpResponse(render_website(slug))
-    response["Content-Security-Policy"] = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
-    return response
+    return _public(render_website(slug))
+
+
+@require_GET
+def direction_page(request, slug):
+    return _public(render_direction(slug))
+
+
+@require_GET
+def publication_page(request, slug):
+    return _public(render_publication(slug))
 
 
 @require_GET
