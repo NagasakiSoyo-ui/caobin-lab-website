@@ -9,10 +9,45 @@ from django.db import transaction
 from django.template.loader import render_to_string
 from .presentation import website_context, page_manifest
 
-# Only attribute values that start with the site-local prefixes are rewritten, so external
-# URLs that merely contain "/media/" or "/static/" are left untouched.
-LOCAL_ATTRIBUTE = re.compile(r'((?:src|href|srcset|data-full)=")/(media|static/site)/')
-MEDIA_REFERENCE = re.compile(r'(?:src|href|srcset|data-full)="(/media/[^"]+)"')
+# URL-bearing attributes. srcset holds a comma-separated list of "url descriptor" entries,
+# so each URL in it is handled separately. Only URLs that start with the site-local prefixes
+# are rewritten; external URLs that merely contain "/media/" or "/static/" are left untouched.
+URL_ATTRIBUTE = re.compile(r'\b(src|href|data-full|srcset)="([^"]*)"')
+LOCAL_PREFIXES = (("/media/", "media/"), ("/static/site/", "assets/"))
+
+
+def srcset_urls(value):
+    return [entry.split()[0] for entry in value.split(",") if entry.strip()]
+
+
+def attribute_urls(html):
+    for name, value in URL_ATTRIBUTE.findall(html):
+        yield from (srcset_urls(value) if name == "srcset" else [value])
+
+
+def _local(url):
+    for prefix, replacement in LOCAL_PREFIXES:
+        if url.startswith(prefix):
+            return replacement + url[len(prefix):]
+    return url
+
+
+def _rewrite(match):
+    name, value = match.groups()
+    if name == "srcset":
+        entries = []
+        for entry in value.split(","):
+            parts = entry.strip().split(None, 1)
+            if parts:
+                entries.append(" ".join([_local(parts[0])] + parts[1:]))
+        value = ", ".join(entries)
+    else:
+        value = _local(value)
+    return f'{name}="{value}"'
+
+
+def media_references(html):
+    return {unquote(url) for url in attribute_urls(html) if url.startswith("/media/")}
 
 
 class LinkCollector(HTMLParser):
@@ -27,11 +62,11 @@ class LinkCollector(HTMLParser):
             if name in ("href", "src", "data-full") and value:
                 self.links.append(value)
             if name == "srcset" and value:
-                self.links.extend(part.strip().split(" ")[0] for part in value.split(",") if part.strip())
+                self.links.extend(srcset_urls(value))
 
 
 def localize(html):
-    return LOCAL_ATTRIBUTE.sub(lambda m: m.group(1) + ("media/" if m.group(2) == "media" else "assets/"), html)
+    return URL_ATTRIBUTE.sub(_rewrite, html)
 
 
 def check_links(documents, files):
@@ -65,7 +100,7 @@ def website_archive():
         documents, media = {}, set()
         for filename, template, context in page_manifest(website_context("index")):
             html = render_to_string(template, context)
-            media.update(unquote(url) for url in MEDIA_REFERENCE.findall(html))
+            media.update(media_references(html))
             documents[filename] = localize(html)
     static_root = settings.BASE_DIR / "static/site"
     static_files = {"assets/" + f.relative_to(static_root).as_posix(): f for f in static_root.rglob("*") if f.is_file()}

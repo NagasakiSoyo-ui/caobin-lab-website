@@ -298,7 +298,9 @@ class PubMedCandidate(Versioned):
     title = models.TextField("题目")
     authors = models.TextField("作者", blank=True)
     journal = models.CharField("期刊", max_length=300, blank=True)
-    year = models.PositiveIntegerField("年份", null=True, blank=True)
+    year = models.PositiveIntegerField("年份", null=True, blank=True,
+                                       validators=[MinValueValidator(1900), MaxValueValidator(2200)],
+                                       help_text="PubMed 未提供年份时，核对原文后人工填写；纳入前必须有年份。")
     citation = models.CharField("卷期页码", max_length=300, blank=True)
     abstract = models.TextField("英文摘要", blank=True)
     publication_types = models.CharField("文献类型", max_length=500, blank=True)

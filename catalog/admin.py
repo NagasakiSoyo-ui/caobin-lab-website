@@ -1,12 +1,12 @@
 from django.contrib import admin, messages
-from django.db.models import F
+from django.db import transaction
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html, format_html_join
 from .forms import VersionedForm
 from .models import (SiteSettings, Page, ResearchDirection, Project, Member, Publication, Resource,
                      Figure, PubMedCandidate, PubMedImportRun)
-from .pubmed import ImportFailure, accept
+from .pubmed import ImportFailure, accept, reset_to_pending
 
 admin.site.site_header = "课题组 · 内容管理"
 admin.site.site_title = "网站管理台"
@@ -158,13 +158,28 @@ class FigureAdmin(ContentAdmin):
             return "已显示"
         return "成果未公开" if obj.is_published else "草稿"
 
+    def _set_published(self, request, queryset, value, label):
+        # Save each figure like an ordinary edit: bumps version, refreshes updated_at, writes the admin log.
+        changed = 0
+        for figure in queryset.select_for_update():
+            if figure.is_published == value:
+                continue
+            figure.is_published = value
+            figure.version += 1
+            figure.save(update_fields=["is_published", "version", "updated_at"])
+            self.log_change(request, figure, f"批量{label}（在网站公开）")
+            changed += 1
+        self.message_user(request, f"已{label} {changed} 张图片。")
+
     @admin.action(description="公开选中的图片", permissions=["change"])
     def publish(self, request, queryset):
-        queryset.update(is_published=True, version=F("version") + 1)
+        with transaction.atomic():
+            self._set_published(request, queryset, True, "公开")
 
     @admin.action(description="取消公开选中的图片", permissions=["change"])
     def unpublish(self, request, queryset):
-        queryset.update(is_published=False, version=F("version") + 1)
+        with transaction.atomic():
+            self._set_published(request, queryset, False, "取消公开")
 
 
 @admin.register(PubMedCandidate)
@@ -172,17 +187,25 @@ class CandidateAdmin(ContentAdmin):
     list_display = ("pmid", "short_title", "year", "journal", "identity_status", "decision", "has_conflict", "publication")
     list_filter = ("decision", "identity_status", "year")
     search_fields = ("pmid", "doi", "title", "authors")
-    actions = ("accept_selected", "reject_selected")
+    actions = ("accept_selected", "reject_selected", "reset_selected")
     readonly_fields = ("pmid", "doi", "pmcid", "title", "authors", "journal", "year", "citation", "publication_types",
                        "abstract", "identity_status", "identity_evidence", "query", "retrieved_at", "decision",
                        "decided_by", "decided_at", "publication", "conflict", "upstream_changes", "updated_at")
+
+    def get_readonly_fields(self, request, obj=None):
+        # PubMed sometimes has no publication year; let an editor enter the verified year instead of guessing.
+        fields = super().get_readonly_fields(request, obj)
+        if obj and obj.year is None and not obj.publication_id:
+            return tuple(f for f in fields if f != "year")
+        return fields
     fieldsets = [
         ("审核", {"fields": ["decision", "decision_note", "decided_by", "decided_at", "publication", "conflict",
                            "upstream_changes", "edit_version"],
                 "description": "在列表中勾选候选，使用「纳入为成果草稿」或「标记为不纳入」。纳入后的成果默认不公开。"}),
         ("身份核验", {"fields": ["identity_status", "identity_evidence"],
                   "description": "依据 PubMed 作者单位判断是否为本课题组曹彬；不会根据作者顺序判断通讯作者。"}),
-        ("PubMed 记录", {"fields": ["pmid", "doi", "pmcid", "title", "authors", "journal", "year", "citation",
+        ("PubMed 记录", {"description": "年份缺失时可在此填写经原文核对的年份（保存会记入操作记录），否则无法纳入。",
+                        "fields": ["pmid", "doi", "pmcid", "title", "authors", "journal", "year", "citation",
                                   "publication_types", "abstract", "query", "retrieved_at", "updated_at"]}),
     ]
 
@@ -205,8 +228,9 @@ class CandidateAdmin(ContentAdmin):
         done = 0
         for candidate in queryset:
             try:
-                accept(candidate, request.user)
+                publication = accept(candidate, request.user)
                 done += 1
+                self.log_change(request, candidate, f"纳入为成果草稿 #{publication.pk}")
             except ImportFailure as exc:
                 self.message_user(request, str(exc), messages.ERROR)
         if done:
@@ -214,9 +238,25 @@ class CandidateAdmin(ContentAdmin):
 
     @admin.action(description="标记为不纳入", permissions=["change"])
     def reject_selected(self, request, queryset):
-        count = queryset.filter(publication__isnull=True).update(
-            decision="rejected", decided_by=request.user, decided_at=timezone.now(), version=F("version") + 1)
+        count = 0
+        with transaction.atomic():
+            for candidate in queryset.select_for_update().filter(publication__isnull=True).exclude(decision="rejected"):
+                candidate.decision, candidate.decided_by, candidate.decided_at = "rejected", request.user, timezone.now()
+                candidate.version += 1
+                candidate.save()
+                self.log_change(request, candidate, "标记为不纳入")
+                count += 1
         self.message_user(request, f"已标记 {count} 条为不纳入；已纳入成果的候选不受影响。")
+
+    @admin.action(description="恢复为待审核（撤销「不纳入」）", permissions=["change"])
+    def reset_selected(self, request, queryset):
+        count = 0
+        for candidate in queryset:
+            if reset_to_pending(candidate, request.user):
+                self.log_change(request, candidate, "将「不纳入」恢复为待审核")
+                count += 1
+        skipped = queryset.count() - count
+        self.message_user(request, f"已恢复 {count} 条为待审核。" + (f"{skipped} 条不是「不纳入」状态或已关联成果，未改动。" if skipped else ""))
 
 
 @admin.register(PubMedImportRun)

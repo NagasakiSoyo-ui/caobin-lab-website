@@ -6,6 +6,7 @@ from unittest.mock import patch
 from zipfile import ZipFile
 from PIL import Image
 from django.contrib.auth import get_user_model
+from django.contrib.admin.models import LogEntry
 from django.contrib.auth.models import Permission
 from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -14,9 +15,11 @@ from django.core.management.base import CommandError
 from django.db import connection
 from django.db.migrations.executor import MigrationExecutor
 from django.test import TestCase, TransactionTestCase, override_settings
-from .exporting import check_links, website_archive
+from .exporting import check_links, localize, media_references, website_archive
 from .models import Figure, Page, Project, Publication, PubMedCandidate, PubMedImportRun, ResearchDirection
 from .pubmed import ImportFailure, accept
+from datetime import timedelta
+from django.utils import timezone
 
 SEED_PMIDS = {"32311318", "40367638", "40858544", "38231624", "40693035"}
 
@@ -31,7 +34,7 @@ def pubmed_xml(*articles):
             for last, fore, aff in a["authors"])
         doi = f'<ArticleId IdType="doi">{a["doi"]}</ArticleId>' if a.get("doi") else ""
         parts.append(f"""<PubmedArticle><MedlineCitation><PMID>{a['pmid']}</PMID><Article>
-<Journal><JournalIssue><Volume>10</Volume><Issue>1</Issue><PubDate><Year>{a.get('year', 2025)}</Year></PubDate></JournalIssue>
+<Journal><JournalIssue><Volume>10</Volume><Issue>1</Issue><PubDate>{'<Year>%s</Year>' % a.get('year', 2025) if a.get('year', 2025) else '<Season>Spring</Season>'}</PubDate></JournalIssue>
 <Title>Test Journal</Title><ISOAbbreviation>Test J</ISOAbbreviation></Journal><ArticleTitle>{a['title']}</ArticleTitle>
 <Pagination><MedlinePgn>1-9</MedlinePgn></Pagination><Abstract><AbstractText>Abstract.</AbstractText></Abstract>
 <AuthorList>{authors}</AuthorList><PublicationTypeList><PublicationType>Journal Article</PublicationType></PublicationTypeList>
@@ -326,6 +329,38 @@ class ResearchSiteTests(MediaMixin, TestCase):
         self.assertContains(self.client.get("/research-antiviral-evaluation.html"), project.title)
         self.assertNotContains(self.client.get("/research-viral-sepsis.html"), project.title)
 
+    def test_srcset_urls_are_each_collected_and_rewritten(self):
+        html = ('<img src="/static/site/x.svg" srcset="/media/a.jpg 1x, /media/a%402x.jpg 2x, '
+                'https://example.org/media/b.jpg 3x"><a href="https://example.org/static/site/c.css">c</a>')
+        self.assertEqual(media_references(html), {"/media/a.jpg", "/media/a@2x.jpg"})
+        local = localize(html)
+        self.assertIn('srcset="media/a.jpg 1x, media/a%402x.jpg 2x, https://example.org/media/b.jpg 3x"', local)
+        self.assertIn('src="assets/x.svg"', local)
+        self.assertIn('href="https://example.org/static/site/c.css"', local)
+        check_links({"p.html": local}, {"p.html", "assets/x.svg", "media/a.jpg", "media/a@2x.jpg"})
+        with self.assertRaisesMessage(ValueError, "缺少 media/a@2x.jpg"):
+            check_links({"p.html": local}, {"p.html", "assets/x.svg", "media/a.jpg"})
+
+    def test_figure_bulk_actions_refresh_timestamp_version_and_log(self):
+        self.login()
+        figures = list(Figure.objects.filter(publication__pmid="40858544"))
+        old = timezone.now() - timedelta(days=3)
+        Figure.objects.filter(pk__in=[f.pk for f in figures]).update(updated_at=old)
+        response = self.client.post("/manage/catalog/figure/", {"action": "unpublish", "_selected_action": [f.pk for f in figures]})
+        self.assertEqual(response.status_code, 302)
+        for figure in figures:
+            fresh = Figure.objects.get(pk=figure.pk)
+            self.assertFalse(fresh.is_published)
+            self.assertEqual(fresh.version, figure.version + 1)
+            self.assertGreater(fresh.updated_at, old)
+            self.assertTrue(LogEntry.objects.filter(object_id=str(figure.pk), change_message__contains="取消公开").exists())
+        self.assertNotContains(self.client.get("/research-microbiome.html"), figures[0].image.url)
+        # Re-running on already unpublished figures changes nothing and logs nothing.
+        count = LogEntry.objects.count()
+        self.client.post("/manage/catalog/figure/", {"action": "unpublish", "_selected_action": [f.pk for f in figures]})
+        self.assertEqual(LogEntry.objects.count(), count)
+        self.assertEqual(Figure.objects.get(pk=figures[0].pk).version, figures[0].version + 1)
+
 
 @override_settings(ALLOWED_HOSTS=["testserver"])
 class PubMedImportTests(MediaMixin, TestCase):
@@ -416,6 +451,92 @@ class PubMedImportTests(MediaMixin, TestCase):
 
     def login(self):
         self.client.force_login(self.admin, backend="django.contrib.auth.backends.ModelBackend")
+
+    def action(self, name, *candidates):
+        return self.client.post("/manage/catalog/pubmedcandidate/",
+                                {"action": name, "_selected_action": [c.pk for c in candidates]})
+
+    def test_rejection_can_be_reset_to_pending_with_audit(self):
+        with fake_ncbi(self.articles(), ids=["111", "222"]):
+            call_command("import_pubmed", stdout=io.StringIO())
+        rejected, linked = PubMedCandidate.objects.get(pmid="222"), PubMedCandidate.objects.get(pmid="111")
+        self.login()
+        self.action("accept_selected", linked)
+        self.action("reject_selected", rejected)
+        rejected.refresh_from_db()
+        self.assertEqual(rejected.decision, "rejected")
+        with self.assertRaises(ImportFailure):
+            accept(rejected, self.admin)
+        # A view-only reviewer cannot undo the decision.
+        reviewer = get_user_model().objects.create_user("viewer", is_staff=True)
+        reviewer.user_permissions.add(Permission.objects.get(codename="view_pubmedcandidate"))
+        self.client.force_login(reviewer, backend="django.contrib.auth.backends.ModelBackend")
+        self.action("reset_selected", rejected)
+        self.assertEqual(PubMedCandidate.objects.get(pk=rejected.pk).decision, "rejected")
+        self.login()
+        version = PubMedCandidate.objects.get(pk=rejected.pk).version
+        linked_state = PubMedCandidate.objects.filter(pk=linked.pk).values("decision", "publication", "version").get()
+        self.action("reset_selected", rejected, linked)
+        rejected.refresh_from_db()
+        self.assertEqual((rejected.decision, rejected.version, rejected.decided_by), ("pending", version + 1, self.admin))
+        self.assertIn("恢复为待审核", rejected.decision_note)
+        self.assertTrue(LogEntry.objects.filter(object_id=str(rejected.pk), change_message__contains="恢复为待审核").exists())
+        self.assertEqual(PubMedCandidate.objects.filter(pk=linked.pk).values("decision", "publication", "version").get(), linked_state)
+        # A re-import keeps the restored decision; the candidate can now be accepted.
+        with fake_ncbi(self.articles(), ids=["222"]):
+            call_command("import_pubmed", "--pmid", "222", stdout=io.StringIO())
+        self.assertEqual(PubMedCandidate.objects.get(pk=rejected.pk).decision, "pending")
+        self.assertEqual(accept(rejected, self.admin).pmid, "222")
+
+    def test_missing_year_requires_verified_manual_year(self):
+        xml = pubmed_xml({"pmid": "555", "doi": "10.1000/noyear", "title": "No Year", "year": None, "authors": [GROUP]})
+        with fake_ncbi(xml, ids=["555"]):
+            call_command("import_pubmed", "--pmid", "555", stdout=io.StringIO())
+        candidate = PubMedCandidate.objects.get(pmid="555")
+        self.assertIsNone(candidate.year)
+        with self.assertRaisesMessage(ImportFailure, "缺少出版年份"):
+            accept(candidate, self.admin)
+        self.assertFalse(Publication.objects.exists())
+        self.login()
+        response = self.action("accept_selected", candidate)
+        self.assertFalse(Publication.objects.exists())
+        url = f"/manage/catalog/pubmedcandidate/{candidate.pk}/change/"
+        self.assertContains(self.client.get(url), 'name="year"')
+        bad = self.client.post(url, {"year": "1800", "decision_note": "", "edit_version": candidate.version})
+        self.assertEqual(bad.status_code, 200)
+        saved = self.client.post(url, {"year": "2023", "decision_note": "年份依据期刊官网核对", "edit_version": candidate.version})
+        self.assertEqual(saved.status_code, 302)
+        self.assertTrue(LogEntry.objects.filter(object_id=str(candidate.pk)).exists())
+        with fake_ncbi(xml, ids=["555"]):
+            call_command("import_pubmed", "--pmid", "555", stdout=io.StringIO())
+        candidate.refresh_from_db()
+        self.assertEqual(candidate.year, 2023)  # re-import does not erase the verified year
+        self.assertEqual(accept(candidate, self.admin).year, 2023)
+        self.assertNotContains(self.client.get(url), 'name="year"')  # locked once linked
+
+    def test_linked_candidate_conflicts_when_identifiers_are_reassigned(self):
+        with fake_ncbi(self.articles(), ids=["111"]):
+            call_command("import_pubmed", "--pmid", "111", stdout=io.StringIO())
+        candidate = PubMedCandidate.objects.get(pmid="111")
+        first = accept(candidate, self.admin)
+        # The PMID now belongs to a different publication: the old link must not be reused.
+        Publication.objects.filter(pk=first.pk).update(pmid="999", doi=None)
+        other = Publication.objects.create(title="Other", year=2024, pmid="111")
+        with fake_ncbi(self.articles(), ids=["111"]):
+            call_command("import_pubmed", "--pmid", "111", stdout=io.StringIO())
+        candidate.refresh_from_db()
+        self.assertIn(f"另一成果 #{other.pk}", candidate.conflict)
+        with self.assertRaisesMessage(ImportFailure, "未沿用旧关联"):
+            accept(candidate, self.admin)
+        # The linked publication's DOI was edited to another value (no second record involved).
+        other.delete()
+        Publication.objects.filter(pk=first.pk).update(pmid="111", doi="10.1000/changed")
+        with self.assertRaisesMessage(ImportFailure, "不一致"):
+            accept(candidate, self.admin)
+        first.refresh_from_db()
+        self.assertEqual((first.pmid, first.doi), ("111", "10.1000/changed"))
+        Publication.objects.filter(pk=first.pk).update(doi="10.1000/abc.1")
+        self.assertEqual(accept(candidate, self.admin).pk, first.pk)
 
     def test_empty_result_and_network_failure_are_reported(self):
         with fake_ncbi(b"", ids=[]), self.assertRaisesMessage(CommandError, "检索结果为空"):

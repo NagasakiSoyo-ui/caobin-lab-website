@@ -123,6 +123,21 @@ def find_conflict(pmid, doi):
     return match, ""
 
 
+def linked_conflict(candidate, match):
+    """A candidate already linked to a publication must still point at that same record."""
+    linked = candidate.publication
+    if linked is None:
+        return ""
+    if match is not None and match.pk != linked.pk:
+        return (f"冲突：候选已关联成果 #{linked.pk}，但其 PMID/DOI 现指向另一成果 #{match.pk}"
+                f"《{match.title[:40]}》。未沿用旧关联，请人工核对。")
+    doi = normalize_doi(candidate.doi)
+    if (linked.pmid and linked.pmid != candidate.pmid) or (linked.doi and doi and linked.doi != doi):
+        return (f"冲突：候选已关联成果 #{linked.pk}，但该成果的标识已改为 PMID {linked.pmid or '无'} / "
+                f"DOI {linked.doi or '无'}，与候选 PMID {candidate.pmid} / DOI {doi or '无'} 不一致。未沿用旧关联，请人工核对。")
+    return ""
+
+
 def _diff(candidate, publication):
     changes = []
     for field in COMPARED_FIELDS:
@@ -144,11 +159,15 @@ def store(records, query):
             created += 1
         else:
             updated += 1
+        manual_year = candidate.year
         for field, value in record.items():
             setattr(candidate, field, value)
+        if candidate.year is None and manual_year:
+            candidate.year = manual_year  # keep a year an editor verified by hand when PubMed has none
         candidate.query, candidate.retrieved_at = query, now
         match, candidate.conflict = find_conflict(candidate.pmid, candidate.doi)
         if candidate.publication_id:
+            candidate.conflict = candidate.conflict or linked_conflict(candidate, match)
             candidate.upstream_changes = _diff(candidate, candidate.publication)
         elif match and candidate.decision == "pending":
             candidate.decision_note = candidate.decision_note or f"已有成果 #{match.pk} 与该记录 PMID/DOI 一致。"
@@ -196,14 +215,17 @@ def accept(candidate, user=None):
     if candidate.decision == "rejected":
         raise ImportFailure(f"PMID {candidate.pmid} 已标记为不纳入，未导入。")
     match, conflict = find_conflict(candidate.pmid, candidate.doi)
+    conflict = conflict or linked_conflict(candidate, match)
     if conflict:
         candidate.conflict = conflict
         candidate.save(update_fields=["conflict"])
         raise ImportFailure(conflict)
     publication = candidate.publication or match
+    if publication is None and not candidate.year:
+        raise ImportFailure(f"PMID {candidate.pmid} 缺少出版年份：PubMed 记录未提供年份。请核对原文后在候选中填写年份，再纳入。")
     if publication is None:
         publication = Publication.objects.create(
-            kind="paper", title=candidate.title, authors=candidate.authors, year=candidate.year or timezone.now().year,
+            kind="paper", title=candidate.title, authors=candidate.authors, year=candidate.year,
             journal=candidate.journal, citation=candidate.citation, pmid=candidate.pmid, doi=candidate.doi or None,
             pmcid=candidate.pmcid, url=f"https://pubmed.ncbi.nlm.nih.gov/{candidate.pmid}/", is_published=False,
             source_note=(f"来源：{candidate.query}\n检索时间：{candidate.retrieved_at:%Y-%m-%d %H:%M}\n"
@@ -223,3 +245,19 @@ def accept(candidate, user=None):
     candidate.version += 1
     candidate.save()
     return publication
+
+
+@transaction.atomic
+def reset_to_pending(candidate, user=None):
+    """Undo a rejection. Candidates already linked to a publication are left untouched."""
+    candidate = PubMedCandidate.objects.select_for_update().get(pk=candidate.pk)
+    if candidate.decision != "rejected" or candidate.publication_id:
+        return False
+    stamp = timezone.localtime()
+    who = user.get_username() if user else "系统"
+    note = f"{stamp:%Y-%m-%d %H:%M} {who} 将「不纳入」恢复为待审核。"
+    candidate.decision_note = (candidate.decision_note + "\n" + note).strip()
+    candidate.decision, candidate.decided_by, candidate.decided_at = "pending", user, stamp
+    candidate.version += 1
+    candidate.save()
+    return True
