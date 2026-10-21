@@ -33,8 +33,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .button.primary{background:#fff;color:var(--accent)}.button.primary:hover{background:#e8eff6;color:var(--accent-dark)}.button.ghost{border-color:#ffffff90;color:#fff}.button.ghost:hover{background:#ffffff1a;color:#fff}
 .button.outline{border-color:var(--line);color:var(--accent);background:#fff;padding:10px 22px}.button.outline:hover{border-color:var(--accent)}
 .empty-state{padding:36px;border:1px dashed var(--line);color:var(--muted);text-align:center;background:#fff}
-.layer-chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}.chip{font-size:12px;font-weight:600;padding:1px 9px;border-radius:var(--radius);line-height:1.7}
-.chip.pathogen{color:var(--pathogen);background:var(--pathogen-bg)}.chip.host{color:var(--host);background:var(--host-bg)}.chip.clinical{color:var(--clinical);background:var(--clinical-bg)}.chip.intervention{color:var(--intervention);background:var(--intervention-bg)}
 
 /* Page intro (light) */
 .page-intro{background:linear-gradient(110deg,#eaf0f6,#f7f9fb);border-bottom:1px solid var(--line);color:var(--ink);padding:30px 0 50px}
@@ -59,7 +57,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .direction-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;counter-reset:d}
 .direction-card{position:relative;display:flex;flex-direction:column;background:#fff;border-top:3px solid var(--accent-soft);box-shadow:0 5px 20px #16365706;padding:27px 27px 24px;transition:box-shadow .2s,transform .2s}
 .direction-card:hover{box-shadow:0 12px 28px #1636571a;transform:translateY(-2px)}.direction-card h3{font-size:18px;margin-top:14px;color:var(--ink)}
-.direction-card p{color:var(--muted);font-size:14px;margin-top:10px}.direction-card .layer-chips{margin-top:auto;padding-top:16px}.direction-card .text-link{margin-top:8px}
+.direction-card p{color:var(--muted);font-size:14px;margin-top:10px}.direction-card .text-link{margin-top:8px}
 .direction-jump{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}.direction-jump a{display:inline-flex;gap:8px;align-items:center;padding:8px 18px;border:1px solid var(--line);font-size:14px;background:#fff;color:var(--ink)}
 .direction-jump span{font-family:Georgia,serif;color:var(--number)}.direction-jump a:hover{border-color:var(--accent)}
 .direction-row{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;align-items:start;padding:36px 0;border-top:1px solid var(--line)}.direction-row:first-child{border-top:0}
