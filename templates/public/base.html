@@ -4,9 +4,9 @@
 <link rel="icon" href="{% static 'site/favicon.svg' %}" type="image/svg+xml">
 <link rel="stylesheet" href="{% static 'site/medical.css' %}"><script src="{% static 'site/site.js' %}" defer></script></head>
 <body data-page="{{ route }}"><a class="skip-link" href="#main">跳至正文</a>
-<header class="site-header"><div class="container header-bar"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18"/><path d="M8 20h7l3-7 4 14 3-7h7"/></svg></span><span class="brand-text"><strong>{{ site.name }}</strong><small>{{ site.subtitle }}</small></span></a>
-<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-label">菜单</span><span class="menu-icon" aria-hidden="true"></span></button>
-<nav id="site-nav" aria-label="主导航">{% for item in pages %}<a href="{{ item.slug }}.html"{% if item.slug == route %} aria-current="page"{% endif %}>{{ item.title }}</a>{% endfor %}</nav></div></header>
+<header class="site-header"><div class="container masthead"><a class="brand" href="index.html"><strong class="brand-name">{{ site.name }}</strong><span class="brand-detail">{{ site.subtitle }}</span></a>
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-label">菜单</span><span class="menu-icon" aria-hidden="true"></span></button></div>
+<nav id="site-nav" class="container" aria-label="主导航">{% for item in pages %}<a href="{{ item.slug }}.html"{% if item.slug == route %} aria-current="page"{% endif %}><span>{{ item.title }}</span><small lang="en">{{ item.english }}</small></a>{% endfor %}</nav></header>
 <main id="main" tabindex="-1">{% block content %}{% endblock %}</main>
 <footer class="site-footer"><div class="container footer-grid"><div><a class="footer-brand" href="index.html">{{ site.name }}</a><p>{{ site.subtitle }}</p><p class="footer-english" lang="en">Respiratory Infection &amp; Translational Research</p></div>
 <nav aria-label="页脚导航">{% for item in pages %}<a href="{{ item.slug }}.html">{{ item.title }}</a>{% endfor %}</nav><div><h2>联系与加入</h2><p>{{ site.contact_name }}</p><a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a></div></div><div class="container footer-note"><span>{{ site.name }}</span><span>研究配图均注明原文出处</span></div></footer></body></html>
