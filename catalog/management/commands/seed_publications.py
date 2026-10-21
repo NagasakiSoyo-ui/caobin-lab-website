@@ -80,16 +80,6 @@ class Command(BaseCommand):
                     figure.directions.set(pick(spec["directions"]))
                     stats["figures"] += 1
 
-        for spec in data.get("schematics", []):
-            if not Figure.objects.filter(static_asset=spec["static_asset"]).exists():
-                figure = Figure.objects.create(kind="schematic", static_asset=spec["static_asset"], title=spec["title"],
-                                               caption=spec["caption"], alt=spec["alt"], position=spec["position"],
-                                               credit="曹彬课题组网站原创示意图", license_note="课题组网站自制", is_published=True)
-                figure.directions.set(pick(spec["directions"]))
-                stats["figures"] += 1
-
-        for slug, summary in data.get("direction_summaries", {}).items():
-            ResearchDirection.objects.filter(slug=slug, summary="").update(summary=summary)
         for code, slugs in data.get("project_directions", {}).items():
             for project in Project.objects.filter(code=code):
                 if not project.directions.exists():

@@ -121,7 +121,7 @@ def website_archive():
             for name, file in {**static_files, **media_files}.items():
                 archive.write(file, name)
             archive.writestr("打开网站.txt", "完整解压后双击 index.html。\n请整体保留 assets 与 media 文件夹。\n"
-                             "研究配图为原文原图，点击图片可查看大图；图片说明下方注明原文出处。\n"
+                             "点击图片可查看大图。\n"
                              "这是前台离线快照；后台管理需运行服务端。\n")
         stream.seek(0)
         return stream

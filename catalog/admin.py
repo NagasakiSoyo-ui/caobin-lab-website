@@ -138,8 +138,8 @@ class FigureAdmin(ContentAdmin):
     readonly_fields = ("preview", "updated_at")
     actions = ("publish", "unpublish")
     fieldsets = [
-        ("图片", {"fields": ["kind", "image", "static_asset", "preview", "edit_version"],
-                "description": "上传 JPG/PNG/WebP 原图，或选择开发者内置的 SVG 示意图（二选一）。替换图片时直接上传新文件。"}),
+        ("图片", {"fields": ["kind", "image", "preview", "edit_version"],
+                "description": "上传团队提供或有原始出处的 JPG/PNG/WebP 图片，不使用 AI 生成图片。"}),
         ("说明", {"fields": ["publication", "label", "title", "caption", "alt"]}),
         ("出处记录", {"fields": ["credit", "source_url", "license_note"]}),
         ("展示", {"fields": ["directions", "position", "is_published", "updated_at"],
@@ -148,7 +148,7 @@ class FigureAdmin(ContentAdmin):
 
     @admin.display(description="预览")
     def preview(self, obj):
-        if obj and (obj.image or obj.static_asset):
+        if obj and obj.image:
             return format_html('<img src="{}" alt="" style="max-height:72px;max-width:120px">', obj.src)
         return "—"
 
@@ -234,7 +234,7 @@ class CandidateAdmin(ContentAdmin):
             except ImportFailure as exc:
                 self.message_user(request, str(exc), messages.ERROR)
         if done:
-            self.message_user(request, f"已纳入 {done} 条为成果草稿。请在「论文与其他成果」补充中文概述后公开。", messages.SUCCESS)
+            self.message_user(request, f"已纳入 {done} 条为成果草稿。请在「论文与其他成果」核对原始内容后公开。", messages.SUCCESS)
 
     @admin.action(description="标记为不纳入", permissions=["change"])
     def reject_selected(self, request, queryset):

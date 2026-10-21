@@ -35,20 +35,16 @@ class Command(BaseCommand):
         leader = data["leader"]
         SiteSettings.objects.create(
             pk=1, name=data["name"], subtitle=data["subtitle"],
-            hero_title="呼吸道感染与临床转化研究",
-            hero_english="Respiratory Infection & Translational Research",
-            hero_intro="围绕病毒性肺炎、呼吸道病原体、抗病毒药物评价与微生物组，开展临床研究与转化探索。",
+            hero_title=data["hero"]["title"],
+            hero_english=data["hero"]["english"],
+            hero_intro=data["hero"]["intro"],
             hero_photo=asset(leader["photo"]), leader_name=leader["name"], leader_english="Bin Cao",
             leader_role=leader["role"], leader_bio="\n\n".join(leader["bio"]),
             leader_photo=asset(leader["photo"]), contact_name=data["contact"]["name"],
             contact_email=data["contact"]["email"],
         )
-        english = ["Home", "Research", "Research Projects", "Publications", "Our Team", "Learning Resources", "Contact & Join"]
-        introductions = ["", "围绕呼吸道感染的临床问题，连接病原、宿主与转化研究。",
-                         "课题组承担的科研课题档案。",
-                         "代表性研究论文与其他科研成果，目录持续整理。", "",
-                         "常见呼吸疾病的指南、专家共识与学习资料。点击卡片阅读 PDF，也可下载保存。",
-                         "欢迎开展呼吸道感染与临床转化研究相关的学术交流。"]
+        english = ["Home", "Research", "Research Projects", "Publications", "Our Team", "Learning Resources", "Contact"]
+        introductions = ["" for _ in Page.ROUTES]
         for (slug, title), en, intro in zip(Page.ROUTES, english, introductions):
             Page.objects.create(slug=slug, title=title, english=en, intro=intro)
         for i, item in enumerate(data["research"]):

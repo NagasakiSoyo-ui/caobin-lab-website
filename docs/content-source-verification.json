@@ -1,0 +1,89 @@
+{
+  "docx": {
+    "directions": 6,
+    "projects": 4,
+    "leader_bio_paragraphs": 4,
+    "senior_names": 8,
+    "portrait_bytes_match": true
+  },
+  "questionnaire": {
+    "records_match": 41,
+    "supplied_photo_links": 40,
+    "photo_processing": "Existing import code only performs EXIF transpose, resize and JPEG encoding."
+  },
+  "learning_resources": {
+    "original_pdf_bytes_match": 9
+  },
+  "pubmed": {
+    "exact_metadata_matches": 11,
+    "source": "Saved original NCBI efetch XML, 2026-10-21"
+  },
+  "original_figures": [
+    {
+      "file": "figures/pmid32311318-figure.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC7164875.1/gr1_lrg.jpg",
+      "sha256": "cb98de6966045cae1b292c11445315269ecf5a64177ab09bec92a84ab85b4f2c",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid40367638-fig2.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12142562.1/gr2.jpg",
+      "sha256": "2f461130bb09ab65d703511d27999d641e117dcd930e7637939ed735abceac31",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid40367638-fig1.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12142562.1/gr1.jpg",
+      "sha256": "e9978ee93ce5c59af4f2a6f655707690adfd975b3d081ebac37e687c8865517e",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid40858544-fig6.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12381301.1/41392_2025_2365_Fig6_HTML.jpg",
+      "sha256": "adb1ee933519fabd7aae9707676176d5088da59ce1bc3a6c3df241121bbe36b9",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid40858544-fig1.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12381301.1/41392_2025_2365_Fig1_HTML.jpg",
+      "sha256": "6cd4744e08b51d81c3605b0ed18bcd1fcc1c2d177e640222c36ffe9614eb8791",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid38231624-fig2.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11156186.1/NEJMoa2301425_f2.jpg",
+      "sha256": "de32546fc5dc4750cbd1aa42439d469880b7a96a4f893a92730d6b8adf439116",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid38231624-fig1.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11156186.1/NEJMoa2301425_f1.jpg",
+      "sha256": "3611b5a396190fb29af1fcf90087f279d76fad447a9d37ee3957e2f4ba302dd9",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid40693035-fig1.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12276579.1/gr1.jpg",
+      "sha256": "5348ccd5df7309466ab10f5e1020b90e618f069a947ac04999006c553417230a",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid39692191-fig1.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11809327.1/ADVS-12-2405087-g003.jpg",
+      "sha256": "066319283eba9c73f34ddaa86d1a1e4f5a20a2e58e4dbdd2b2ba3fef7f157eaa",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid39692191-fig4.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC11809327.1/ADVS-12-2405087-g006.jpg",
+      "sha256": "f7461d5d680bec858b9ac5071d330f354508862d8a25bf334e6ff12b5b77d62b",
+      "bytes_match": true
+    },
+    {
+      "file": "figures/pmid40470147-fig2.jpg",
+      "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12134930.1/00836-2024.02.jpg",
+      "sha256": "4e4a425f1d1b24a68557267925305d040ab8214a8182e2069cfc6dd0ecf3a9f3",
+      "bytes_match": true
+    }
+  ]
+}

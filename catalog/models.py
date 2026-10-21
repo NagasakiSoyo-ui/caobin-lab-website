@@ -2,7 +2,6 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.templatetags.static import static
 from .identifiers import normalize_doi, normalize_pmid, unique_slug
 from .validators import upload_path, validate_image, validate_pdf, validate_web_url, pdf_metadata
 
@@ -30,7 +29,7 @@ class OrderedContent(Versioned):
 
 class SiteSettings(Versioned):
     name = models.CharField("课题组名称", max_length=100)
-    subtitle = models.CharField("副标题", max_length=200)
+    subtitle = models.CharField("副标题", max_length=200, blank=True)
     hero_title = models.CharField("首页主标题", max_length=200)
     hero_english = models.CharField("首页英文标题", max_length=300, blank=True)
     hero_intro = models.TextField("首页简介")
@@ -53,7 +52,7 @@ class SiteSettings(Versioned):
 
 class Page(Versioned):
     ROUTES = [("index", "首页"), ("research", "研究方向"), ("projects", "科研课题"), ("publications", "研究成果"),
-              ("team", "研究团队"), ("resources", "学习资料"), ("contact", "联系与加入")]
+              ("team", "研究团队"), ("resources", "学习资料"), ("contact", "联系我们")]
     slug = models.CharField("栏目", max_length=20, choices=ROUTES, unique=True)
     title = models.CharField("栏目名称", max_length=50)
     english = models.CharField("英文名称", max_length=100, blank=True)
@@ -69,7 +68,7 @@ class Page(Versioned):
 
 class ResearchDirection(OrderedContent):
     title = models.CharField("研究方向", max_length=300)
-    short_title = models.CharField("简称", max_length=30, blank=True, help_text="用于首页研究布局图，建议 10 字以内；留空则截取标题。")
+    short_title = models.CharField("简称", max_length=30, blank=True, help_text="使用团队提供的简称；留空则截取原始标题。")
     slug = models.SlugField("链接名", max_length=80, unique=True, blank=True,
                             help_text="详情页文件名 research-链接名.html。首次保存后固定，修改会使外部旧链接失效。")
     summary = models.TextField("中文简介", blank=True, help_text="列表卡片与详情页开头显示的简介；完整介绍另行保留。")
@@ -147,7 +146,7 @@ class Publication(OrderedContent):
     journal = models.CharField("期刊或颁发机构", max_length=300, blank=True)
     citation = models.CharField("卷期、页码或编号", max_length=300, blank=True)
     url = models.URLField("原文链接", max_length=2000, blank=True, validators=[validate_web_url])
-    summary = models.TextField("中文概述", blank=True, help_text="人工撰写的中文概述；PubMed 导入和初始化不会覆盖已有内容。")
+    summary = models.TextField("中文概述", blank=True, help_text="仅使用团队提供的介绍或原文摘录，不使用 AI 改写。")
     pmid = models.CharField("PMID", max_length=12, unique=True, null=True, blank=True)
     doi = models.CharField("DOI", max_length=200, unique=True, null=True, blank=True, help_text="保存时自动去掉 https://doi.org/ 前缀并转为小写。")
     pmcid = models.CharField("PMCID", max_length=20, blank=True)
@@ -219,15 +218,8 @@ def publication_filename(slug):
     return f"publication-{slug}.html"
 
 
-# Developer-maintained SVG schematics in static/site/figures/. Administrators can only pick
-# from this list; uploading SVG through the admin is intentionally not supported.
-STATIC_FIGURES = [
-    ("direction-translation.svg", "临床转化方向：研究布局示意"),
-]
-
-
 class Figure(Versioned):
-    KINDS = [("original", "论文原图"), ("schematic", "原创示意图")]
+    KINDS = [("original", "论文原图"), ("schematic", "团队提供图片")]
     kind = models.CharField("图片类型", max_length=20, choices=KINDS, default="original")
     publication = models.ForeignKey(Publication, verbose_name="所属成果", null=True, blank=True,
                                     on_delete=models.CASCADE, related_name="figures",
@@ -235,12 +227,10 @@ class Figure(Versioned):
     directions = models.ManyToManyField(ResearchDirection, verbose_name="在研究方向页展示", blank=True, related_name="figures")
     label = models.CharField("原文图号", max_length=50, blank=True, help_text="例如 Fig. 6；示意图可留空。")
     title = models.CharField("图题", max_length=300)
-    caption = models.TextField("中文图片说明", help_text="说明图中展示的内容，忠实原文图义，不扩展结论。")
+    caption = models.TextField("图片说明", blank=True, help_text="可留空；仅使用团队提供的文字或原文图注。")
     alt = models.CharField("替代文字", max_length=300, help_text="供读屏软件使用的简短描述。")
     image = models.ImageField("图片文件", upload_to=upload_path, validators=[validate_image], blank=True,
                               help_text="JPG、PNG 或 WebP；替换图片即上传新文件。")
-    static_asset = models.CharField("内置示意图", max_length=100, choices=STATIC_FIGURES, blank=True,
-                                    help_text="开发者维护的 SVG 示意图，与上传图片二选一。")
     credit = models.CharField("作者与出处", max_length=500, blank=True, help_text="例如：Zou X, et al. Signal Transduct Target Ther. 2025.")
     source_url = models.URLField("原图来源链接", max_length=2000, blank=True, validators=[validate_web_url])
     license_note = models.CharField("使用说明", max_length=300, blank=True, help_text="原文许可或使用依据，例如 CC BY 4.0、课题组自有论文。")
@@ -253,14 +243,14 @@ class Figure(Versioned):
 
     def clean(self):
         super().clean()
-        if bool(self.image) == bool(self.static_asset):
-            raise ValidationError("请上传图片文件或选择一个内置示意图（二选一）。")
+        if not self.image:
+            raise ValidationError("请上传有来源的图片文件。")
         if self.kind == "original" and not (self.publication_id and self.label and self.credit and self.source_url):
             raise ValidationError("论文原图需要填写所属成果、原文图号、作者与出处和原图来源链接。")
 
     @property
     def src(self):
-        return self.image.url if self.image else static(f"site/figures/{self.static_asset}")
+        return self.image.url if self.image else ""
 
     @property
     def is_public(self):

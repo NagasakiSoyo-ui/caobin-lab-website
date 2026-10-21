@@ -114,29 +114,33 @@ class ResearchSiteTests(MediaMixin, TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertContains(response, direction.text)
             self.assertIn("object-src 'none'", response["Content-Security-Policy"])
-            self.assertTrue(Figure.objects.filter(directions=direction, is_published=True).exists(), direction.slug)
+            figures = Figure.objects.filter(directions=direction, is_published=True)
+            self.assertTrue(figures.exists(), direction.slug)
+            self.assertTrue(all(f.kind == "original" and f.source_url for f in figures))
             self.assertContains(response, 'class="figure-plate"')
         viral = self.client.get("/research-viral-sepsis.html")
         self.assertContains(viral, "82530002")  # linked project
         self.assertContains(viral, "publication-2020-sars-cov-2-viral-sepsis.html")
-        self.assertContains(self.client.get("/research-translation.html"), "示意图")
+        self.assertNotContains(self.client.get("/research-translation.html"), "direction-translation.svg")
         self.assertEqual(self.client.get("/research-unknown.html").status_code, 404)
 
     def test_seeded_publications_have_verified_metadata_and_figures(self):
         for pmid in SEED_PMIDS:
             publication = Publication.objects.get(pmid=pmid)
-            self.assertTrue(publication.is_published and publication.summary and publication.doi)
+            self.assertTrue(publication.is_published and publication.doi)
+            self.assertEqual(publication.summary, "")
             self.assertIn("单位匹配", publication.source_note)
         self.assertEqual(Publication.objects.get(pmid="40858544").doi, "10.1038/s41392-025-02365-x")
         with_figures = Publication.objects.filter(pmid__in=SEED_PMIDS, figures__is_published=True).distinct()
         self.assertEqual(with_figures.count(), 5)
         fig6 = Figure.objects.get(publication__pmid="40858544", label="Fig. 6")
-        self.assertIn("CC BY 4.0", fig6.license_note)
+        self.assertEqual((fig6.title, fig6.caption, fig6.license_note), (fig6.label, "", ""))
         self.assertEqual(fig6.source_url, "https://pmc.ncbi.nlm.nih.gov/articles/PMC12381301/figure/Fig6/")
         detail = self.client.get("/publication-2025-streptococcus-oralis-influenza.html")
         for text in ("https://pubmed.ncbi.nlm.nih.gov/40858544/", "https://doi.org/10.1038/s41392-025-02365-x",
-                     "中文概述", "Fig. 6", "原文图页面", 'data-lightbox'):
+                     "Fig. 6", "原文图页面", 'data-lightbox'):
             self.assertContains(detail, text)
+        self.assertNotContains(detail, "中文概述")
         page = self.client.get("/publications.html")
         self.assertContains(page, "并非全部成果")
         self.assertNotContains(page, "完整全部成果")
@@ -212,7 +216,8 @@ class ResearchSiteTests(MediaMixin, TestCase):
             self.assertIn(name, pages)
         for figure in Figure.objects.filter(is_published=True).exclude(image=""):
             self.assertIn("media/" + figure.image.name, names)
-        self.assertIn("assets/figures/direction-translation.svg", names)
+        self.assertNotIn("assets/figures/direction-translation.svg", names)
+        self.assertNotIn("assets/favicon.svg", names)
         self.assertEqual(sum(n.endswith(".pdf") for n in names), 9)
         self.assertEqual(sum("/people/" in n for n in names), 40)
         for html in pages.values():
@@ -262,7 +267,6 @@ class ResearchSiteTests(MediaMixin, TestCase):
         Publication.objects.filter(pk=lancet.pk).update(summary="")
         Publication.objects.get(pmid="40858544").directions.clear()
         Publication.objects.filter(pmid="40367638").delete()
-        Figure.objects.filter(static_asset="direction-translation.svg").delete()
         ResearchDirection.objects.filter(slug="microbiome").update(summary="")
         Project.objects.get(code="82530002").directions.clear()
         snapshot = lambda: (Publication.objects.count(), Figure.objects.count(),
@@ -309,7 +313,7 @@ class ResearchSiteTests(MediaMixin, TestCase):
         data = {"kind": "original", "publication": Publication.objects.get(pmid="40858544").pk, "label": "Fig. 3",
                 "title": "新配图", "caption": "说明", "alt": "替代文字", "credit": "Zou X, et al.",
                 "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12381301/figure/Fig3/", "license_note": "CC BY 4.0",
-                "position": 5, "is_published": "on", "static_asset": ""}
+                "position": 5, "is_published": "on"}
         data.update(changes)
         return data
 
@@ -418,7 +422,7 @@ class SeedInitializationTests(MediaMixin, TestCase):
         self.assertEqual((Publication.objects.count(), Figure.objects.count(), SeedCheckpoint.objects.count()), (0, 0, 0))
         call_command("seed_publications", stdout=io.StringIO())
         self.assertEqual(Publication.objects.count(), 11)
-        self.assertEqual(Figure.objects.count(), 12)
+        self.assertEqual(Figure.objects.count(), 11)
         self.assertEqual(SeedCheckpoint.objects.get().key, "research-publications-v1")
         self.assertEqual(Publication.objects.filter(pmid__in=SEED_PMIDS, is_published=True).count(), 5)
 
@@ -617,6 +621,26 @@ class PubMedImportTests(MediaMixin, TestCase):
 class LegacyMigrationTests(TransactionTestCase):
     """Upgrade a database at migration 0001 (the previously shipped schema) without data loss."""
 
+    def test_content_cleanup_removes_known_defaults_but_preserves_human_edits(self):
+        executor = MigrationExecutor(connection)
+        executor.migrate([("catalog", "0004_seed_checkpoint")])
+        old = executor.loader.project_state([("catalog", "0004_seed_checkpoint")]).apps
+        OldPage = old.get_model("catalog", "Page")
+        OldPage.objects.create(slug="research", title="研究方向", intro="围绕呼吸道感染的临床问题，连接病原、宿主与转化研究。")
+        OldPage.objects.create(slug="contact", title="团队自定名称", intro="由团队撰写的联系介绍", version=7)
+        OldFigure = old.get_model("catalog", "Figure")
+        OldFigure.objects.create(title="旧示意图", static_asset="direction-translation.svg", kind="schematic")
+        original = OldFigure.objects.create(title="团队图片标题", caption="团队提供的说明", image="initial/figures/pmid38231624-fig2.jpg", version=9)
+        executor = MigrationExecutor(connection)
+        executor.migrate(executor.loader.graph.leaf_nodes("catalog"))
+        self.assertEqual(Page.objects.get(slug="research").intro, "")
+        manual = Page.objects.get(slug="contact")
+        self.assertEqual((manual.title, manual.intro, manual.version), ("团队自定名称", "由团队撰写的联系介绍", 7))
+        self.assertEqual(Figure.objects.count(), 1)
+        figure = Figure.objects.get(pk=original.pk)
+        self.assertEqual((figure.title, figure.caption, figure.version), ("团队图片标题", "团队提供的说明", 9))
+        self.assertEqual(figure.image.name, original.image.name)
+
     def test_upgrade_backfills_stable_slugs_and_keeps_edits(self):
         executor = MigrationExecutor(connection)
         executor.migrate([("catalog", "0001_initial")])
@@ -643,14 +667,15 @@ class LegacyMigrationTests(TransactionTestCase):
                                                         "real-world-evidence", "microbiome", "translation",
                                                         "custom-direction", "direction-8"])
         self.assertEqual([d.text for d in directions], [f"人工编辑正文{i}" for i in range(8)])
-        self.assertTrue(all(d.version == 3 for d in directions))
+        self.assertEqual([d.version for d in directions], [4] * 6 + [3] * 2)
+        self.assertTrue(all(not d.short_title for d in directions[:6]))
         self.assertTrue(directions[0].covers_host and not directions[2].covers_pathogen)
         slugs = list(Publication.objects.values_list("slug", flat=True))
         self.assertEqual(len(set(slugs)), 2)
         self.assertTrue(all(slugs))
-        self.assertEqual(Page.objects.get(slug="contact").title, "联系与加入")
+        self.assertEqual(Page.objects.get(slug="contact").title, "联系我们")
         self.assertTrue(Page.objects.filter(slug="projects").exists())
-        self.assertIn("持续整理", Page.objects.get(slug="publications").intro)
+        self.assertEqual(Page.objects.get(slug="publications").intro, "")
         # A database from before the research release has no checkpoint and is imported once.
         self.assertFalse(SeedCheckpoint.objects.exists())
         with tempfile.TemporaryDirectory() as media, override_settings(MEDIA_ROOT=media):

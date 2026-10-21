@@ -91,6 +91,3 @@ figures/pmid40470147-fig2.jpg
   原文图页面：https://pmc.ncbi.nlm.nih.gov/articles/PMC12134930/figure/F2/
   文件来源：https://pmc-oa-opendata.s3.amazonaws.com/PMC12134930.1/00836-2024.02.jpg
   使用说明：课题组自有论文，按课题组授权在本站使用原图；图像未作修改。原文许可：CC BY-NC 4.0。
-
-static/site/figures/direction-translation.svg
-  课题组网站原创示意图，依据「临床转化方向」介绍整理，不代表实验结论。
