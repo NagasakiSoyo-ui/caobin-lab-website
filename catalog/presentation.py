@@ -5,7 +5,7 @@ publication, published figure of a published publication) are applied in one pla
 """
 from django.db.models import Prefetch, Q
 from django.template.loader import render_to_string
-from .models import LAYERS, SiteSettings, Page, ResearchDirection, Project, Member, Publication, Resource, Figure
+from .models import SiteSettings, Page, ResearchDirection, Project, Member, Publication, Resource, Figure
 
 
 def public_figures():
@@ -29,17 +29,6 @@ def public_projects():
         Prefetch("directions", queryset=public_directions()))
 
 
-def layout_rows(directions):
-    """Geometry for the home page research layout SVG: one row per direction, one column per layer."""
-    rows = []
-    for index, direction in enumerate(directions):
-        y = 92 + index * 54
-        cells = [{"x": 196 + column * 56, "on": getattr(direction, f"covers_{key}"), "key": key, "name": name}
-                 for column, (key, name) in enumerate(LAYERS)]
-        rows.append({"direction": direction, "y": y, "text_y": y + 5, "cells": cells})
-    return rows
-
-
 def website_context(slug):
     site = SiteSettings.objects.get(pk=1)
     order = [key for key, _ in Page.ROUTES]
@@ -55,9 +44,7 @@ def website_context(slug):
     featured = [p for p in publications if p.is_featured and p.public_figures]
     return {
         "site": site, "pages": pages, "page": current, "route": slug,
-        "directions": directions, "layers": LAYERS, "layout_rows": layout_rows(directions),
-        "layout_height": 120 + len(directions) * 54,
-        "layout_columns": [{"x": 196 + i * 56, "key": key, "name": name} for i, (key, name) in enumerate(LAYERS)],
+        "directions": directions,
         "projects": list(public_projects()),
         "publications": publications, "featured": featured,
         "publication_years": sorted({p.year for p in publications}, reverse=True),

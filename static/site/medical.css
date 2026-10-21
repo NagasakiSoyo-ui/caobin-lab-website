@@ -54,16 +54,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .kicker{font-size:12px;letter-spacing:2px;opacity:.9;border-left:3px solid #87b9dc;padding-left:15px;margin-bottom:18px;line-height:1.5}
 .hero-copy h1{font-size:40px;line-height:1.6;max-width:730px;text-wrap:balance}.hero-english{margin-top:6px;color:#ffffffd9;font-size:15px;max-width:630px}
 .hero-lead{margin-top:16px;color:#ffffffe6;font-size:15px;max-width:600px}.hero-actions{display:flex;flex-wrap:wrap;gap:15px;margin-top:30px}
-.home-layout{border-bottom:1px solid var(--line)}
-.layout-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);grid-template-areas:"head svg" "note svg";gap:0 56px;align-items:start}
-.layout-head{grid-area:head;display:flex;flex-direction:column}.layout-head h2{font-size:27px;color:var(--ink)}.layout-head p{font-size:13px;letter-spacing:1px;color:var(--label);margin-top:9px}
-.layout-svg{grid-area:svg;width:100%;height:auto;display:block;background:var(--wash);border:1px solid var(--line);border-top:3px solid var(--accent-soft);padding:10px 12px}
-.layout-svg .layer-pill{fill:#fff;stroke:var(--line)}.layout-svg .layer-name{font-size:15px;fill:var(--ink);font-weight:600}
-.layout-svg .guide{stroke-width:1.5;stroke-dasharray:3 5;opacity:.45}.layout-svg .guide.pathogen,.layout-svg .dot.pathogen{stroke:var(--pathogen);fill:var(--pathogen)}.layout-svg .guide.host,.layout-svg .dot.host{stroke:var(--host);fill:var(--host)}
-.layout-svg .guide.clinical,.layout-svg .dot.clinical{stroke:var(--clinical);fill:var(--clinical)}.layout-svg .guide.intervention,.layout-svg .dot.intervention{stroke:var(--intervention);fill:var(--intervention)}
-.layout-svg .row-bg{fill:#fff;stroke:var(--line)}.layout-svg .row-label{font-size:18px;fill:var(--ink);font-weight:600}.layout-svg .dot-off{fill:#b9c7d5}.layout-svg .row-arrow{fill:none;stroke:var(--accent);stroke-width:2}
-.layout-svg .layout-link:hover .row-bg,.layout-svg .layout-link:focus .row-bg{fill:#eaf0f6;stroke:var(--accent)}.layout-svg .layout-link:focus{outline:none}.layout-svg .layout-link:focus-visible .row-bg{stroke:var(--accent);stroke-width:2}
-.layout-note{grid-area:note;font-size:13px;color:var(--muted);margin-top:22px;padding-top:16px;border-top:1px solid var(--line);line-height:1.8}
 
 /* Direction cards and lists */
 .direction-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;counter-reset:d}
@@ -73,10 +63,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .direction-jump{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}.direction-jump a{display:inline-flex;gap:8px;align-items:center;padding:8px 18px;border:1px solid var(--line);font-size:14px;background:#fff;color:var(--ink)}
 .direction-jump span{font-family:Georgia,serif;color:var(--number)}.direction-jump a:hover{border-color:var(--accent)}
 .direction-row{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;align-items:start;padding:36px 0;border-top:1px solid var(--line)}.direction-row:first-child{border-top:0}
+.filter-bar,#resource-filters{grid-template-columns:1fr 1fr;padding:14px;gap:12px}.filter-bar .search-field,.filter-bar button,#resource-filters .search-field,#resource-filters button{grid-column:1/-1}
 .direction-row h2{font-size:24px;color:var(--ink);margin-top:4px}.direction-summary{font-size:16px;color:var(--ink);margin-bottom:12px}
 .original-text{color:var(--muted);border-left:3px solid var(--line);padding-left:16px;margin:12px 0 20px}
 .direction-cover{display:block;border:1px solid var(--line);overflow:hidden;background:#fff}.direction-cover img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top}
-.direction-cover span{display:block;font-size:12px;color:var(--muted);padding:8px 12px;border-top:1px solid var(--line)}
 
 /* Projects */
 .project-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
@@ -129,12 +119,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
    ends visible, and site.js adds .reveal-in only to blocks that are still below the fold when
    they approach the viewport. Fill mode "backwards" leaves hover transforms untouched afterwards. */
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@keyframes appear{from{opacity:0}to{opacity:1}}
 .hero-copy>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) backwards}.hero-copy>:nth-child(2){animation-delay:.06s}.hero-copy>:nth-child(3){animation-delay:.12s}
 .hero-copy>:nth-child(4){animation-delay:.18s}.hero-copy>:nth-child(5){animation-delay:.24s}
-.layout-card{animation:rise .8s .2s cubic-bezier(.2,.7,.2,1) backwards}.layout-svg .layout-link{animation:appear .5s backwards}
-.layout-svg .layout-link:nth-of-type(1){animation-delay:.45s}.layout-svg .layout-link:nth-of-type(2){animation-delay:.52s}.layout-svg .layout-link:nth-of-type(3){animation-delay:.59s}
-.layout-svg .layout-link:nth-of-type(4){animation-delay:.66s}.layout-svg .layout-link:nth-of-type(5){animation-delay:.73s}.layout-svg .layout-link:nth-of-type(n+6){animation-delay:.8s}
 .page-intro .container>*{animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
 .reveal-in{animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
 
@@ -175,7 +161,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .footer-grid a:hover{color:#fff;text-decoration:underline}.footer-grid h2{font-size:15px;color:#fff;margin-bottom:8px}.footer-note{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #ffffff20;margin-top:38px;padding:21px 0;font-size:12px;color:#94abc1}
 
 @media(max-width:1180px){#site-nav a{display:block;text-align:center;padding:12px 6px}#site-nav small{display:block;margin-top:2px}}
-@media(max-width:1100px){.layout-card{grid-template-columns:1fr;grid-template-areas:"head" "svg" "note";gap:0}.layout-head{margin-bottom:24px}.layout-svg{max-width:640px}
+@media(max-width:1100px){
 .direction-grid,.featured-grid,.resource-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.trainee-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.detail-layout{grid-template-columns:minmax(0,1fr) 260px;gap:32px}}
 @media(max-width:900px){.menu-toggle{display:inline-flex}.masthead{padding:14px 0;min-height:76px}.brand{gap:14px}.brand-name{font-size:24px}.brand-detail{font-size:14px;padding-left:14px}
 #site-nav{display:none;padding:4px 0 14px}#site-nav.open{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 16px}
@@ -185,9 +171,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 @media(max-width:760px){.hero-shade{background:linear-gradient(90deg,#071d36e6 0%,#0a2941b3 70%,#081c3966 100%)}.hero-grid{min-height:520px;padding:44px 0 52px}.kicker{font-size:10px;letter-spacing:1px}
 .hero-copy h1{font-size:29px}.hero-english{font-size:13px}.hero-lead{font-size:14px}.hero-actions{gap:10px}.hero-actions .button{padding:13px 21px}}
 @media(max-width:640px){body{font-size:14.5px}.container{width:calc(100% - 32px)}.section{padding:42px 0}#site-nav.open{grid-template-columns:repeat(2,minmax(0,1fr))}
-.page-intro{padding:25px 0 35px}.page-intro h1{font-size:29px}.page-intro h1 span{display:block;margin:7px 0 0;font-size:17px}.page-description{font-size:14px;margin-top:20px}.paper-title{font-size:21px}.section-heading h2,.layout-head h2{font-size:23px}
+.page-intro{padding:25px 0 35px}.page-intro h1{font-size:29px}.page-intro h1 span{display:block;margin:7px 0 0;font-size:17px}.page-description{font-size:14px;margin-top:20px}.paper-title{font-size:21px}.section-heading h2{font-size:23px}
 .section-top{flex-direction:column;align-items:flex-start;gap:10px}.direction-grid,.featured-grid,.resource-grid,.project-list{grid-template-columns:1fr}.project-card dl{grid-template-columns:1fr}.direction-card,.project-card{padding:22px}
-.layout-svg{padding:6px}.filter-bar,#resource-filters{grid-template-columns:1fr 1fr;padding:14px;gap:12px}.filter-bar .search-field,.filter-bar button,#resource-filters .search-field,#resource-filters button{grid-column:1/-1}
+.filter-bar,#resource-filters{grid-template-columns:1fr 1fr;padding:14px;gap:12px}.filter-bar .search-field,.filter-bar button,#resource-filters .search-field,#resource-filters button{grid-column:1/-1}
 .direction-row h2{font-size:21px}.figure-zoom{padding:8px}.figure-plate figcaption{padding:14px}.trainee-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px}.member-info{padding:12px}.member-info h3{font-size:15px}.member-info p{font-size:12px}
 .home-leader h2,.leader-profile h2{font-size:25px}.team-jump{font-size:12px;gap:8px 16px}.contact-band>.container{flex-direction:column;align-items:flex-start;gap:16px}.contact-address{font-size:21px}.footer-grid{grid-template-columns:1fr;gap:24px}.footer-note{flex-direction:column;gap:4px}.pager{flex-wrap:wrap}}
 @media(max-width:480px){.brand{flex-direction:column;align-items:flex-start;gap:2px}.brand-name{font-size:22px}.brand-detail{border-left:0;padding-left:0;font-size:12px;color:var(--muted)}}
