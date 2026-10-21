@@ -16,7 +16,7 @@ from django.db import connection
 from django.db.migrations.executor import MigrationExecutor
 from django.test import TestCase, TransactionTestCase, override_settings
 from .exporting import check_links, localize, media_references, website_archive
-from .models import Figure, Page, Project, Publication, PubMedCandidate, PubMedImportRun, ResearchDirection
+from .models import Figure, Page, Project, Publication, PubMedCandidate, PubMedImportRun, ResearchDirection, SeedCheckpoint
 from .pubmed import ImportFailure, accept
 from datetime import timedelta
 from django.utils import timezone
@@ -255,11 +255,46 @@ class ResearchSiteTests(MediaMixin, TestCase):
         self.assertEqual((Publication.objects.count(), Figure.objects.count()), (counts[0], counts[1]))
         self.assertEqual(ResearchDirection.objects.get(slug="microbiome").summary, "人工方向简介")
 
+    def test_seed_runs_once_and_never_restores_removed_or_cleared_content(self):
+        self.assertEqual(SeedCheckpoint.objects.count(), 1)
+        lancet = Publication.objects.get(pmid="32311318")
+        lancet.figures.all().delete()  # removes the last (only) figure of this paper
+        Publication.objects.filter(pk=lancet.pk).update(summary="")
+        Publication.objects.get(pmid="40858544").directions.clear()
+        Publication.objects.filter(pmid="40367638").delete()
+        Figure.objects.filter(static_asset="direction-translation.svg").delete()
+        ResearchDirection.objects.filter(slug="microbiome").update(summary="")
+        Project.objects.get(code="82530002").directions.clear()
+        snapshot = lambda: (Publication.objects.count(), Figure.objects.count(),
+                            Publication.objects.get(pk=lancet.pk).summary,
+                            Publication.objects.get(pmid="40858544").directions.count(),
+                            ResearchDirection.objects.get(slug="microbiome").summary,
+                            Project.objects.get(code="82530002").directions.count())
+        before = snapshot()
+        for _ in range(2):  # every start of setup_local.py runs both seed commands
+            out = io.StringIO()
+            call_command("seed_site", stdout=io.StringIO())
+            call_command("seed_publications", stdout=out)
+            self.assertIn("跳过", out.getvalue())
+        self.assertEqual(snapshot(), before)
+        self.assertEqual(before[2:], ("", 0, "", 0))
+        self.assertFalse(Publication.objects.filter(pmid="40367638").exists())
+        self.assertFalse(lancet.figures.exists())
+
+    def test_explicit_refill_is_the_only_way_to_restore_seed_content(self):
+        Publication.objects.get(pmid="32311318").figures.all().delete()
+        call_command("seed_publications", stdout=io.StringIO())
+        self.assertFalse(Publication.objects.get(pmid="32311318").figures.exists())
+        call_command("seed_publications", "--refill", stdout=io.StringIO())
+        self.assertTrue(Publication.objects.get(pmid="32311318").figures.exists())
+        self.assertEqual(SeedCheckpoint.objects.count(), 1)
+
     def test_seed_reports_pmid_doi_conflict_without_merging(self):
         Publication.objects.filter(pmid="40858544").update(pmid=None)
         Publication.objects.create(title="Another record", year=2025, pmid="40858544", is_published=False)
         err = io.StringIO()
-        call_command("seed_publications", stderr=err, stdout=io.StringIO())
+        # Explicit maintenance refill; the normal command is a no-op once initialized.
+        call_command("seed_publications", "--refill", stderr=err, stdout=io.StringIO())
         self.assertIn("冲突", err.getvalue())
         self.assertEqual(Publication.objects.filter(title="Another record").count(), 1)
         self.assertIsNone(Publication.objects.get(doi="10.1038/s41392-025-02365-x").pmid)
@@ -360,6 +395,32 @@ class ResearchSiteTests(MediaMixin, TestCase):
         self.client.post("/manage/catalog/figure/", {"action": "unpublish", "_selected_action": [f.pk for f in figures]})
         self.assertEqual(LogEntry.objects.count(), count)
         self.assertEqual(Figure.objects.get(pk=figures[0].pk).version, figures[0].version + 1)
+
+
+
+class SeedInitializationTests(MediaMixin, TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        call_command("seed_site", verbosity=0)
+
+    def test_first_import_failure_rolls_back_and_can_be_retried(self):
+        from catalog.management.commands import seed_publications
+        original, calls = seed_publications.Command.copy_asset, []
+
+        def flaky(command, relative):
+            calls.append(relative)
+            if len(calls) == 4:
+                raise CommandError(f"初始素材缺失：{relative}")
+            return original(command, relative)
+
+        with patch.object(seed_publications.Command, "copy_asset", flaky), self.assertRaises(CommandError):
+            call_command("seed_publications", stdout=io.StringIO())
+        self.assertEqual((Publication.objects.count(), Figure.objects.count(), SeedCheckpoint.objects.count()), (0, 0, 0))
+        call_command("seed_publications", stdout=io.StringIO())
+        self.assertEqual(Publication.objects.count(), 11)
+        self.assertEqual(Figure.objects.count(), 12)
+        self.assertEqual(SeedCheckpoint.objects.get().key, "research-publications-v1")
+        self.assertEqual(Publication.objects.filter(pmid__in=SEED_PMIDS, is_published=True).count(), 5)
 
 
 @override_settings(ALLOWED_HOSTS=["testserver"])
@@ -590,3 +651,29 @@ class LegacyMigrationTests(TransactionTestCase):
         self.assertEqual(Page.objects.get(slug="contact").title, "联系与加入")
         self.assertTrue(Page.objects.filter(slug="projects").exists())
         self.assertIn("持续整理", Page.objects.get(slug="publications").intro)
+        # A database from before the research release has no checkpoint and is imported once.
+        self.assertFalse(SeedCheckpoint.objects.exists())
+        with tempfile.TemporaryDirectory() as media, override_settings(MEDIA_ROOT=media):
+            call_command("seed_publications", stdout=io.StringIO())
+            self.assertEqual(Publication.objects.exclude(pmid=None).count(), 11)
+            self.assertEqual(Publication.objects.filter(title="人工录入成果").count(), 2)
+            Publication.objects.filter(pmid="32311318").delete()
+            call_command("seed_publications", stdout=io.StringIO())
+            self.assertFalse(Publication.objects.filter(pmid="32311318").exists())
+
+    def test_database_seeded_before_checkpoint_is_marked_done(self):
+        executor = MigrationExecutor(connection)
+        executor.migrate([("catalog", "0003_candidate_year_validation")])
+        old = executor.loader.project_state([("catalog", "0003_candidate_year_validation")]).apps
+        old.get_model("catalog", "Figure").objects.create(
+            kind="original", title="已导入的首批原图", caption="c", alt="a", image="initial/figures/pmid38231624-fig2.jpg",
+            is_published=False)
+        executor = MigrationExecutor(connection)
+        executor.loader.build_graph()
+        executor.migrate(executor.loader.graph.leaf_nodes("catalog"))
+        self.assertTrue(SeedCheckpoint.objects.filter(key="research-publications-v1").exists())
+        out = io.StringIO()
+        call_command("seed_publications", stdout=out)
+        self.assertIn("跳过", out.getvalue())
+        self.assertFalse(Publication.objects.exists())
+        self.assertEqual(Figure.objects.get().is_published, False)

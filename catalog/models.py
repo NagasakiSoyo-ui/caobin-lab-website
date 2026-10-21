@@ -270,6 +270,20 @@ class Figure(Versioned):
         return f"{self.label} {self.title}".strip()
 
 
+class SeedCheckpoint(models.Model):
+    """One row per completed one-time content initialization. Stored in the database so it
+    travels with backups; once present, the matching seed command never touches content again."""
+    key = models.CharField("初始化项目", max_length=100, unique=True)
+    completed_at = models.DateTimeField("完成时间", auto_now_add=True)
+    detail = models.TextField("说明", blank=True)
+
+    class Meta:
+        verbose_name = verbose_name_plural = "初始化记录"
+
+    def __str__(self):
+        return self.key
+
+
 class PubMedImportRun(models.Model):
     STATUSES = [("ok", "成功"), ("empty", "无结果"), ("failed", "失败")]
     started_at = models.DateTimeField("开始时间", auto_now_add=True)

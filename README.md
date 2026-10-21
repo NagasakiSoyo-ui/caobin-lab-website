@@ -64,7 +64,7 @@ python -m pip install -r requirements.txt
 python setup_local.py
 ```
 
-`setup_local.py` 会执行数据库迁移（为研究方向回填固定链接名、新增「科研课题」栏目），并运行 `seed_publications` 导入首批成果与原图。已有账号、人工编辑和公开状态都会保留；重复运行不会产生重复内容。
+`setup_local.py` 会执行数据库迁移（为研究方向回填固定链接名、新增「科研课题」栏目），并在首次运行时用 `seed_publications` 导入首批成果与原图。导入完成记录保存在数据库中（随备份一起迁移），之后每次启动都不会再改动内容；后台删除或清空的内容不会被恢复。已有账号、人工编辑和公开状态都会保留。
 
 ## PubMed 导入
 

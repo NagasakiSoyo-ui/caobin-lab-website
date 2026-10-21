@@ -74,6 +74,29 @@
     bindFilter(pubForm, [search, year, direction], filter);
   }
 
+  // Scroll reveal: only blocks that start below the fold are animated, once, as they approach the
+  // viewport. Nothing is hidden up front, so without JS, IntersectionObserver or with reduced motion
+  // everything simply stays visible.
+  const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!calm && 'IntersectionObserver' in window) {
+    const selector = '.section-heading, .direction-card, .featured-card, .project-card, .pub-year, .direction-row, ' +
+      '.detail-block, .detail-aside > section, .figure-plate, .resource-card, .member-card, .home-leader, .contact-band .container';
+    const fold = window.innerHeight;
+    const pending = [...document.querySelectorAll(selector)].filter(el => el.getBoundingClientRect().top > fold);
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target;
+        observer.unobserve(el);
+        const siblings = el.parentElement ? [...el.parentElement.children] : [];
+        el.style.animationDelay = `${(siblings.indexOf(el) % 3) * 70}ms`;
+        el.classList.add('reveal-in');
+        el.addEventListener('animationend', () => {el.classList.remove('reveal-in'); el.style.animationDelay = '';}, {once: true});
+      }
+    }, {rootMargin: '0px 0px 12% 0px'});
+    pending.forEach(el => observer.observe(el));
+  }
+
   // Lightbox: the thumbnail is a plain link to the original image, so it still works
   // without JavaScript or <dialog> support. Native <dialog> provides Esc and focus trapping.
   const zooms = document.querySelectorAll('a[data-lightbox]');

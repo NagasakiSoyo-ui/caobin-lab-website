@@ -119,6 +119,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .lightbox-close{background:#fff;color:var(--navy-900);border:0;border-radius:999px;padding:8px 16px;font-weight:700}
 .lightbox-stage{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;background:#fff;border-radius:10px;touch-action:pinch-zoom pan-x pan-y}.lightbox-stage img{max-width:none;width:auto;height:auto;min-width:min(100%,900px)}
 @keyframes fade{from{opacity:0}to{opacity:1}}.lightbox[open]{animation:fade .18s ease-out}
+/* Entrance motion. Content is visible by default: the hero uses a short CSS-only entrance that
+   ends visible, and site.js adds .reveal-in only to blocks that are still below the fold when
+   they approach the viewport. Fill mode "backwards" leaves hover transforms untouched afterwards. */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes appear{from{opacity:0}to{opacity:1}}
+.hero-copy>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) backwards}.hero-copy>:nth-child(2){animation-delay:.06s}.hero-copy>:nth-child(3){animation-delay:.12s}
+.hero-copy>:nth-child(4){animation-delay:.18s}.hero-copy>:nth-child(5){animation-delay:.24s}
+.layout-card{animation:rise .8s .2s cubic-bezier(.2,.7,.2,1) backwards}.layout-svg .layout-link{animation:appear .5s backwards}
+.layout-svg .layout-link:nth-of-type(1){animation-delay:.45s}.layout-svg .layout-link:nth-of-type(2){animation-delay:.52s}.layout-svg .layout-link:nth-of-type(3){animation-delay:.59s}
+.layout-svg .layout-link:nth-of-type(4){animation-delay:.66s}.layout-svg .layout-link:nth-of-type(5){animation-delay:.73s}.layout-svg .layout-link:nth-of-type(n+6){animation-delay:.8s}
+.page-intro .container>*{animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
+.reveal-in{animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
 
 /* Leader, team, resources, contact (retained pages) */
 .home-leader{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:56px;align-items:center}
