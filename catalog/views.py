@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, FileResponse, Http404
 from django.views.decorators.http import require_GET
+from .models import Resource
 from .presentation import render_website, render_direction, render_publication
 from .exporting import website_archive
 
@@ -43,9 +44,15 @@ def media_file(request, filename):
     content_type = types.get(file.suffix.lower())
     if not content_type:
         raise Http404
-    response = FileResponse(file.open("rb"), content_type=content_type)
+    # Browsers let the response's Content-Disposition file name override <a download>, so a published
+    # resource PDF is named after its title here too. It stays inline so "阅读原文" still opens in the browser.
+    name = file.name
+    if content_type == "application/pdf":
+        resource = Resource.objects.filter(document=file.relative_to(root).as_posix(), is_published=True).first()
+        if resource:
+            name = resource.download_name
+    response = FileResponse(file.open("rb"), content_type=content_type, filename=name)
     response["X-Content-Type-Options"] = "nosniff"
-    response["Content-Disposition"] = f'inline; filename="{file.name}"'
     return response
 
 

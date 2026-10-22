@@ -99,6 +99,8 @@
 
   // Lightbox: the thumbnail is a plain link to the original image, so it still works
   // without JavaScript or <dialog> support. Native <dialog> provides Esc and focus trapping.
+  // While it is open the page behind is locked, so wheel or touch scrolling past the edge of the
+  // image never moves the article; closing returns to the exact reading position.
   const zooms = document.querySelectorAll('a[data-lightbox]');
   if (zooms.length && typeof HTMLDialogElement === 'function') {
     const dialog = document.createElement('dialog');
@@ -110,10 +112,20 @@
     const title = dialog.querySelector('p');
     const image = dialog.querySelector('img');
     const original = dialog.querySelector('.lightbox-bar a');
+    const inner = dialog.querySelector('.lightbox-inner');
+    const root = document.documentElement;
     let opener = null;
+    let saved = null;
     dialog.querySelector('.lightbox-close').addEventListener('click', () => dialog.close());
-    dialog.addEventListener('click', event => {if (event.target === dialog) dialog.close();});
-    dialog.addEventListener('close', () => {image.removeAttribute('src'); if (opener) opener.focus();});
+    // The dialog fills the viewport, so its dark margin (around the bar and the white stage) is the backdrop.
+    dialog.addEventListener('click', event => {if (event.target === dialog || event.target === inner) dialog.close();});
+    dialog.addEventListener('close', () => {
+      image.removeAttribute('src');
+      root.classList.remove('lightbox-open');
+      if (saved) window.scrollTo({left: saved.x, top: saved.y, behavior: 'instant'});
+      saved = null;
+      if (opener) opener.focus({preventScroll: true});
+    });
     zooms.forEach(link => link.addEventListener('click', event => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
       event.preventDefault();
@@ -124,7 +136,10 @@
       image.src = link.getAttribute('href');
       image.alt = (link.querySelector('img') || {}).alt || '';
       original.href = link.getAttribute('href');
+      saved = {x: window.scrollX, y: window.scrollY};
+      root.classList.add('lightbox-open');
       dialog.showModal();
+      dialog.querySelector('.lightbox-stage').scrollTo(0, 0);
       dialog.querySelector('.lightbox-close').focus();
     }));
   }

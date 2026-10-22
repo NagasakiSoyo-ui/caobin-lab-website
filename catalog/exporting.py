@@ -1,8 +1,9 @@
+import posixpath
 import re
 from html.parser import HTMLParser
 from pathlib import Path
 from tempfile import SpooledTemporaryFile
-from urllib.parse import unquote, urlsplit
+from urllib.parse import quote, unquote, urlsplit
 from zipfile import ZipFile, ZIP_DEFLATED
 from django.conf import settings
 from django.db import transaction
@@ -25,24 +26,26 @@ def attribute_urls(html):
         yield from (srcset_urls(value) if name == "srcset" else [value])
 
 
-def _local(url):
+def _local(url, renamed=None):
+    if renamed and url in renamed:
+        return quote(renamed[url])
     for prefix, replacement in LOCAL_PREFIXES:
         if url.startswith(prefix):
             return replacement + url[len(prefix):]
     return url
 
 
-def _rewrite(match):
+def _rewrite(match, renamed=None):
     name, value = match.groups()
     if name == "srcset":
         entries = []
         for entry in value.split(","):
             parts = entry.strip().split(None, 1)
             if parts:
-                entries.append(" ".join([_local(parts[0])] + parts[1:]))
+                entries.append(" ".join([_local(parts[0], renamed)] + parts[1:]))
         value = ", ".join(entries)
     else:
-        value = _local(value)
+        value = _local(value, renamed)
     return f'{name}="{value}"'
 
 
@@ -65,8 +68,26 @@ class LinkCollector(HTMLParser):
                 self.links.extend(srcset_urls(value))
 
 
-def localize(html):
-    return URL_ATTRIBUTE.sub(_rewrite, html)
+def localize(html, renamed=None):
+    return URL_ATTRIBUTE.sub(lambda match: _rewrite(match, renamed), html)
+
+
+def readable_names(resources):
+    """Archive paths for resource PDFs named after their titles. Opened from file://, browsers ignore
+    <a download> and the PDF viewer saves under the file's own name, so the one exported copy carries it."""
+    renamed, used = {}, set()
+    for resource in resources:
+        url = resource.document.url
+        if url in renamed:
+            continue
+        folder, name = posixpath.dirname(_local(url)), resource.download_name
+        number = 1
+        while f"{folder}/{name}" in used:
+            number += 1
+            name = f"{resource.download_name[:-4]} ({number}).pdf"
+        used.add(f"{folder}/{name}")
+        renamed[url] = f"{folder}/{name}"
+    return renamed
 
 
 def check_links(documents, files):
@@ -98,10 +119,13 @@ def website_archive():
     # One database snapshot keeps all exported pages mutually consistent.
     with transaction.atomic():
         documents, media = {}, set()
-        for filename, template, context in page_manifest(website_context("index")):
+        shared = website_context("index")
+        renamed = readable_names(shared["resources"])
+        for filename, template, context in page_manifest(shared):
             html = render_to_string(template, context)
             media.update(media_references(html))
-            documents[filename] = localize(html)
+            documents[filename] = localize(html, renamed)
+    renamed_files = {unquote(url): path for url, path in renamed.items()}
     static_root = settings.BASE_DIR / "static/site"
     static_files = {"assets/" + f.relative_to(static_root).as_posix(): f for f in static_root.rglob("*") if f.is_file()}
     media_root = Path(settings.MEDIA_ROOT).resolve()
@@ -111,7 +135,7 @@ def website_archive():
         file = (media_root / relative).resolve()
         if not file.is_relative_to(media_root) or not file.is_file():
             raise FileNotFoundError(f"导出中发现缺失的素材：{relative}")
-        media_files["media/" + relative] = file
+        media_files[renamed_files.get(url, "media/" + relative)] = file
     check_links(documents, set(documents) | set(static_files) | set(media_files))
     stream = SpooledTemporaryFile(max_size=8 * 1024 * 1024)
     try:

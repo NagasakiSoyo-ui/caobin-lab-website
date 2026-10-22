@@ -1,0 +1,2 @@
+{% extends "admin/submit_line.html" %}{% load admin_urls %}
+{% block submit-row %}{{ block.super }}{% if not show_close and not is_popup and has_view_permission %}{% url opts|admin_urlname:'changelist' as changelist_url %}<a href="{% add_preserved_filters changelist_url %}" class="closelink">返回列表（不保存）</a>{% endif %}{% endblock %}

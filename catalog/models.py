@@ -1,3 +1,4 @@
+import re
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -8,6 +9,8 @@ from .validators import upload_path, validate_image, validate_pdf, validate_web_
 # Research layers used on the home layout and direction pages. They describe where a
 # direction works (a coverage map), not a causal pathway between layers.
 LAYERS = [("pathogen", "病原"), ("host", "宿主"), ("clinical", "临床"), ("intervention", "干预")]
+
+UNSAFE_FILENAME = re.compile(r'[\x00-\x1f\x7f<>:"/\\|?*]+')
 
 
 class Versioned(models.Model):
@@ -68,7 +71,7 @@ class Page(Versioned):
 
 class ResearchDirection(OrderedContent):
     title = models.CharField("研究方向", max_length=300)
-    short_title = models.CharField("简称", max_length=30, blank=True, help_text="使用团队提供的简称；留空则截取原始标题。")
+    short_title = models.CharField("简称", max_length=30, blank=True, help_text="使用团队提供的简称；留空则显示完整原始标题。")
     slug = models.SlugField("链接名", max_length=80, unique=True, blank=True,
                             help_text="详情页文件名 research-链接名.html。首次保存后固定，修改会使外部旧链接失效。")
     summary = models.TextField("中文简介", blank=True, help_text="列表卡片与详情页开头显示的简介；完整介绍另行保留。")
@@ -94,7 +97,8 @@ class ResearchDirection(OrderedContent):
 
     @property
     def label(self):
-        return self.short_title or (self.title if len(self.title) <= 12 else self.title[:11] + "…")
+        # Shortcuts show the team's own short title, otherwise the full original title (wrapped by CSS, never cut).
+        return self.short_title or self.title
 
     @property
     def layers(self):
@@ -352,6 +356,14 @@ class Resource(OrderedContent):
         if self.document and (not self.document._committed or not self.pages):
             self.pages, self.file_bytes = pdf_metadata(self.document)
         super().save(*args, **kwargs)
+
+    @property
+    def download_name(self):
+        """Readable PDF file name taken from the title; characters not allowed in file names become spaces.
+        Kept within 180 UTF-8 bytes so it fits common file-system name limits."""
+        name = " ".join(UNSAFE_FILENAME.sub(" ", self.title).split())
+        name = name.encode()[:180].decode(errors="ignore").strip(" .")
+        return f"{name or 'document'}.pdf"
 
     @property
     def megabytes(self):

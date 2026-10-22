@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin, messages
 from django.db import transaction
 from django.urls import reverse
@@ -24,6 +25,12 @@ class ContentAdmin(admin.ModelAdmin):
         if change:
             obj.version += 1
         super().save_model(request, obj, form, change)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        # A plain checkbox list shows every research direction (published or not) with its full title.
+        if db_field.name == "directions":
+            kwargs["widget"] = forms.CheckboxSelectMultiple
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 
 @admin.register(SiteSettings)
@@ -85,7 +92,6 @@ class ProjectAdmin(ContentAdmin):
     list_display = ("title", "program", "dates", "code", "is_published")
     list_filter = ("is_published", "directions")
     search_fields = ("title", "code")
-    filter_horizontal = ("directions",)
 
 
 @admin.register(Member)
@@ -99,13 +105,15 @@ class MemberAdmin(ContentAdmin):
         ("展示设置", {"fields": ["position", "is_published", "updated_at"]}),
     ]
 
+    class Media:
+        js = ("admin-photo-preview.js",)
+
 
 @admin.register(Publication)
 class PublicationAdmin(StableSlugMixin, ContentAdmin):
     list_display = ("title", "kind", "year", "journal", "pmid", "is_featured", "is_published")
     list_filter = ("kind", "year", "is_published", "is_featured", "directions")
     search_fields = ("title", "authors", "journal", "pmid", "doi")
-    filter_horizontal = ("directions",)
     readonly_fields = ("figure_list", "updated_at")
     fieldsets = [
         ("成果信息", {"fields": ["kind", "title", "authors", "year", "journal", "citation", "edit_version"]}),
@@ -134,7 +142,6 @@ class FigureAdmin(ContentAdmin):
     list_filter = ("is_published", "kind", "directions")
     search_fields = ("title", "caption", "label", "publication__title", "credit")
     autocomplete_fields = ("publication",)
-    filter_horizontal = ("directions",)
     readonly_fields = ("preview", "updated_at")
     actions = ("publish", "unpublish")
     fieldsets = [
