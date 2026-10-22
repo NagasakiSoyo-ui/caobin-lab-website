@@ -111,8 +111,8 @@ class MemberAdmin(ContentAdmin):
 
 @admin.register(Publication)
 class PublicationAdmin(StableSlugMixin, ContentAdmin):
-    list_display = ("title", "kind", "year", "journal", "pmid", "is_featured", "is_published")
-    list_filter = ("kind", "year", "is_published", "is_featured", "directions")
+    list_display = ("title", "kind", "year", "journal", "pmid", "is_published")
+    list_filter = ("kind", "year", "is_published", "directions")
     search_fields = ("title", "authors", "journal", "pmid", "doi")
     readonly_fields = ("figure_list", "updated_at")
     fieldsets = [
@@ -120,7 +120,7 @@ class PublicationAdmin(StableSlugMixin, ContentAdmin):
         ("标识与链接", {"fields": ["pmid", "doi", "pmcid", "url", "slug"]}),
         ("中文概述与关联", {"fields": ["summary", "directions", "lab_role", "source_note"]}),
         ("配图", {"fields": ["figure_list"]}),
-        ("展示设置", {"fields": ["is_featured", "position", "is_published", "updated_at"],
+        ("展示设置", {"fields": ["position", "is_published", "updated_at"],
                   "description": "成果公开后才会出现在前台；取消公开时，其配图也会同时从前台撤下。"}),
     ]
 

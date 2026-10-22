@@ -20,8 +20,7 @@ def public_directions():
 
 def public_publications():
     return (Publication.objects.filter(is_published=True)
-            .prefetch_related(Prefetch("directions", queryset=public_directions()),
-                              Prefetch("figures", queryset=public_figures(), to_attr="public_figures")))
+            .prefetch_related(Prefetch("directions", queryset=public_directions())))
 
 
 def public_projects():
@@ -41,12 +40,11 @@ def website_context(slug):
     for direction in directions:
         direction.cover = next((f for f in figures if direction in f.directions.all()), None)
     publications = list(public_publications())
-    featured = [p for p in publications if p.is_featured and p.public_figures]
     return {
         "site": site, "pages": pages, "page": current, "route": slug,
         "directions": directions,
         "projects": list(public_projects()),
-        "publications": publications, "featured": featured,
+        "publications": publications,
         "publication_years": sorted({p.year for p in publications}, reverse=True),
         "member_groups": [{"id": key, "title": title, "members": [m for m in members if m.group == key]}
                           for key, title in Member.GROUPS],
@@ -70,11 +68,6 @@ def direction_context(shared, direction):
             "next_direction": directions[index + 1] if index + 1 < len(directions) else None}
 
 
-def publication_context(shared, publication):
-    return {**shared, "page": next(p for p in shared["pages"] if p.slug == "publications"),
-            "route": "publications", "publication": publication}
-
-
 def page_manifest(shared=None):
     """All public pages as (file name, template, context). Used by the export and its link check."""
     shared = shared or website_context("index")
@@ -83,9 +76,6 @@ def page_manifest(shared=None):
         pages.append((f"{page.slug}.html", f"public/{page.slug}.html", {**shared, "page": page, "route": page.slug}))
     for direction in shared["directions"]:
         pages.append((direction.page_name, "public/direction_detail.html", direction_context(shared, direction)))
-    for publication in shared["publications"]:
-        if publication.has_detail:
-            pages.append((publication.page_name, "public/publication_detail.html", publication_context(shared, publication)))
     return pages
 
 
@@ -99,11 +89,3 @@ def render_direction(slug):
     if direction is None:
         return None
     return render_to_string("public/direction_detail.html", direction_context(shared, direction))
-
-
-def render_publication(slug):
-    shared = website_context("publications")
-    publication = next((p for p in shared["publications"] if p.slug == slug and p.has_detail), None)
-    if publication is None:
-        return None
-    return render_to_string("public/publication_detail.html", publication_context(shared, publication))

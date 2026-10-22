@@ -49,7 +49,7 @@ class Command(BaseCommand):
                     kind="paper", title=item["title"], authors=item["authors"], year=item["year"],
                     journal=item["journal"], citation=item["citation"], pmid=item["pmid"], doi=item["doi"],
                     pmcid=item["pmcid"], url=f"https://pubmed.ncbi.nlm.nih.gov/{item['pmid']}/",
-                    summary=item["summary"], slug=slug, is_featured=item["featured"], lab_role=item["lab_role"],
+                    summary=item["summary"], slug=slug, lab_role=item["lab_role"],
                     source_note=item["source_note"], is_published=True)
                 publication.directions.set(pick(item["directions"]))
                 stats["created"] += 1

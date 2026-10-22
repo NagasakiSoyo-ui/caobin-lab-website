@@ -155,8 +155,7 @@ class Publication(OrderedContent):
     doi = models.CharField("DOI", max_length=200, unique=True, null=True, blank=True, help_text="保存时自动去掉 https://doi.org/ 前缀并转为小写。")
     pmcid = models.CharField("PMCID", max_length=20, blank=True)
     slug = models.SlugField("链接名", max_length=80, unique=True, null=True, blank=True,
-                            help_text="详情页文件名 publication-链接名.html。首次保存后固定。")
-    is_featured = models.BooleanField("精选并生成详情页", default=False, help_text="精选成果在研究成果页图文展示，并生成固定详情页。")
+                            help_text="成果的内部固定标识，用于导入与记录关联。")
     lab_role = models.CharField("课题组角色", max_length=20, choices=ROLES, default="unverified", blank=True,
                                 help_text="不按作者顺序自动判断；请依据原文通讯作者标注人工选择。")
     directions = models.ManyToManyField(ResearchDirection, verbose_name="关联研究方向", blank=True, related_name="publications")
@@ -184,12 +183,8 @@ class Publication(OrderedContent):
         super().save(*args, **kwargs)
 
     @property
-    def page_name(self):
-        return publication_filename(self.slug)
-
-    @property
-    def has_detail(self):
-        return self.is_published and self.is_featured and bool(self.slug)
+    def original_url(self):
+        return self.url or self.doi_url or self.pubmed_url
 
     @property
     def pubmed_url(self):
@@ -203,23 +198,12 @@ class Publication(OrderedContent):
     def pmc_url(self):
         return f"https://pmc.ncbi.nlm.nih.gov/articles/{self.pmcid}/" if self.pmcid else ""
 
-    @property
-    def authors_short(self):
-        names = [name.strip() for name in self.authors.split(",") if name.strip()]
-        if len(names) <= 6:
-            return ", ".join(names)
-        return ", ".join(names[:3]) + ", …, " + names[-1]
-
     def __str__(self):
         return self.title
 
 
 def direction_filename(slug):
     return f"research-{slug}.html"
-
-
-def publication_filename(slug):
-    return f"publication-{slug}.html"
 
 
 class Figure(Versioned):

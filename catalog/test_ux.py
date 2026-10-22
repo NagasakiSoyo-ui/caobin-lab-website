@@ -116,22 +116,36 @@ class UsabilityFixTests(MediaMixin, TestCase):
         self.assertEqual(meta(journal="Lancet", citation=""), f'<span lang="en">Lancet</span> · {year}')
         self.assertEqual(meta(journal="Lancet", citation="1"), f'<span lang="en">Lancet</span> · {year} · 1')
 
-    def test_featured_and_detail_metadata_without_journal_have_no_dangling_separator(self):
-        publication = Publication.objects.filter(is_published=True, is_featured=True).first()
+    def test_home_cards_without_journal_have_no_dangling_separator(self):
+        publication = Publication.objects.filter(is_published=True).first()
         Publication.objects.filter(pk=publication.pk).update(journal="", citation="")
-        self.assertNotContains(self.client.get("/publications.html"), f"{publication.year} · <span lang=\"en\"></span>")
-        detail = self.client.get(f"/{publication.page_name}").content.decode()
-        self.assertIn(f'<p class="paper-journal" lang="en">{publication.year}</p>', detail)
+        html = self.client.get("/index.html").content.decode()
+        self.assertIn(f'<p class="pub-meta">{publication.year}</p>', html)
 
-    def test_publications_page_head_links_to_catalog_search(self):
+    def test_publications_use_actual_years_and_preserve_full_authors(self):
         html = self.client.get("/publications.html").content.decode()
-        head = re.search(r'<header class="page-intro">.*?</header>', html, re.S).group(0)
-        self.assertIn('href="#catalog"', head)
-        self.assertIn('id="catalog" tabindex="-1"', html)
-        self.assertLess(html.index('href="#catalog"'), html.index('class="featured-grid"'))
-        self.assertLess(html.index('class="featured-grid"'), html.index('id="pub-search"'))
+        expected = sorted(set(Publication.objects.filter(is_published=True).values_list("year", flat=True)), reverse=True)
+        years = [int(y) for y in re.findall(r'data-publication-year="(\d+)"', html)]
+        self.assertEqual(years, expected)
+        self.assertEqual(html.count('class="pub-entry"'), Publication.objects.filter(is_published=True).count())
+        for publication in Publication.objects.filter(is_published=True):
+            self.assertIn(publication.authors, html)
+        self.assertNotIn('featured', html)
+        self.assertNotIn('成果详情', html)
         Publication.objects.update(is_published=False)
-        self.assertNotContains(self.client.get("/publications.html"), 'href="#catalog"')
+        empty = self.client.get("/publications.html")
+        self.assertContains(empty, '成果目录整理中')
+        self.assertNotContains(empty, 'data-publication-year=')
+
+    def test_original_link_uses_verified_identifiers_without_inventing_url(self):
+        publication = Publication(title="No source yet", year=2026)
+        self.assertEqual(publication.original_url, "")
+        publication.pmid = "12345"
+        self.assertEqual(publication.original_url, "https://pubmed.ncbi.nlm.nih.gov/12345/")
+        publication.doi = "10.1234/example"
+        self.assertEqual(publication.original_url, "https://doi.org/10.1234/example")
+        publication.url = "https://example.org/original"
+        self.assertEqual(publication.original_url, publication.url)
 
     def test_member_without_photo_has_neutral_placeholder_without_repeating_name(self):
         member = Member.objects.filter(is_published=True, photo="").first()

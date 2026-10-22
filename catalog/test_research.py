@@ -120,7 +120,7 @@ class ResearchSiteTests(MediaMixin, TestCase):
             self.assertContains(response, 'class="figure-plate"')
         viral = self.client.get("/research-viral-sepsis.html")
         self.assertContains(viral, "82530002")  # linked project
-        self.assertContains(viral, "publication-2020-sars-cov-2-viral-sepsis.html")
+        self.assertContains(viral, "https://pubmed.ncbi.nlm.nih.gov/32311318/")
         self.assertNotContains(self.client.get("/research-translation.html"), "direction-translation.svg")
         self.assertEqual(self.client.get("/research-unknown.html").status_code, 404)
 
@@ -136,23 +136,19 @@ class ResearchSiteTests(MediaMixin, TestCase):
         fig6 = Figure.objects.get(publication__pmid="40858544", label="Fig. 6")
         self.assertEqual((fig6.title, fig6.caption, fig6.license_note), (fig6.label, "", ""))
         self.assertEqual(fig6.source_url, "https://pmc.ncbi.nlm.nih.gov/articles/PMC12381301/figure/Fig6/")
-        detail = self.client.get("/publication-2025-streptococcus-oralis-influenza.html")
-        for text in ("https://pubmed.ncbi.nlm.nih.gov/40858544/", "https://doi.org/10.1038/s41392-025-02365-x",
-                     "Fig. 6", "原文图页面", 'data-lightbox'):
-            self.assertContains(detail, text)
-        self.assertNotContains(detail, "中文概述")
         page = self.client.get("/publications.html")
-        self.assertContains(page, "并非全部成果")
-        self.assertNotContains(page, "完整全部成果")
-        self.assertContains(page, 'id="pub-year"')
-        # Non-featured publications are catalogue entries only, without a detail page.
-        plain = Publication.objects.get(pmid="39775042")
-        self.assertFalse(plain.has_detail)
-        self.assertEqual(self.client.get(f"/{plain.page_name}").status_code, 404)
+        for text in ("https://pubmed.ncbi.nlm.nih.gov/40858544/", "https://doi.org/10.1038/s41392-025-02365-x"):
+            self.assertContains(page, text)
+        self.assertContains(page, 'data-publication-year="2026"')
+        self.assertNotContains(page, '精选')
+        self.assertNotContains(page, '成果详情')
+        for publication in Publication.objects.all():
+            self.assertContains(page, publication.title)
+            self.assertEqual(self.client.get(f"/publication-{publication.slug}.html").status_code, 404)
 
     def test_figure_link_works_without_javascript(self):
         figure = Figure.objects.get(publication__pmid="38231624", label="Figure 2")
-        response = self.client.get("/publication-2024-oral-simnotrelvir-covid-19.html")
+        response = self.client.get("/research-antiviral-evaluation.html")
         self.assertContains(response, f'<a class="figure-zoom" href="{figure.image.url}"')
         image = self.client.get(figure.image.url)
         self.assertEqual(image["Content-Type"], "image/jpeg")
@@ -162,7 +158,7 @@ class ResearchSiteTests(MediaMixin, TestCase):
     def test_drafts_and_unpublished_figures_do_not_leak(self):
         direction = ResearchDirection.objects.get(slug="microbiome")
         draft_direction = ResearchDirection.objects.create(title="草稿方向甲", text="草稿方向正文", slug="draft-direction")
-        draft_pub = Publication.objects.create(title="Draft Paper Beta", year=2026, pmid="99999991", is_featured=True,
+        draft_pub = Publication.objects.create(title="Draft Paper Beta", year=2026, pmid="99999991",
                                                summary="草稿成果概述乙", slug="draft-paper")
         draft_pub.directions.add(direction)
         Project.objects.create(title="草稿课题丙", program="测试", dates="2026", is_published=False).directions.add(direction)
@@ -197,12 +193,11 @@ class ResearchSiteTests(MediaMixin, TestCase):
         Publication.objects.filter(pk=publication.pk).update(is_published=False)
         for url in ("/research-microbiome.html", "/publications.html", "/index.html"):
             self.assertNotContains(self.client.get(url), figure_url)
-        self.assertEqual(self.client.get(f"/{publication.page_name}").status_code, 404)
+        self.assertEqual(self.client.get(f"/publication-{publication.slug}.html").status_code, 404)
         Publication.objects.filter(pk=publication.pk).update(is_published=True)
         Figure.objects.filter(publication=publication).update(is_published=False)
-        self.assertNotContains(self.client.get(f"/{publication.page_name}"), figure_url)
-        # Featured cards require a public figure, so no empty figure frame is rendered.
-        self.assertNotContains(self.client.get("/publications.html"), f'href="{publication.page_name}" tabindex="-1"')
+        self.assertNotContains(self.client.get("/research-microbiome.html"), figure_url)
+        self.assertContains(self.client.get("/publications.html"), publication.title)
 
     # --- export -------------------------------------------------------------------------
     def test_export_contains_all_public_detail_pages_and_valid_links(self):
@@ -210,11 +205,11 @@ class ResearchSiteTests(MediaMixin, TestCase):
         pages, names = self.html_pages()
         for direction in ResearchDirection.objects.all():
             self.assertIn(direction.page_name, pages)
-        featured = [p.page_name for p in Publication.objects.filter(is_featured=True, is_published=True)]
-        self.assertEqual(len(featured), 7)
-        for name in featured:
-            self.assertIn(name, pages)
-        for figure in Figure.objects.filter(is_published=True).exclude(image=""):
+        self.assertEqual(len(pages), 13)
+        self.assertFalse(any(name.startswith("publication-") for name in pages))
+        for html in pages.values():
+            self.assertNotRegex(html, r'href="publication-[^"]+\.html"')
+        for figure in Figure.objects.filter(is_published=True, directions__is_published=True).exclude(image="").distinct():
             self.assertIn("media/" + figure.image.name, names)
         self.assertNotIn("assets/figures/direction-translation.svg", names)
         self.assertNotIn("assets/favicon.svg", names)

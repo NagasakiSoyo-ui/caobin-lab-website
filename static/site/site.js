@@ -50,28 +50,32 @@
     document.getElementById('clear-filters').addEventListener('click', () => {resourceForm.reset(); search.focus();});
   }
 
-  const pubForm = document.getElementById('pub-filters');
-  if (pubForm) {
-    const search = document.getElementById('pub-search');
-    const year = document.getElementById('pub-year');
-    const direction = document.getElementById('pub-direction');
-    const entries = [...document.querySelectorAll('#pub-list .pub-entry')];
-    const groups = [...document.querySelectorAll('#pub-list .pub-year')];
-    const filter = () => {
-      const query = normalize(search.value);
-      let count = 0;
-      for (const entry of entries) {
-        const matches = (!query || normalize(entry.dataset.search).includes(query)) &&
-          (!year.value || entry.dataset.year === year.value) &&
-          (!direction.value || entry.dataset.directions.split(' ').includes(direction.value));
-        entry.hidden = !matches;
-        count += Number(matches);
-      }
-      groups.forEach(group => {group.hidden = !group.querySelector('.pub-entry:not([hidden])');});
-      document.getElementById('pub-count').textContent = `显示 ${count} / ${entries.length} 条`;
-      document.getElementById('pub-empty').hidden = count > 0;
+  const yearLinks = [...document.querySelectorAll('[data-publication-year]')];
+  if (yearLinks.length) {
+    const catalog = document.getElementById('pub-list');
+    const groups = [...catalog.querySelectorAll('[data-year-group]')];
+    const selectYear = year => {
+      groups.forEach(group => {group.hidden = year !== 'all' && group.dataset.yearGroup !== year;});
+      yearLinks.forEach(link => {
+        if (link.dataset.publicationYear === year) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+      catalog.classList.toggle('single-year', year !== 'all');
+      const count = groups.filter(group => !group.hidden).reduce((total, group) => total + group.querySelectorAll('.pub-entry').length, 0);
+      document.getElementById('pub-count').textContent = `${year === 'all' ? '全部年份' : year + ' 年'}，${count} 条成果`;
     };
-    bindFilter(pubForm, [search, year, direction], filter);
+    yearLinks.forEach(link => link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      event.preventDefault();
+      history.replaceState(null, '', link.hash);
+      selectYear(link.dataset.publicationYear);
+    }));
+    const selectHashYear = () => {
+      const link = yearLinks.find(item => item.hash === location.hash);
+      selectYear((link || yearLinks[0]).dataset.publicationYear);
+    };
+    window.addEventListener('hashchange', selectHashYear);
+    selectHashYear();
   }
 
   // Scroll reveal: only blocks that start below the fold are animated, once, as they approach the
@@ -79,7 +83,7 @@
   // everything simply stays visible.
   const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!calm && 'IntersectionObserver' in window) {
-    const selector = '.section-heading, .direction-card, .featured-card, .project-card, .pub-year, .direction-row, ' +
+    const selector = '.section-heading, .direction-card, .pub-entry, .project-card, .pub-year, .direction-row, ' +
       '.detail-block, .detail-aside > section, .figure-plate, .resource-card, .member-card, .home-leader, .contact-band .container';
     const fold = window.innerHeight;
     const pending = [...document.querySelectorAll(selector)].filter(el => el.getBoundingClientRect().top > fold);
