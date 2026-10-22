@@ -82,10 +82,10 @@ def readable_names(resources):
             continue
         folder, name = posixpath.dirname(_local(url)), resource.download_name
         number = 1
-        while f"{folder}/{name}" in used:
+        while f"{folder}/{name}".casefold() in used:
             number += 1
             name = f"{resource.download_name[:-4]} ({number}).pdf"
-        used.add(f"{folder}/{name}")
+        used.add(f"{folder}/{name}".casefold())
         renamed[url] = f"{folder}/{name}"
     return renamed
 

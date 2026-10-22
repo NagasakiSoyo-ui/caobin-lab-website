@@ -6,6 +6,8 @@
 
 2026-10-21 核验记录见 [素材来源核验](docs/content-source-verification.json)：研究文字与 DOCX 对照，成员字段与问卷对照，PDF 与原压缩包逐文件校验，论文题录与原始 PubMed XML 对照，11 张图片与 PMC 下载原件逐字节一致。
 
+V3.5 修复图片查看、成果检索入口、资料文件名及手机后台操作体验，保留原有正文、图片和医学深蓝版型。验证范围见 [V3.5 验收记录](docs/v3.5-validation.md)。
+
 ## 两种使用方式
 
 **只看网页**：从 [Releases](https://github.com/NagasakiSoyo-ui/caobin-lab-website/releases) 下载医学深蓝离线包，完整解压，双击 `index.html`。不需要 GitHub 登录或安装软件。

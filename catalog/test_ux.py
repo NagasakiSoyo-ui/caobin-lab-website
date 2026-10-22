@@ -1,4 +1,5 @@
 import re
+from contextlib import closing
 from urllib.parse import quote
 from zipfile import ZipFile
 from django.conf import settings
@@ -37,12 +38,12 @@ class UsabilityFixTests(MediaMixin, TestCase):
     def test_unpublished_resource_and_images_keep_stored_file_name(self):
         resource = Resource.objects.get(document="initial/documents/resource-05.pdf")
         Resource.objects.filter(pk=resource.pk).update(is_published=False)
-        response = self.client.get(resource.document.url)
-        self.assertEqual(response["Content-Disposition"], 'inline; filename="resource-05.pdf"')
-        self.assertNotIn(quote(resource.title), response["Content-Disposition"])
+        with closing(self.client.get(resource.document.url)) as response:
+            self.assertEqual(response["Content-Disposition"], 'inline; filename="resource-05.pdf"')
+            self.assertNotIn(quote(resource.title), response["Content-Disposition"])
         figure = Figure.objects.exclude(image="").first()
-        image = self.client.get(figure.image.url)
-        self.assertEqual(image["Content-Disposition"], f'inline; filename="{figure.image.name.rsplit("/", 1)[-1]}"')
+        with closing(self.client.get(figure.image.url)) as image:
+            self.assertEqual(image["Content-Disposition"], f'inline; filename="{figure.image.name.rsplit("/", 1)[-1]}"')
 
     def test_download_name_strips_characters_unsafe_in_file_names(self):
         resource = Resource(title=' 指南/共识: "2025" <修订>\\版? * | \n.')
@@ -78,6 +79,13 @@ class UsabilityFixTests(MediaMixin, TestCase):
         for path in ("/media/../secret.key", "/media/..%2Fsecret.key", "/media/initial/../../secret.key",
                      "/media/%2E%2E/site.sqlite3"):
             self.assertEqual(self.client.get(path).status_code, 404, path)
+
+    def test_offline_names_do_not_collide_on_case_insensitive_filesystems(self):
+        first, second = Resource.objects.filter(is_published=True)[:2]
+        first.title, second.title = "Guideline", "GUIDELINE"
+        renamed = readable_names([first, second])
+        self.assertEqual(len({name.casefold() for name in renamed.values()}), 2)
+        self.assertTrue(renamed[second.document.url].endswith("GUIDELINE (2).pdf"))
 
     # --- public display ------------------------------------------------------------------
     def test_direction_shortcuts_show_full_original_titles(self):
