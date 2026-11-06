@@ -4,7 +4,7 @@ from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
-from catalog.models import SiteSettings, Page, ResearchDirection, Project, Member, Publication, Resource
+from catalog.models import SiteSettings, HomeSlide, Page, ResearchDirection, Project, Member, Publication, Resource
 
 
 class Command(BaseCommand):
@@ -15,7 +15,7 @@ class Command(BaseCommand):
         if SiteSettings.objects.exists():
             self.stdout.write("已有网站数据，跳过初始化。")
             return
-        if any(model.objects.exists() for model in (Page, ResearchDirection, Project, Member, Publication, Resource)):
+        if any(model.objects.exists() for model in (HomeSlide, Page, ResearchDirection, Project, Member, Publication, Resource)):
             raise CommandError("检测到部分内容，停止初始化以免覆盖。请恢复备份或检查数据库。")
         source = settings.BASE_DIR / "seed"
         data = json.loads((source / "content.json").read_text(encoding="utf-8"))
@@ -35,14 +35,13 @@ class Command(BaseCommand):
         leader = data["leader"]
         SiteSettings.objects.create(
             pk=1, name=data["name"], subtitle=data["subtitle"],
-            hero_title=data["hero"]["title"],
-            hero_english=data["hero"]["english"],
-            hero_intro=data["hero"]["intro"],
-            hero_photo=asset(leader["photo"]), leader_name=leader["name"], leader_english="Bin Cao",
+            leader_name=leader["name"], leader_english="Bin Cao",
             leader_role=leader["role"], leader_bio="\n\n".join(leader["bio"]),
             leader_photo=asset(leader["photo"]), contact_name=data["contact"]["name"],
             contact_email=data["contact"]["email"],
         )
+        HomeSlide.objects.create(title=data["hero"]["title"], english=data["hero"]["english"],
+                                 intro=data["hero"]["intro"], photo=asset(leader["photo"]), position=0, is_published=True)
         english = ["Home", "Research", "Research Projects", "Publications", "Our Team", "Learning Resources", "Contact"]
         introductions = ["" for _ in Page.ROUTES]
         for (slug, title), en, intro in zip(Page.ROUTES, english, introductions):

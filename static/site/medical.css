@@ -43,14 +43,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 
 
 /* Home hero (left-aligned copy over the photo) and research layout */
-.hero{position:relative;overflow:hidden;background:#24394c;color:#fff}
+.hero{position:relative;overflow:hidden;background:#112e4e;color:#fff;touch-action:pan-y pinch-zoom}
+.hero-slide{position:relative;min-width:0}
+.carousel-ready .hero-slides{display:grid}
+.carousel-ready .hero-slide{grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .8s ease,visibility 0s .8s}
+.carousel-ready .hero-slide.is-active{opacity:1;visibility:visible;pointer-events:auto;transition-delay:0s;z-index:1}
 .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 30%}
-.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,#071d36d9 0%,#0a294173 55%,#081c3920 100%)}
-.hero-grid{position:relative;display:flex;align-items:center;min-height:565px;padding:64px 0}
+.hero-photo-contain{width:65%;left:auto;right:0;object-fit:contain;object-position:center;padding:30px 35px 70px}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,#071d36f5 0%,#0a2941e6 32%,#0a29418c 64%,#081c3933 100%)}
+.hero-grid{position:relative;display:flex;align-items:center;min-height:600px;padding:64px 0 90px;width:calc(100% - 160px)}
 .hero-copy{max-width:800px}
 .kicker{font-size:12px;letter-spacing:2px;opacity:.9;border-left:3px solid #87b9dc;padding-left:15px;margin-bottom:18px;line-height:1.5}
-.hero-copy h1{font-size:40px;line-height:1.6;max-width:730px;text-wrap:balance}.hero-english{margin-top:6px;color:#ffffffd9;font-size:15px;max-width:630px}
+.hero-copy h1,.hero-copy h2{font-size:40px;line-height:1.6;max-width:730px;text-wrap:balance}.hero-english{margin-top:6px;color:#ffffffd9;font-size:15px;max-width:630px}
 .hero-lead{margin-top:16px;color:#ffffffe6;font-size:15px;max-width:600px}.hero-actions{display:flex;flex-wrap:wrap;gap:15px;margin-top:30px}
+.hero-arrow,.hero-play,.hero-dots button{position:relative;z-index:3;color:#fff;border:1px solid #ffffff60;background:#102b49b3}
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);border-radius:50%;width:46px;height:46px;font-size:32px;line-height:1;display:grid;place-items:center;padding:0}
+.hero-prev{left:18px}.hero-next{right:18px}.hero-arrow:hover,.hero-play:hover{background:#24567c}
+.hero-play{position:absolute;right:24px;bottom:22px;padding:6px 12px;font-size:12px;border-radius:2px}
+.hero-dots{position:absolute;z-index:3;bottom:17px;left:50%;transform:translateX(-50%);display:flex;gap:2px;max-width:calc(100% - 230px);flex-wrap:wrap;justify-content:center}
+.hero-dots button{width:30px;height:36px;border:0;background:none;display:grid;place-items:center;padding:0}
+.hero-dots span{width:8px;height:8px;border:1px solid #fff;border-radius:50%;opacity:.65;transition:transform .25s,opacity .25s,background .25s}
+.hero-dots [aria-disabled=true] span{background:#fff;opacity:1;transform:scale(1.25)}
+.hero button:focus-visible,.hero a:focus-visible{outline-color:#fff}
 
 /* Direction cards and lists */
 .direction-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;counter-reset:d}
@@ -117,7 +131,7 @@ html.lightbox-open{overflow:hidden;scrollbar-gutter:stable}
    ends visible, and site.js adds .reveal-in only to blocks that are still below the fold when
    they approach the viewport. Fill mode "backwards" leaves hover transforms untouched afterwards. */
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.hero-copy>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) backwards}.hero-copy>:nth-child(2){animation-delay:.06s}.hero-copy>:nth-child(3){animation-delay:.12s}
+.is-active .hero-copy>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) backwards}.hero-copy>:nth-child(2){animation-delay:.06s}.hero-copy>:nth-child(3){animation-delay:.12s}
 .hero-copy>:nth-child(4){animation-delay:.18s}.hero-copy>:nth-child(5){animation-delay:.24s}
 .page-intro .container>*{animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
 .reveal-in{animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
@@ -166,8 +180,9 @@ html.lightbox-open{overflow:hidden;scrollbar-gutter:stable}
 #site-nav a,#site-nav a:first-child,#site-nav a:last-child{text-align:left;padding:9px 0;font-size:14px;border-bottom:1px solid var(--line);margin:0}#site-nav a[aria-current]{border-bottom-color:var(--accent)}
 .direction-row,.detail-layout{grid-template-columns:1fr}.direction-cover{max-width:420px}.detail-aside{position:static}.home-leader,.leader-profile{grid-template-columns:1fr;gap:28px}.leader-profile figure{position:static}
 .leader-portrait img,.leader-profile figure img{aspect-ratio:3/2;object-position:center}.contact-section{grid-template-columns:1fr;gap:32px}.contact-section aside{border-left:0;border-top:1px solid var(--line);padding:24px 0 0}.footer-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:760px){.hero-shade{background:linear-gradient(90deg,#071d36e6 0%,#0a2941b3 70%,#081c3966 100%)}.hero-grid{min-height:520px;padding:44px 0 52px}.kicker{font-size:10px;letter-spacing:1px}
-.hero-copy h1{font-size:29px}.hero-english{font-size:13px}.hero-lead{font-size:14px}.hero-actions{gap:10px}.hero-actions .button{padding:13px 21px}}
+@media(max-width:760px){.hero-shade{background:linear-gradient(90deg,#071d36eb 0%,#0a2941cc 70%,#081c398c 100%)}.hero-grid{min-height:570px;padding:42px 0 115px;width:calc(100% - 48px)}.kicker{font-size:10px;letter-spacing:1px}
+.hero-copy h1,.hero-copy h2{font-size:28px;line-height:1.5}.hero-english{font-size:13px}.hero-lead{font-size:14px}.hero-actions{gap:10px}.hero-actions .button{padding:13px 21px}
+.hero-photo-contain{width:100%;padding:20px 16px 100px}.hero-arrow{top:auto;bottom:18px;transform:none;width:40px;height:40px}.hero-prev{left:24px}.hero-next{right:24px}.hero-play{right:24px;bottom:70px}.hero-dots{bottom:20px;max-width:calc(100% - 150px)}}
 @media(max-width:640px){body{font-size:14.5px}.container{width:calc(100% - 32px)}.section{padding:42px 0}#site-nav.open{grid-template-columns:repeat(2,minmax(0,1fr))}
 .page-intro{padding:25px 0 35px}.page-intro h1{font-size:29px}.page-intro h1 span{display:block;margin:7px 0 0;font-size:17px}.page-description{font-size:14px;margin-top:20px}.section-heading h2{font-size:23px}
 .section-top{flex-direction:column;align-items:flex-start;gap:10px}.direction-grid,.resource-grid,.project-list{grid-template-columns:1fr}.project-card dl{grid-template-columns:1fr}.direction-card,.project-card{padding:22px}

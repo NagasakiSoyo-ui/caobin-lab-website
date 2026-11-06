@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.utils.html import format_html
 from .forms import VersionedForm
 from .widgets import AdminImageWidget
-from .models import (SiteSettings, Page, ResearchDirection, Project, Member, Publication, Resource,
+from .models import (SiteSettings, HomeSlide, Page, ResearchDirection, Project, Member, Publication, Resource,
                      Figure, PubMedCandidate, PubMedImportRun)
 from .pubmed import ImportFailure, accept, reset_to_pending
 
@@ -39,7 +39,7 @@ class ContentAdmin(admin.ModelAdmin):
                 if direction:
                     page = reverse("direction", args=[direction.slug]) + f"#figure-{obj.pk}"
             else:
-                route = {SiteSettings: "index", Member: "team", Project: "projects",
+                route = {SiteSettings: "index", HomeSlide: "index", Member: "team", Project: "projects",
                          Publication: "publications", Resource: "resources"}.get(type(obj))
                 if route:
                     page = reverse(route)
@@ -68,7 +68,6 @@ class ContentAdmin(admin.ModelAdmin):
 class SiteSettingsAdmin(ContentAdmin):
     fieldsets = [
         ("网站名称", {"fields": ["name", "subtitle", "edit_version"]}),
-        ("首页首屏", {"fields": ["hero_title", "hero_english", "hero_intro", "hero_photo"]}),
         ("课题组负责人", {"fields": ["leader_name", "leader_english", "leader_role", "leader_photo", "leader_bio"]}),
         ("联系信息", {"fields": ["contact_name", "contact_email", "updated_at"]}),
     ]
@@ -82,6 +81,18 @@ class SiteSettingsAdmin(ContentAdmin):
     def save_model(self, request, obj, form, change):
         obj.pk = 1
         super().save_model(request, obj, form, change)
+
+
+@admin.register(HomeSlide)
+class HomeSlideAdmin(ContentAdmin):
+    list_display = ("title", "position", "is_published", "updated_at")
+    list_filter = ("is_published",)
+    search_fields = ("title", "intro")
+    fieldsets = [
+        ("轮播内容", {"fields": ["title", "english", "intro", "photo", "image_fit", "edit_version"]}),
+        ("展示设置", {"fields": ["position", "is_published", "updated_at"],
+                    "description": "数字越小越靠前。取消公开可暂时撤下；全部撤下时首页不显示轮播。"}),
+    ]
 
 
 @admin.register(Page)

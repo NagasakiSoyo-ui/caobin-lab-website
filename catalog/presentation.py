@@ -5,7 +5,7 @@ publication, published figure of a published publication) are applied in one pla
 """
 from django.db.models import Prefetch, Q
 from django.template.loader import render_to_string
-from .models import SiteSettings, Page, ResearchDirection, Project, Member, Publication, Resource, Figure
+from .models import SiteSettings, HomeSlide, Page, ResearchDirection, Project, Member, Publication, Resource, Figure
 
 
 def public_figures():
@@ -55,6 +55,7 @@ def website_context(slug):
             achievement_sections.append({"kind": kind, "title": "国家发明专利" if kind == "patent" else label, "items": items})
     return {
         "site": site, "pages": pages, "page": current, "route": slug,
+        "home_slides": list(HomeSlide.objects.filter(is_published=True)),
         "directions": directions,
         "projects": list(public_projects()),
         "publications": publications,

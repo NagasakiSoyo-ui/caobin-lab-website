@@ -1,7 +1,7 @@
 {% load static %}<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{% block title %}{{ page.title }}{% endblock %} · {{ site.name }}</title><meta name="description" content="{{ site.name }}：{{ site.subtitle }}">
-<link rel="stylesheet" href="{% static 'site/medical.css' %}"><script src="{% static 'site/site.js' %}" defer></script></head>
+<link rel="stylesheet" href="{% static 'site/medical.css' %}"><script src="{% static 'site/site.js' %}" defer></script>{% if route == 'index' %}<script src="{% static 'site/home-carousel.js' %}" defer></script>{% endif %}</head>
 <body data-page="{{ route }}"><a class="skip-link" href="#main">跳至正文</a>
 <header class="site-header"><div class="container masthead"><a class="brand" href="index.html"><strong class="brand-name">{{ site.name }}</strong>{% if site.subtitle %}<span class="brand-detail">{{ site.subtitle }}</span>{% endif %}</a>
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-label">菜单</span><span class="menu-icon" aria-hidden="true"></span></button></div>

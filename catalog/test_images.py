@@ -7,7 +7,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.test import TestCase, override_settings
 from .exporting import website_archive
-from .models import Figure, Member, Page, Project, Publication, ResearchDirection, Resource, SiteSettings
+from .models import Figure, HomeSlide, Member, Page, Project, Publication, ResearchDirection, Resource, SiteSettings
 from .test_research import MediaMixin
 from pypdf import PdfReader
 
@@ -102,7 +102,7 @@ class ImageEditingTests(MediaMixin, TestCase):
         self.assertEqual(figure.position, 0)
 
     def test_all_optional_images_add_replace_clear_and_export(self):
-        cases = [(SiteSettings.objects.get(pk=1), "hero_photo", "/index.html"),
+        cases = [(HomeSlide.objects.first(), "photo", "/index.html"),
                  (SiteSettings.objects.get(pk=1), "leader_photo", "/team.html"),
                  (Member.objects.filter(is_published=True).first(), "photo", "/team.html"),
                  (Resource.objects.filter(is_published=True).first(), "cover", "/resources.html")]

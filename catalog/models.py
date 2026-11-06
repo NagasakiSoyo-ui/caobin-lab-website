@@ -40,10 +40,6 @@ class OrderedContent(Versioned):
 class SiteSettings(Versioned):
     name = models.CharField("课题组名称", max_length=100)
     subtitle = models.CharField("副标题", max_length=200, blank=True)
-    hero_title = models.CharField("首页主标题", max_length=200)
-    hero_english = models.CharField("首页英文标题", max_length=300, blank=True)
-    hero_intro = models.TextField("首页简介")
-    hero_photo = models.ImageField("首页大图", upload_to=upload_path, validators=[validate_image], blank=True)
     leader_name = models.CharField("负责人姓名", max_length=100)
     leader_english = models.CharField("负责人英文名", max_length=100, blank=True)
     leader_role = models.CharField("负责人职务", max_length=200)
@@ -71,6 +67,21 @@ class Page(Versioned):
     class Meta:
         verbose_name = verbose_name_plural = "栏目文字"
         ordering = ["pk"]
+
+    def __str__(self):
+        return self.title
+
+
+class HomeSlide(OrderedContent):
+    title = models.CharField("标题", max_length=300)
+    english = models.CharField("英文标题", max_length=300, blank=True)
+    intro = models.TextField("介绍", blank=True, help_text="使用团队提供的原文或已核实的原文摘录。")
+    photo = models.ImageField("图片", upload_to=upload_path, validators=[validate_image], blank=True)
+    image_fit = models.CharField("图片显示", max_length=10, default="cover",
+                                 choices=[("cover", "铺满背景（适合照片）"), ("contain", "完整显示（适合论文配图）")])
+
+    class Meta(OrderedContent.Meta):
+        verbose_name = verbose_name_plural = "首页轮播"
 
     def __str__(self):
         return self.title

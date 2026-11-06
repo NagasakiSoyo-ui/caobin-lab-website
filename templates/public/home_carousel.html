@@ -1,0 +1,27 @@
+{% if home_slides %}
+<section class="hero" data-carousel role="region" aria-roledescription="轮播" aria-label="课题组介绍">
+  {% if home_slides|length > 1 %}<button class="hero-play" type="button" data-carousel-play hidden>暂停轮播</button>{% endif %}
+  <div class="hero-slides">
+    {% for slide in home_slides %}
+    <div class="hero-slide{% if forloop.first %} is-active{% endif %}" id="home-slide-{{ slide.pk }}" data-slide role="group" aria-roledescription="幻灯片" aria-label="{{ forloop.counter }} / {{ home_slides|length }}：{{ slide.title }}"{% if not forloop.first %} hidden inert aria-hidden="true"{% endif %}>
+      {% if slide.photo %}<img class="hero-photo hero-photo-{{ slide.image_fit }}" src="{{ slide.photo.url }}" alt="" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>{% endif %}
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="container hero-grid"><div class="hero-copy"><p class="kicker">{{ site.name }}</p>
+        {% if forloop.first %}<h1>{{ slide.title }}</h1>{% else %}<h2>{{ slide.title }}</h2>{% endif %}
+        {% if slide.english %}<p class="hero-english" lang="en">{{ slide.english }}</p>{% endif %}
+        {% if slide.intro %}<p class="hero-lead">{{ slide.intro }}</p>{% endif %}
+        <div class="hero-actions"><a class="button primary" href="research.html">研究方向</a><a class="button ghost" href="team.html">研究团队</a></div>
+      </div></div>
+    </div>
+    {% endfor %}
+  </div>
+  {% if home_slides|length > 1 %}
+  <div class="hero-controls" data-carousel-controls hidden>
+    <button class="hero-arrow hero-prev" type="button" data-carousel-prev aria-label="上一张">‹</button>
+    <button class="hero-arrow hero-next" type="button" data-carousel-next aria-label="下一张">›</button>
+    <div class="hero-dots" role="group" aria-label="选择展示内容">{% for slide in home_slides %}<button type="button" data-carousel-dot="{{ forloop.counter0 }}" aria-controls="home-slide-{{ slide.pk }}" aria-label="第 {{ forloop.counter }} 张：{{ slide.title }}"{% if forloop.first %} aria-disabled="true"{% endif %}><span></span></button>{% endfor %}</div>
+  </div>
+  <p class="visually-hidden" data-carousel-status aria-live="polite" aria-atomic="true"></p>
+  {% endif %}
+</section>
+{% endif %}
