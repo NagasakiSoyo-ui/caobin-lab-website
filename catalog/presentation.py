@@ -40,12 +40,22 @@ def website_context(slug):
     for direction in directions:
         direction.cover = next((f for f in figures if direction in f.directions.all()), None)
     publications = list(public_publications())
+    papers = [item for item in publications if item.kind == "paper"]
+    achievement_sections = []
+    for kind, label in Publication.KINDS:
+        if kind == "paper":
+            continue
+        items = [item for item in publications if item.kind == kind]
+        if items:
+            achievement_sections.append({"kind": kind, "title": "国家发明专利" if kind == "patent" else label, "items": items})
     return {
         "site": site, "pages": pages, "page": current, "route": slug,
         "directions": directions,
         "projects": list(public_projects()),
         "publications": publications,
-        "publication_years": sorted({p.year for p in publications}, reverse=True),
+        "papers": papers,
+        "achievement_sections": achievement_sections,
+        "publication_years": sorted({p.year for p in papers}, reverse=True),
         "member_groups": [{"id": key, "title": title, "members": [m for m in members if m.group == key]}
                           for key, title in Member.GROUPS],
         "resources": resources,

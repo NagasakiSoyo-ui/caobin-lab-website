@@ -62,7 +62,7 @@
       });
       catalog.classList.toggle('single-year', year !== 'all');
       const count = groups.filter(group => !group.hidden).reduce((total, group) => total + group.querySelectorAll('.pub-entry').length, 0);
-      document.getElementById('pub-count').textContent = `${year === 'all' ? '全部年份' : year + ' 年'}，${count} 条成果`;
+      document.getElementById('pub-count').textContent = `${year === 'all' ? '全部年份' : year + ' 年'}，${count} 条论文`;
     };
     yearLinks.forEach(link => link.addEventListener('click', event => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
@@ -72,9 +72,10 @@
     }));
     const selectHashYear = () => {
       const link = yearLinks.find(item => item.hash === location.hash);
-      selectYear((link || yearLinks[0]).dataset.publicationYear);
+      if (link) selectYear(link.dataset.publicationYear);
     };
     window.addEventListener('hashchange', selectHashYear);
+    selectYear(yearLinks[0].dataset.publicationYear);
     selectHashYear();
   }
 

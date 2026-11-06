@@ -61,6 +61,28 @@ class AchievementImportTests(MediaMixin, TestCase):
         self.assertFalse(obj.is_published)
         self.assertEqual(Publication.objects.filter(kind='patent').count(), 5)
 
+    def test_patents_are_separate_from_paper_year_filters(self):
+        self.import_data()
+        response = self.client.get('/publications.html')
+        self.assertEqual(len(response.context['papers']), 11)
+        groups = response.context['achievement_sections']
+        self.assertEqual([(group['kind'], len(group['items'])) for group in groups], [('patent', 6)])
+        self.assertNotIn(2023, response.context['publication_years'])
+        self.assertContains(response, 'href="#achievements-patent"')
+        html = response.content.decode()
+        before, patents = html.split('<section class="section" id="achievements-patent">')
+        self.assertNotIn('ZL 2021 1 0111066.8', before)
+        self.assertIn('ZL 2021 1 0111066.8', patents)
+
+    def test_patent_only_page_and_empty_categories(self):
+        self.import_data()
+        Publication.objects.filter(kind='paper').update(is_published=False)
+        response = self.client.get('/publications.html')
+        self.assertNotContains(response, 'data-publication-year')
+        self.assertContains(response, '国家发明专利')
+        self.assertNotContains(response, '软件著作权')
+        self.assertNotContains(response, '成果目录整理中')
+
     def test_conflict_rolls_back_the_whole_batch(self):
         Publication.objects.create(kind='patent', title='已有人工记录', year=2025,
                                    registration_number='ZL 2024 1 1313198.9')
