@@ -5,7 +5,7 @@ from django.db.models import ImageField
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.html import format_html, format_html_join
+from django.utils.html import format_html
 from .forms import VersionedForm
 from .widgets import AdminImageWidget
 from .models import (SiteSettings, Page, ResearchDirection, Project, Member, Publication, Resource,
@@ -19,11 +19,38 @@ admin.site.site_url = "/"
 
 
 class ContentAdmin(admin.ModelAdmin):
+    change_form_template = "admin/catalog/change_form.html"
     form = VersionedForm
     readonly_fields = ("updated_at",)
     list_per_page = 30
     save_on_top = True
     formfield_overrides = {ImageField: {"widget": AdminImageWidget}}
+
+    def render_change_form(self, request, context, *args, **kwargs):
+        obj = context.get("original")
+        page = None
+        if obj:
+            if isinstance(obj, Page):
+                page = reverse(obj.slug)
+            elif isinstance(obj, ResearchDirection):
+                page = reverse("direction", args=[obj.slug]) if obj.is_published else reverse("research")
+            elif isinstance(obj, Figure):
+                direction = obj.directions.filter(is_published=True).first() if obj.is_public else None
+                if direction:
+                    page = reverse("direction", args=[direction.slug]) + f"#figure-{obj.pk}"
+            else:
+                route = {SiteSettings: "index", Member: "team", Project: "projects",
+                         Publication: "publications", Resource: "resources"}.get(type(obj))
+                if route:
+                    page = reverse(route)
+        context["saved_page_url"] = page
+        return super().render_change_form(request, context, *args, **kwargs)
+
+    def render_figure_manager(self, obj, relation):
+        return render_to_string("admin/catalog/figure_manager.html", {
+            "figures": obj.figures.select_related("publication").prefetch_related("directions"),
+            "add_url": reverse("admin:catalog_figure_add") + f"?{relation}={obj.pk}",
+        })
 
     def save_model(self, request, obj, form, change):
         if change:
@@ -97,10 +124,7 @@ class ResearchAdmin(StableSlugMixin, ContentAdmin):
     def figure_list(self, obj):
         if not obj or not obj.pk:
             return "先保存研究方向，再添加图片。"
-        return render_to_string("admin/catalog/direction_figures.html", {
-            "figures": obj.figures.select_related("publication"),
-            "add_url": reverse("admin:catalog_figure_add") + f"?directions={obj.pk}",
-        })
+        return self.render_figure_manager(obj, "directions")
 
 
 @admin.register(Project)
@@ -108,6 +132,10 @@ class ProjectAdmin(ContentAdmin):
     list_display = ("title", "program", "dates", "code", "is_published")
     list_filter = ("is_published", "directions")
     search_fields = ("title", "code")
+    fieldsets = [
+        ("课题信息", {"fields": ["title", "program", "dates", "code", "edit_version"]}),
+        ("展示设置", {"fields": ["directions", "position", "is_published", "updated_at"]}),
+    ]
 
 
 @admin.register(Member)
@@ -140,15 +168,13 @@ class PublicationAdmin(StableSlugMixin, ContentAdmin):
     def figure_list(self, obj):
         if not obj or not obj.pk:
             return "保存成果后，可在「研究配图」中添加。"
-        rows = format_html_join("", '<li><a href="{}">{} {}</a>（{}）</li>',
-                                ((reverse("admin:catalog_figure_change", args=[f.pk]), f.label, f.title,
-                                  "公开" if f.is_published else "草稿") for f in obj.figures.all()))
-        add = reverse("admin:catalog_figure_add") + f"?publication={obj.pk}"
-        return format_html('<ul>{}</ul><a href="{}">添加配图</a>', rows, add)
+        return self.render_figure_manager(obj, "publication")
 
 
 @admin.register(Figure)
 class FigureAdmin(ContentAdmin):
+    delete_confirmation_template = "admin/catalog/figure_delete.html"
+    delete_selected_confirmation_template = "admin/catalog/figure_delete_selected.html"
     list_display = ("preview", "title", "label", "publication", "kind", "is_published", "front_status")
     list_display_links = ("preview", "title")
     list_filter = ("is_published", "kind", "directions")

@@ -1,9 +1,0 @@
-<div class="direction-image-manager">
-<p><a class="button" href="{{ add_url }}">添加图片</a></p>
-{% for figure in figures %}<div class="managed-image">
-{% if figure.image %}<img src="{{ figure.image.url }}" alt="{{ figure.alt }}">{% endif %}
-<div><strong>{{ figure.title }}</strong><p>顺序：{{ figure.position }} · {% if not figure.is_published %}草稿{% elif not figure.is_public %}所属成果未公开{% else %}已公开{% endif %}</p>
-<a href="{% url 'admin:catalog_figure_change' figure.pk %}">替换图片 / 修改展示方向</a> · <a href="{% url 'admin:catalog_figure_delete' figure.pk %}">删除图片</a></div>
-</div>{% empty %}<p>尚未添加配图。</p>{% endfor %}
-<p class="help">同一图片可以关联多个方向，替换或删除会影响所有关联方向；仅从本方向移除时，在编辑图片中取消勾选本方向。</p>
-</div>

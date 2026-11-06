@@ -1,0 +1,10 @@
+{% extends "admin/change_form.html" %}{% load static %}
+{% block extrahead %}{{ block.super }}<script src="{% static 'admin-editor.js' %}" defer></script>{% endblock %}
+{% block object-tools-items %}{{ block.super }}{% if saved_page_url %}<li><a href="{{ saved_page_url }}" target="_blank" rel="noopener">查看已保存页面 ↗</a></li>{% endif %}{% endblock %}
+{% block form_top %}{{ block.super }}
+{% if has_change_permission or add %}
+<div class="editor-notice{% if errors %} editor-error{% endif %}" data-editor-status data-invalid="{{ errors|yesno:'true,false' }}" role="status" aria-live="polite">
+{% if errors %}本次保存未成功，请修改标红的字段。{% if has_file_field %}如本次上传了图片或文件，请重新选择后保存。{% endif %}{% else %}修改后点击“保存”。查看前台时显示的是已保存、已公开的内容。{% endif %}
+</div>
+{% endif %}
+{% endblock %}

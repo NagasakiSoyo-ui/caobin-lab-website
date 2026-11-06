@@ -1,0 +1,5 @@
+<div class="editor-notice editor-error">
+<strong>删除整张配图会从所有关联研究方向撤下，所属成果记录仍会保留。</strong>
+<p>如果只想从某个方向移除，请返回图片编辑页，取消勾选该方向后保存；更换图片请直接上传新文件。</p>
+{% if object %}<p>关联方向：{% for direction in object.directions.all %}{{ direction.title }}{% if not forloop.last %}；{% endif %}{% empty %}无{% endfor %}</p>{% endif %}
+</div>

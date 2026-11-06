@@ -7,7 +7,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.test import TestCase, override_settings
 from .exporting import website_archive
-from .models import Figure, Member, ResearchDirection, Resource, SiteSettings
+from .models import Figure, Member, Page, Project, Publication, ResearchDirection, Resource, SiteSettings
 from .test_research import MediaMixin
 from pypdf import PdfReader
 
@@ -35,6 +35,71 @@ class ImageEditingTests(MediaMixin, TestCase):
         return {name: ("on" if value is True else "" if value is None or value is False else value)
                 for name, field in form.fields.items() if not isinstance(field, forms.FileField)
                 for value in [form[name].value()]}
+
+    def test_saved_page_links_are_local_and_drafts_use_the_listing(self):
+        cases = [(SiteSettings.objects.first(), '/index.html'), (Page.objects.get(slug='team'), '/team.html'),
+                 (Member.objects.first(), '/team.html'), (Project.objects.first(), '/projects.html'),
+                 (Publication.objects.first(), '/publications.html'), (Resource.objects.first(), '/resources.html')]
+        direction = ResearchDirection.objects.filter(is_published=True).first()
+        cases.append((direction, f'/research-{direction.slug}.html'))
+        for obj, url in cases:
+            with self.subTest(model=type(obj).__name__):
+                response = self.client.get(self.url(obj))
+                self.assertEqual(response.context['saved_page_url'], url)
+                self.assertContains(response, '查看已保存页面')
+        direction.is_published = False
+        direction.save()
+        self.assertEqual(self.client.get(self.url(direction)).context['saved_page_url'], '/research.html')
+
+    def test_invalid_save_keeps_text_and_original_image_and_reports_failure(self):
+        member = Member.objects.exclude(photo='').first()
+        image = member.photo.name
+        data = {**self.payload(member), 'position': '-1', 'bio': '保留本次未保存的输入'}
+        response = self.client.post(self.url(member), data)
+        self.assertContains(response, '本次保存未成功')
+        self.assertContains(response, '保留本次未保存的输入')
+        self.assertContains(response, '请重新选择后保存')
+        member.refresh_from_db()
+        self.assertNotEqual(member.bio, data['bio'])
+        self.assertEqual(member.photo.name, image)
+
+    def test_publication_uses_shared_image_manager_and_prefills_parent(self):
+        publication = Publication.objects.filter(figures__isnull=False).first()
+        response = self.client.get(self.url(publication))
+        self.assertContains(response, 'class="direction-image-manager"')
+        self.assertContains(response, publication.figures.first().image.url)
+        add_url = f'/manage/catalog/figure/add/?publication={publication.pk}'
+        self.assertContains(response, add_url)
+        self.assertEqual(str(self.client.get(add_url).context['adminform'].form['publication'].value()), str(publication.pk))
+
+    def test_figure_delete_explains_all_associations_and_bulk_scope(self):
+        figure = Figure.objects.first()
+        directions = list(ResearchDirection.objects.all()[:2])
+        figure.directions.set(directions)
+        response = self.client.get(self.url(figure, 'delete'))
+        self.assertContains(response, '删除整张配图会从所有关联研究方向撤下')
+        for direction in directions:
+            self.assertContains(response, direction.title)
+        response = self.client.post('/manage/catalog/figure/', {'action': 'delete_selected', '_selected_action': [figure.pk]})
+        self.assertContains(response, '取消勾选该方向后保存')
+        self.assertTrue(Figure.objects.filter(pk=figure.pk).exists())
+
+    def test_figure_reordering_updates_direction_and_survives_stale_submission(self):
+        direction = ResearchDirection.objects.first()
+        figures = list(Figure.objects.filter(is_published=True, publication__is_published=True)[:2])
+        for index, figure in enumerate(figures):
+            figure.directions.add(direction)
+            figure.position = 100 + index
+            figure.save()
+        figure = figures[1]
+        stale = self.payload(figure)
+        response = self.client.post(self.url(figure), {**stale, 'position': 0})
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(direction.figures.first().pk, figure.pk)
+        response = self.client.post(self.url(figure), {**stale, 'position': 500})
+        self.assertContains(response, '这条内容已被另一个窗口修改或删除')
+        figure.refresh_from_db()
+        self.assertEqual(figure.position, 0)
 
     def test_all_optional_images_add_replace_clear_and_export(self):
         cases = [(SiteSettings.objects.get(pk=1), "hero_photo", "/index.html"),

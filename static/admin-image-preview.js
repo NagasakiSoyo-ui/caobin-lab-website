@@ -40,7 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (clear.checked) input.value = '';
       render();
     });
-    cancel.addEventListener('click', () => {input.value = ''; render(); input.focus();});
+    cancel.addEventListener('click', () => {
+      input.value = '';
+      input.dispatchEvent(new Event('change', {bubbles: true}));
+      input.focus();
+    });
     image.addEventListener('error', () => {status.textContent = '无法预览此图片。请检查文件，上传时会再次校验格式。';});
     window.addEventListener('pagehide', release);
     window.addEventListener('pageshow', event => {if (event.persisted) render();});
