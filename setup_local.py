@@ -24,6 +24,7 @@ call_command("migrate", interactive=False)
 call_command("seed_site")
 call_command("seed_publications")
 call_command("seed_achievements")
+call_command("seed_achievements", file=str(root / "seed/software.json"))
 call_command("collectstatic", interactive=False, verbosity=0)
 if not args.no_admin and not get_user_model().objects.filter(is_superuser=True).exists():
     print("请设置管理员账号和密码。密码输入时不回显，至少 12 位。")

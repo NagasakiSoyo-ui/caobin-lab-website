@@ -9,7 +9,7 @@ from catalog.models import Publication, SeedCheckpoint
 
 
 class Command(BaseCommand):
-    help = "一次性导入经核实的专利等成果；待核实项目不会导入，后续运行不恢复客户删除的记录。"
+    help = "一次性导入所选清单的成果并保留来源备注；后续运行不恢复客户删除的记录。"
 
     def add_arguments(self, parser):
         parser.add_argument('--file', default=str(settings.BASE_DIR / 'seed/achievements.json'))
@@ -25,8 +25,8 @@ class Command(BaseCommand):
         for item in data['publications']:
             obj = Publication(**item)
             obj.full_clean(validate_unique=False)
-            if not obj.registration_number or not obj.registered_on or not obj.url or not obj.source_note:
-                raise CommandError(f'缺少编号、日期或核验来源：{obj.title}')
+            if not obj.registration_number or not obj.registered_on or not obj.source_note:
+                raise CommandError(f'缺少编号、日期或来源备注：{obj.title}')
             matches = list(Publication.objects.filter(
                 Q(slug=obj.slug) | Q(registration_number=obj.registration_number) | Q(kind=obj.kind, title=obj.title)))
             if matches:
@@ -35,6 +35,6 @@ class Command(BaseCommand):
                 continue
             obj.save()
             created += 1
-        summary = f'新增 {created} 条已核实成果。'
+        summary = f'新增 {created} 条成果。'
         SeedCheckpoint.objects.create(key=checkpoint, detail=summary)
         self.stdout.write(summary)

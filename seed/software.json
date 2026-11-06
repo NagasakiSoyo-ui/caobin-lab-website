@@ -1,0 +1,29 @@
+{
+  "checkpoint": "user-supplied-software-20261106",
+  "publications": [
+    {
+      "kind": "software",
+      "slug": "software-2025sr0462060",
+      "title": "干预性临床研究伦理风险受益评估软件V1.0",
+      "registration_number": "2025SR0462060",
+      "authors": "中日友好医院（中日友好临床医学研究所）",
+      "registered_on": "2025-03-17",
+      "year": 2025,
+      "position": 300,
+      "is_published": true,
+      "source_note": "来源：用户提供的成果清单。2026-11-06 按用户要求作为独立软件著作权板块录入。按登记号和名称检索未取得可核对的公开登记记录；名称、登记号、日期及著作权人均保持用户原文，尚未完成公开核验。"
+    },
+    {
+      "kind": "software",
+      "slug": "software-2025sr0462049",
+      "title": "非干预性临床试验项目风险受益评估软件V1.0",
+      "registration_number": "2025SR0462049",
+      "authors": "中日友好医院（中日友好临床医学研究所）",
+      "registered_on": "2025-03-17",
+      "year": 2025,
+      "position": 301,
+      "is_published": true,
+      "source_note": "来源：用户提供的成果清单。2026-11-06 按用户要求作为独立软件著作权板块录入。按登记号和名称检索未取得可核对的公开登记记录；名称、登记号、日期及著作权人均保持用户原文，尚未完成公开核验。"
+    }
+  ]
+}

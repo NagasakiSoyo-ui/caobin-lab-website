@@ -96,3 +96,41 @@ class AchievementImportTests(MediaMixin, TestCase):
         with self.assertRaises(ValidationError) as error:
             obj.full_clean()
         self.assertIn('year', error.exception.message_dict)
+
+    def test_software_has_its_own_section_and_preserves_supplied_metadata(self):
+        self.import_data()
+        call_command('seed_achievements', file=str(settings.BASE_DIR / 'seed/software.json'), stdout=io.StringIO())
+        response = self.client.get('/publications.html')
+        self.assertEqual([(s['kind'], len(s['items'])) for s in response.context['achievement_sections']],
+                         [('patent', 6), ('software', 2)])
+        self.assertContains(response, 'href="#achievements-software"')
+        with website_archive() as stream, ZipFile(stream) as archive:
+            htmls = [response.content.decode(), archive.read('publications.html').decode()]
+        data = json.loads((settings.BASE_DIR / 'seed/software.json').read_text('utf8'))
+        for html in htmls:
+            before, software = html.split('<section class="section" id="achievements-software">')
+            for item in data['publications']:
+                self.assertNotIn(item['registration_number'], before)
+                for field in ('title', 'authors', 'registration_number', 'registered_on'):
+                    self.assertIn(item[field], software)
+            self.assertNotIn('来源链接', software)
+            self.assertNotIn('尚未完成公开核验', software)
+        for obj in Publication.objects.filter(kind='software'):
+            self.assertIn('用户提供', obj.source_note)
+            self.assertIn('尚未完成公开核验', obj.source_note)
+            self.assertFalse(obj.url)
+            self.assertFalse(obj.summary)
+
+    def test_software_initialization_preserves_later_edits_and_deletions(self):
+        options = {'file': str(settings.BASE_DIR / 'seed/software.json'), 'stdout': io.StringIO()}
+        call_command('seed_achievements', **options)
+        obj = Publication.objects.get(registration_number='2025SR0462060')
+        obj.title = '客户更新名称'
+        obj.is_published = False
+        obj.save()
+        Publication.objects.get(registration_number='2025SR0462049').delete()
+        call_command('seed_achievements', **options)
+        obj.refresh_from_db()
+        self.assertEqual(obj.title, '客户更新名称')
+        self.assertFalse(obj.is_published)
+        self.assertEqual(Publication.objects.filter(kind='software').count(), 1)
