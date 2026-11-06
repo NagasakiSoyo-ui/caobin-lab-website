@@ -25,8 +25,8 @@ class Command(BaseCommand):
         for item in data['publications']:
             obj = Publication(**item)
             obj.full_clean(validate_unique=False)
-            if not obj.registration_number or not obj.registered_on or not obj.source_note:
-                raise CommandError(f'缺少编号、日期或来源备注：{obj.title}')
+            if not obj.registration_number or not obj.registered_on:
+                raise CommandError(f'缺少编号或日期：{obj.title}')
             matches = list(Publication.objects.filter(
                 Q(slug=obj.slug) | Q(registration_number=obj.registration_number) | Q(kind=obj.kind, title=obj.title)))
             if matches:

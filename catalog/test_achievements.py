@@ -116,8 +116,7 @@ class AchievementImportTests(MediaMixin, TestCase):
             self.assertNotIn('来源链接', software)
             self.assertNotIn('尚未完成公开核验', software)
         for obj in Publication.objects.filter(kind='software'):
-            self.assertIn('用户提供', obj.source_note)
-            self.assertIn('尚未完成公开核验', obj.source_note)
+            self.assertEqual(obj.source_note, '')
             self.assertFalse(obj.url)
             self.assertFalse(obj.summary)
 
