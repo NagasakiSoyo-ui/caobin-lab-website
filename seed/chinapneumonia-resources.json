@@ -47,7 +47,7 @@
       "fields": {
         "title": "【肺炎精粹】揭开中年男性播散性感染的“隐形杀手”面纱",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2025,
         "published_on": "2025-07-09",
         "authors": "李辉丨赵玲丨张婉莹丨曹彬",
@@ -61,7 +61,7 @@
       "fields": {
         "title": "探案丨5个月不肯吸收的“肺炎”",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2024,
         "published_on": "2024-09-10",
         "authors": "",
@@ -103,7 +103,7 @@
       "fields": {
         "title": "【肺炎精粹】剪不断 理还乱 别是滋味在心头",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-08-12",
         "authors": "徐九洋丨崔晓敬",
@@ -117,7 +117,7 @@
       "fields": {
         "title": "【肺炎精粹】蹊跷的“肺部感染”",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-07-11",
         "authors": "张芳丨刘智博",
@@ -131,7 +131,7 @@
       "fields": {
         "title": "警惕身体的肺炎信号，在家借助常用工具来判断身体指标的变化",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2024,
         "published_on": "2024-01-24",
         "authors": "徐九洋",
@@ -607,7 +607,7 @@
       "fields": {
         "title": "曹彬-病毒性肺炎和病毒性感染中毒症",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-06-21",
         "authors": "曹彬",
@@ -635,7 +635,7 @@
       "fields": {
         "title": "徐金富-卒中相关肺炎诊治进展",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-06-20",
         "authors": "",
@@ -971,7 +971,7 @@
       "fields": {
         "title": "从CAP-China十年发展，看中国肺炎研究变迁",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2021,
         "published_on": "2021-01-19",
         "authors": "王一民",
@@ -1069,7 +1069,7 @@
       "fields": {
         "title": "CAP-China青年学术沙龙 第三期",
         "kind": "视频课程",
-        "disease": "呼吸道感染与综合学习",
+        "disease": "社区获得性肺炎",
         "year": 2020,
         "published_on": "2020-11-27",
         "authors": "曹彬丨王一民丨冯录召丨贾举",
@@ -1097,7 +1097,7 @@
       "fields": {
         "title": "CAP-China青年学术沙龙 第二期",
         "kind": "视频课程",
-        "disease": "呼吸道感染与综合学习",
+        "disease": "社区获得性肺炎",
         "year": 2020,
         "published_on": "2020-09-30",
         "authors": "曹彬丨刘帅丨王一民丨周敏丨于歆",
@@ -1139,7 +1139,7 @@
       "fields": {
         "title": "CAP-China青年学术沙龙",
         "kind": "视频课程",
-        "disease": "呼吸道感染与综合学习",
+        "disease": "社区获得性肺炎",
         "year": 2020,
         "published_on": "2020-09-03",
         "authors": "曹彬丨王一民丨王业明丨韩秀迪丨余跃天",
@@ -1279,7 +1279,7 @@
       "fields": {
         "title": "病毒性肺炎临床特点剖析",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-10-29",
         "authors": "周飞",
@@ -1391,7 +1391,7 @@
       "fields": {
         "title": "中国肺炎研究现状",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-06-03",
         "authors": "曹彬",
@@ -1699,7 +1699,7 @@
       "fields": {
         "title": "按指南经验治疗可能失败的 CAP",
         "kind": "视频课程",
-        "disease": "呼吸道感染与综合学习",
+        "disease": "社区获得性肺炎",
         "year": 2018,
         "published_on": "2018-11-23",
         "authors": "刘又宁",
@@ -1937,7 +1937,7 @@
       "fields": {
         "title": "肺炎抗菌药物治疗特点",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-10",
         "authors": "崔晓敬",
@@ -1951,7 +1951,7 @@
       "fields": {
         "title": "初始治疗效果不佳的肺炎，何去何从？",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-09",
         "authors": "王一民",
@@ -1979,7 +1979,7 @@
       "fields": {
         "title": "病毒性肺炎亟待解决的临床和研究问题",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-07",
         "authors": "曹彬",
@@ -2063,7 +2063,7 @@
       "fields": {
         "title": "院内获得性肺炎的诊治",
         "kind": "视频课程",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-02",
         "authors": "王一民",
@@ -2077,7 +2077,7 @@
       "fields": {
         "title": "曹彬教授：在全球首创「肺炎管理三阶段」……中国方案正成为全球呼吸感染防控网络的关键节点丨2026组长会谈（呼吸感染）",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2026,
         "published_on": "2026-10-09",
         "authors": "",
@@ -2119,7 +2119,7 @@
       "fields": {
         "title": "肺炎大纪事",
         "kind": "科普文章",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2024,
         "published_on": "2024-09-02",
         "authors": "",
@@ -2189,7 +2189,7 @@
       "fields": {
         "title": "健康向未来 曹彬：让肺炎诊治更精准",
         "kind": "科普文章",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-01-09",
         "authors": "",
@@ -2343,7 +2343,7 @@
       "fields": {
         "title": "【肺炎精粹】“肺炎”狡猾的模仿者",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-06-09",
         "authors": "李丽丽，王瑞彬，刘智博",
@@ -2371,7 +2371,7 @@
       "fields": {
         "title": "【肺炎精粹】意想不到的肺内多发结节",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-05-05",
         "authors": "李慧 李丽丽 刘智博",
@@ -2399,7 +2399,7 @@
       "fields": {
         "title": "【肺炎精粹】花季少年反复肺炎，到底病因几何？",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2021,
         "published_on": "2021-08-25",
         "authors": "吴海玲丨王夏珍丨崔晓敬",
@@ -2413,7 +2413,7 @@
       "fields": {
         "title": "【肺炎精粹】显微镜检技术指导肺球孢子菌病一例",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2021,
         "published_on": "2021-08-06",
         "authors": "",
@@ -2427,7 +2427,7 @@
       "fields": {
         "title": "【肺炎精粹】发热伴肺部阴影≠肺炎",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2021,
         "published_on": "2021-02-01",
         "authors": "路明",
@@ -2483,7 +2483,7 @@
       "fields": {
         "title": "同为病毒性肺炎，腺病毒与其他病毒有何差异？",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-12-09",
         "authors": "潍坊呼吸病医院呼吸与危重症医学科 田高清|张晓琦",
@@ -2497,7 +2497,7 @@
       "fields": {
         "title": "若有天忽略了谁付出谁伤害，是否会再记起我的双眼？——又见高毒力肺炎克雷伯菌导致全身侵袭性感染",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-12-05",
         "authors": "河北医科大学第三医院感染科 王玮",
@@ -2553,7 +2553,7 @@
       "fields": {
         "title": "曹彬教授：肺炎新说",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-09-20",
         "authors": "曹彬",
@@ -2567,7 +2567,7 @@
       "fields": {
         "title": "持续发热的难治性肺炎病因探索？",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-04-23",
         "authors": "翟天姝|谢万木",
@@ -2623,7 +2623,7 @@
       "fields": {
         "title": "反复肺炎，“都是辣椒惹的祸”",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-03-15",
         "authors": "尤玲燕|万钧",
@@ -2637,7 +2637,7 @@
       "fields": {
         "title": "说出你的故事｜中国肺炎研究网站「肺炎精粹」征稿啦",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-02-18",
         "authors": "曹彬",
@@ -2651,7 +2651,7 @@
       "fields": {
         "title": "貌似肺炎的原发性肺淋巴瘤",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-30",
         "authors": "刘学东|刘菁|魏风芹",
@@ -2805,7 +2805,7 @@
       "fields": {
         "title": "「典型」肺炎链球菌大叶性肺炎不典型",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-23",
         "authors": "韩秀迪|刘学东",
@@ -2917,7 +2917,7 @@
       "fields": {
         "title": "【肺炎精粹】治疗停不下来的惠普尔养障体肺炎",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2021,
         "published_on": "2021-04-01",
         "authors": "张晓岩丨邢斌丨杨宏伟",
@@ -3169,7 +3169,7 @@
       "fields": {
         "title": "不发热的肺炎克雷伯菌肺炎",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-29",
         "authors": "任雁宏|任晓丽",
@@ -3183,7 +3183,7 @@
       "fields": {
         "title": "多杀巴斯德菌肺炎",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-29",
         "authors": "周飞|陶新曹|曹彬",
@@ -3337,7 +3337,7 @@
       "fields": {
         "title": "柳叶刀呼吸病学丨社区感染性肺炎研究的十大研究优先事项",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2026,
         "published_on": "2026-06-04",
         "authors": "刘东 中日友好医院",
@@ -3365,7 +3365,7 @@
       "fields": {
         "title": "欧洲卒中组织发布2026年卒中相关肺炎指南",
         "kind": "指南与共识",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2026,
         "published_on": "2026-06-03",
         "authors": "刘东 中日友好医院",
@@ -3379,7 +3379,7 @@
       "fields": {
         "title": "科学运用创新技术，拓展肺炎诊疗宽度——第三届华夏肺炎大会在长沙盛大开幕",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2026,
         "published_on": "2026-06-03",
         "authors": "",
@@ -3603,7 +3603,7 @@
       "fields": {
         "title": "Burden and Risk Factors for Pseudomonas aeruginosa Community-acquired Pneumonia: a Multinational Point Prevalence Study of Hospitalised Patients",
         "kind": "研究进展",
-        "disease": "呼吸道感染与综合学习",
+        "disease": "社区获得性肺炎",
         "year": 2018,
         "published_on": "2018-10-23",
         "authors": "Marcos I. Restrepo, Bettina L. Babu, Luis F. Reyes, James D. Chalmers, Nilam J. Soni, Oriol Sibila, Paola Faverio, Catia Cilloniz, William Rodriguez-Cintron and Stefano Aliberti.",
@@ -3715,7 +3715,7 @@
       "fields": {
         "title": "2025 ATS肺炎指南更新后的读者来信：指南并非终点",
         "kind": "指南与共识",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2026,
         "published_on": "2026-03-02",
         "authors": "刘东",
@@ -3771,7 +3771,7 @@
       "fields": {
         "title": "指南之争：美国两大学会就病毒性肺炎抗生素应用公开交锋",
         "kind": "指南与共识",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2026,
         "published_on": "2026-01-29",
         "authors": "",
@@ -3799,7 +3799,7 @@
       "fields": {
         "title": "会议通知｜XPLORER Symposia 2026香港见！呼吸道感染与长期健康：发病机制、免疫与恢复",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2026,
         "published_on": "2026-01-04",
         "authors": "",
@@ -3897,7 +3897,7 @@
       "fields": {
         "title": "新书推荐 |《认识肺炎100问》",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2025,
         "published_on": "2025-07-09",
         "authors": "",
@@ -3911,7 +3911,7 @@
       "fields": {
         "title": "曹彬教授：什么是有质量的肺炎诊疗？",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2025,
         "published_on": "2025-06-09",
         "authors": "曹彬",
@@ -3925,7 +3925,7 @@
       "fields": {
         "title": "聚焦肺炎诊疗创新，共探传染病防控新篇——第二届华夏肺炎大会圆满召开",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2025,
         "published_on": "2025-06-09",
         "authors": "",
@@ -4149,7 +4149,7 @@
       "fields": {
         "title": "您还在为不能及时获取肺炎最新文献发愁吗？中国肺炎研究（www.chinapneumonia.cn）文献数据库帮您忙！",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2024,
         "published_on": "2024-07-16",
         "authors": "",
@@ -4177,7 +4177,7 @@
       "fields": {
         "title": "曹彬教授：从认知到行动，20年间我国“肺炎”诊治的进步与挑战？丨CAPC 2024",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2024,
         "published_on": "2024-07-16",
         "authors": "",
@@ -4205,7 +4205,7 @@
       "fields": {
         "title": "CAPC 2024丨路虽远，行则将至：曹彬教授、王贵强教授和王一民教授主编《肺炎的基础与实践》在京发布",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2024,
         "published_on": "2024-05-29",
         "authors": "",
@@ -4219,7 +4219,7 @@
       "fields": {
         "title": "“肺炎科学管理”：从认知到行动——我国首届华夏肺炎大会在北京成功召开",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2024,
         "published_on": "2024-05-29",
         "authors": "",
@@ -4653,7 +4653,7 @@
       "fields": {
         "title": "病毒性肺炎影像学特点及诊治策略",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2024,
         "published_on": "2024-09-14",
         "authors": "",
@@ -4681,7 +4681,7 @@
       "fields": {
         "title": "自身免疫性疾病的影像学表现",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2024,
         "published_on": "2024-04-03",
         "authors": "",
@@ -4737,7 +4737,7 @@
       "fields": {
         "title": "特殊免疫状态下的分枝杆菌感染",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2023,
         "published_on": "2023-08-21",
         "authors": "",
@@ -5703,7 +5703,7 @@
       "fields": {
         "title": "肺气囊：金黄色葡萄球菌肺炎典型影像学表现",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-29",
         "authors": "韩秀迪|刘学东",
@@ -5759,7 +5759,7 @@
       "fields": {
         "title": "军团菌肺炎合并自发性脾破裂的罕见病例 1 例",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-23",
         "authors": "徐开轶|尹玉东|谷丽",
@@ -5787,7 +5787,7 @@
       "fields": {
         "title": "以树芽征及结节为表现的嗜麦芽窄食单胞菌肺炎1例",
         "kind": "病例讨论",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2018,
         "published_on": "2018-10-19",
         "authors": "左瑜|陈文慧",
@@ -5871,7 +5871,7 @@
       "fields": {
         "title": "【第二届呼吸感染免疫论坛会议报道】第二届呼吸感染免疫论坛与2022年第五届华夏临床微生物学学术年会暨第十一届京港感染论坛同期开幕",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "病原学诊断",
         "year": 2023,
         "published_on": "2023-01-05",
         "authors": "",
@@ -6039,7 +6039,7 @@
       "fields": {
         "title": "肺炎是什么？",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2020,
         "published_on": "2020-10-28",
         "authors": "曹彬",
@@ -6151,7 +6151,7 @@
       "fields": {
         "title": "很多疾病起病初期以肺炎或者呼吸道感染为表现，这4个疑难复杂的「肺炎」病例，提示我们临床要如何寻找线索？丨CACP 2020",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2020,
         "published_on": "2020-08-31",
         "authors": "王一民",
@@ -6221,7 +6221,7 @@
       "fields": {
         "title": "《柳叶刀 感染病学》：感染中毒症免疫学当前的研究空白——转化研究的新机遇",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2020,
         "published_on": "2020-08-23",
         "authors": "徐逸天 译",
@@ -6445,7 +6445,7 @@
       "fields": {
         "title": "免疫检查点抑制剂相关性肺炎的知识空白和研究重点——美国胸科协会官方研究声明",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-10-06",
         "authors": "徐逸天",
@@ -6795,7 +6795,7 @@
       "fields": {
         "title": "对于社区起病的肺炎广谱抗菌药物的过度使用会导致患者不良预后",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-06-03",
         "authors": "Brandon J. Webb | Jeff Sorensen | Al Jephson | Ian Mecham | Nathan C. Dean",
@@ -6823,7 +6823,7 @@
       "fields": {
         "title": "Efficacy and safety of trimodulin, a novel polyclonal antibody preparation, in patients with severe community‑acquired pneumonia: a randomized, placebo‑controlled, double‑blind, multicenter, phase II trial (CIGMA study)",
         "kind": "研究进展",
-        "disease": "呼吸道感染与综合学习",
+        "disease": "社区获得性肺炎",
         "year": 2018,
         "published_on": "2018-12-26",
         "authors": "Welte T, Dellinger RP, Ebelt H et al.",
@@ -6977,7 +6977,7 @@
       "fields": {
         "title": "说出你的故事 | 肺炎临床诊疗经验分享有礼！",
         "kind": "学术活动",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-11-21",
         "authors": "CAP-China",
@@ -6991,7 +6991,7 @@
       "fields": {
         "title": "肺炎知识 PK 赛，谁是最终答题王？",
         "kind": "学术活动",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-11-11",
         "authors": "CAP-China",
@@ -7005,7 +7005,7 @@
       "fields": {
         "title": "2019 年京港感染论坛 CAP-China 专题直播",
         "kind": "学术活动",
-        "disease": "呼吸道感染与综合学习",
+        "disease": "社区获得性肺炎",
         "year": 2019,
         "published_on": "2019-11-12",
         "authors": "CAP-China",
@@ -7831,7 +7831,7 @@
       "fields": {
         "title": "风湿免疫疾病患者并发NTM感染",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2022,
         "published_on": "2022-11-17",
         "authors": "赖晓宇",
@@ -7915,7 +7915,7 @@
       "fields": {
         "title": "革兰氏阳性菌肺炎: 噬菌体治疗的可能性",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-09-09",
         "authors": "马志明",
@@ -7943,7 +7943,7 @@
       "fields": {
         "title": "隐源性机化性肺炎（COP） --文献学习",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-07-12",
         "authors": "王玉光，刘萌",
@@ -8433,7 +8433,7 @@
       "fields": {
         "title": "世界范围内ST11型肺炎克雷伯菌的基因组特征",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2020,
         "published_on": "2020-06-01",
         "authors": "赵建康",
@@ -10295,7 +10295,7 @@
       "fields": {
         "title": "呼吸道病毒感染的免疫调节机制：从急性发病到慢性后遗症",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2022,
         "published_on": "2022-05-23",
         "authors": "曾皓杨",
@@ -10827,7 +10827,7 @@
       "fields": {
         "title": "中国成人HAP的临床和微生物学特征：一项为期十年的前瞻性观察研究",
         "kind": "研究进展",
-        "disease": "医院获得性肺炎",
+        "disease": "病原学诊断",
         "year": 2020,
         "published_on": "2020-11-24",
         "authors": "",
@@ -10897,7 +10897,7 @@
       "fields": {
         "title": "蒋荣猛主任：我国病毒性肺炎诊疗现状",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-02-13",
         "authors": "蒋荣猛",
@@ -11247,7 +11247,7 @@
       "fields": {
         "title": "病毒性肺炎：我们离精准抗病毒治疗有多远",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2019,
         "published_on": "2019-06-14",
         "authors": "徐九洋 | 王业明 | 曹彬",
@@ -11527,7 +11527,7 @@
       "fields": {
         "title": "过敏性肺炎的影像学表现",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-01-19",
         "authors": "",
@@ -11555,7 +11555,7 @@
       "fields": {
         "title": "【肺炎精粹】“一咳嗽就是感染”？——探究慢性咳嗽的少见病因",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2022,
         "published_on": "2022-01-19",
         "authors": "张慧、崔晓敬",
@@ -11975,7 +11975,7 @@
       "fields": {
         "title": "CAP-China学术沙龙（武汉金银潭站）",
         "kind": "研究进展",
-        "disease": "呼吸道感染与综合学习",
+        "disease": "社区获得性肺炎",
         "year": 2021,
         "published_on": "2021-06-11",
         "authors": "",
@@ -12073,7 +12073,7 @@
       "fields": {
         "title": "免疫检查点抑制剂相关肺炎—临床与影像",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "肺炎综合",
         "year": 2021,
         "published_on": "2021-12-27",
         "authors": "",
@@ -12129,7 +12129,7 @@
       "fields": {
         "title": "【会议报道】第一届呼吸感染免疫论坛（下午场）",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2021,
         "published_on": "2021-11-14",
         "authors": "何迪丨左文婷",
@@ -12143,7 +12143,7 @@
       "fields": {
         "title": "【会议报道】第一届呼吸感染免疫论坛（上午场）",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2021,
         "published_on": "2021-11-14",
         "authors": "宋融融丨蒲丹妮丨刘红玉丨李海波",
@@ -12157,7 +12157,7 @@
       "fields": {
         "title": "第一届呼吸感染免疫论坛",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2021,
         "published_on": "2021-11-03",
         "authors": "",
@@ -12185,7 +12185,7 @@
       "fields": {
         "title": "隐源性机化性肺炎与继发性机化性肺炎的异同",
         "kind": "研究进展",
-        "disease": "社区获得性肺炎",
+        "disease": "肺炎综合",
         "year": 2021,
         "published_on": "2021-10-28",
         "authors": "胡红玲丨梁音",
@@ -12241,7 +12241,7 @@
       "fields": {
         "title": "第一届呼吸感染免疫论坛预通知（第二轮）",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "呼吸道感染与综合学习",
         "year": 2021,
         "published_on": "2021-10-20",
         "authors": "",
@@ -12255,7 +12255,7 @@
       "fields": {
         "title": "免疫低下宿主与免疫正常宿主病毒性肺炎的临床特点对比——一项较大规模、多中心、回顾性研究",
         "kind": "研究进展",
-        "disease": "特殊人群肺炎",
+        "disease": "肺炎综合",
         "year": 2021,
         "published_on": "2021-09-22",
         "authors": "",

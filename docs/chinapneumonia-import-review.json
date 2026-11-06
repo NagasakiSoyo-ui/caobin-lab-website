@@ -25,14 +25,15 @@
   "diseases": {
     "真菌感染": 31,
     "胸膜感染": 9,
-    "社区获得性肺炎": 81,
-    "呼吸道感染与综合学习": 309,
-    "特殊人群肺炎": 42,
+    "肺炎综合": 65,
+    "呼吸道感染与综合学习": 311,
+    "特殊人群肺炎": 28,
     "新冠": 134,
-    "病原学诊断": 54,
+    "病原学诊断": 56,
     "支气管扩张": 8,
     "慢阻肺": 13,
     "流感": 87,
+    "社区获得性肺炎": 27,
     "耐药菌感染": 19,
     "抗感染治疗": 16,
     "重症肺炎与呼吸支持": 27,
@@ -41,7 +42,7 @@
     "长新冠": 10,
     "哮喘": 1,
     "百日咳": 1,
-    "医院获得性肺炎": 6,
+    "医院获得性肺炎": 5,
     "呼吸道合胞病毒": 3
   },
   "supplementary_sources": [
@@ -79,14 +80,14 @@
       "title": "【肺炎精粹】揭开中年男性播散性感染的“隐形杀手”面纱",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/1289",
       "title": "探案丨5个月不肯吸收的“肺炎”",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/1285",
@@ -107,21 +108,21 @@
       "title": "【肺炎精粹】剪不断 理还乱 别是滋味在心头",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/1099",
       "title": "【肺炎精粹】蹊跷的“肺部感染”",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/1254",
       "title": "警惕身体的肺炎信号，在家借助常用工具来判断身体指标的变化",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/1198",
@@ -359,7 +360,7 @@
       "title": "曹彬-病毒性肺炎和病毒性感染中毒症",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/1056",
@@ -373,7 +374,7 @@
       "title": "徐金富-卒中相关肺炎诊治进展",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/910",
@@ -541,7 +542,7 @@
       "title": "从CAP-China十年发展，看中国肺炎研究变迁",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/717",
@@ -590,7 +591,7 @@
       "title": "CAP-China青年学术沙龙 第三期",
       "status": "included",
       "kind": "视频课程",
-      "disease": "呼吸道感染与综合学习"
+      "disease": "社区获得性肺炎"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/674",
@@ -604,7 +605,7 @@
       "title": "CAP-China青年学术沙龙 第二期",
       "status": "included",
       "kind": "视频课程",
-      "disease": "呼吸道感染与综合学习"
+      "disease": "社区获得性肺炎"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/631",
@@ -625,7 +626,7 @@
       "title": "CAP-China青年学术沙龙",
       "status": "included",
       "kind": "视频课程",
-      "disease": "呼吸道感染与综合学习"
+      "disease": "社区获得性肺炎"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/616",
@@ -695,7 +696,7 @@
       "title": "病毒性肺炎临床特点剖析",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/470",
@@ -751,7 +752,7 @@
       "title": "中国肺炎研究现状",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/383",
@@ -905,7 +906,7 @@
       "title": "按指南经验治疗可能失败的 CAP",
       "status": "included",
       "kind": "视频课程",
-      "disease": "呼吸道感染与综合学习"
+      "disease": "社区获得性肺炎"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/248",
@@ -1024,14 +1025,14 @@
       "title": "肺炎抗菌药物治疗特点",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/63",
       "title": "初始治疗效果不佳的肺炎，何去何从？",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/91",
@@ -1045,7 +1046,7 @@
       "title": "病毒性肺炎亟待解决的临床和研究问题",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/secondaryschool/id/86",
@@ -1087,14 +1088,14 @@
       "title": "院内获得性肺炎的诊治",
       "status": "included",
       "kind": "视频课程",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1452",
       "title": "曹彬教授：在全球首创「肺炎管理三阶段」……中国方案正成为全球呼吸感染防控网络的关键节点丨2026组长会谈（呼吸感染）",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1450",
@@ -1135,7 +1136,7 @@
       "title": "肺炎大纪事",
       "status": "included",
       "kind": "科普文章",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1431",
@@ -1170,7 +1171,7 @@
       "title": "健康向未来 曹彬：让肺炎诊治更精准",
       "status": "included",
       "kind": "科普文章",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/scienceeducation/id/867",
@@ -1247,7 +1248,7 @@
       "title": "【肺炎精粹】“肺炎”狡猾的模仿者",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/1009",
@@ -1261,7 +1262,7 @@
       "title": "【肺炎精粹】意想不到的肺内多发结节",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/853",
@@ -1275,21 +1276,21 @@
       "title": "【肺炎精粹】花季少年反复肺炎，到底病因几何？",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/845",
       "title": "【肺炎精粹】显微镜检技术指导肺球孢子菌病一例",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/738",
       "title": "【肺炎精粹】发热伴肺部阴影≠肺炎",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/739",
@@ -1317,14 +1318,14 @@
       "title": "同为病毒性肺炎，腺病毒与其他病毒有何差异？",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/493",
       "title": "若有天忽略了谁付出谁伤害，是否会再记起我的双眼？——又见高毒力肺炎克雷伯菌导致全身侵袭性感染",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/451",
@@ -1352,14 +1353,14 @@
       "title": "曹彬教授：肺炎新说",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/378",
       "title": "持续发热的难治性肺炎病因探索？",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/377",
@@ -1387,21 +1388,21 @@
       "title": "反复肺炎，“都是辣椒惹的祸”",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/315",
       "title": "说出你的故事｜中国肺炎研究网站「肺炎精粹」征稿啦",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/226",
       "title": "貌似肺炎的原发性肺淋巴瘤",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/225",
@@ -1478,7 +1479,7 @@
       "title": "「典型」肺炎链球菌大叶性肺炎不典型",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/214",
@@ -1534,7 +1535,7 @@
       "title": "【肺炎精粹】治疗停不下来的惠普尔养障体肺炎",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/741",
@@ -1660,14 +1661,14 @@
       "title": "不发热的肺炎克雷伯菌肺炎",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/216",
       "title": "多杀巴斯德菌肺炎",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1428",
@@ -1744,7 +1745,7 @@
       "title": "柳叶刀呼吸病学丨社区感染性肺炎研究的十大研究优先事项",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1418",
@@ -1758,14 +1759,14 @@
       "title": "欧洲卒中组织发布2026年卒中相关肺炎指南",
       "status": "included",
       "kind": "指南与共识",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1417",
       "title": "科学运用创新技术，拓展肺炎诊疗宽度——第三届华夏肺炎大会在长沙盛大开幕",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1413",
@@ -1877,7 +1878,7 @@
       "title": "Burden and Risk Factors for Pseudomonas aeruginosa Community-acquired Pneumonia: a Multinational Point Prevalence Study of Hospitalised Patients",
       "status": "included",
       "kind": "研究进展",
-      "disease": "呼吸道感染与综合学习"
+      "disease": "社区获得性肺炎"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/110",
@@ -1938,7 +1939,7 @@
       "title": "2025 ATS肺炎指南更新后的读者来信：指南并非终点",
       "status": "included",
       "kind": "指南与共识",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1361",
@@ -1966,7 +1967,7 @@
       "title": "指南之争：美国两大学会就病毒性肺炎抗生素应用公开交锋",
       "status": "included",
       "kind": "指南与共识",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1358",
@@ -1980,7 +1981,7 @@
       "title": "会议通知｜XPLORER Symposia 2026香港见！呼吸道感染与长期健康：发病机制、免疫与恢复",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1355",
@@ -2029,21 +2030,21 @@
       "title": "新书推荐 |《认识肺炎100问》",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1333",
       "title": "曹彬教授：什么是有质量的肺炎诊疗？",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1335",
       "title": "聚焦肺炎诊疗创新，共探传染病防控新篇——第二届华夏肺炎大会圆满召开",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1334",
@@ -2161,7 +2162,7 @@
       "title": "您还在为不能及时获取肺炎最新文献发愁吗？中国肺炎研究（www.chinapneumonia.cn）文献数据库帮您忙！",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1286",
@@ -2175,7 +2176,7 @@
       "title": "曹彬教授：从认知到行动，20年间我国“肺炎”诊治的进步与挑战？丨CAPC 2024",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1278",
@@ -2189,14 +2190,14 @@
       "title": "CAPC 2024丨路虽远，行则将至：曹彬教授、王贵强教授和王一民教授主编《肺炎的基础与实践》在京发布",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1276",
       "title": "“肺炎科学管理”：从认知到行动——我国首届华夏肺炎大会在北京成功召开",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1275",
@@ -2413,7 +2414,7 @@
       "title": "病毒性肺炎影像学特点及诊治策略",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1259",
@@ -2427,7 +2428,7 @@
       "title": "自身免疫性疾病的影像学表现",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1215",
@@ -2455,7 +2456,7 @@
       "title": "特殊免疫状态下的分枝杆菌感染",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1197",
@@ -2938,7 +2939,7 @@
       "title": "肺气囊：金黄色葡萄球菌肺炎典型影像学表现",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/211",
@@ -2966,7 +2967,7 @@
       "title": "军团菌肺炎合并自发性脾破裂的罕见病例 1 例",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/caseshare/id/101",
@@ -2980,7 +2981,7 @@
       "title": "以树芽征及结节为表现的嗜麦芽窄食单胞菌肺炎1例",
       "status": "included",
       "kind": "病例讨论",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1162",
@@ -3028,7 +3029,7 @@
       "title": "【第二届呼吸感染免疫论坛会议报道】第二届呼吸感染免疫论坛与2022年第五届华夏临床微生物学学术年会暨第十一届京港感染论坛同期开幕",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "病原学诊断"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1153",
@@ -3112,7 +3113,7 @@
       "title": "肺炎是什么？",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/676",
@@ -3173,7 +3174,7 @@
       "title": "很多疾病起病初期以肺炎或者呼吸道感染为表现，这4个疑难复杂的「肺炎」病例，提示我们临床要如何寻找线索？丨CACP 2020",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/618",
@@ -3218,7 +3219,7 @@
       "title": "《柳叶刀 感染病学》：感染中毒症免疫学当前的研究空白——转化研究的新机遇",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/605",
@@ -3340,7 +3341,7 @@
       "title": "免疫检查点抑制剂相关性肺炎的知识空白和研究重点——美国胸科协会官方研究声明",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/450",
@@ -3515,7 +3516,7 @@
       "title": "对于社区起病的肺炎广谱抗菌药物的过度使用会导致患者不良预后",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/381",
@@ -3529,7 +3530,7 @@
       "title": "Efficacy and safety of trimodulin, a novel polyclonal antibody preparation, in patients with severe community‑acquired pneumonia: a randomized, placebo‑controlled, double‑blind, multicenter, phase II trial (CIGMA study)",
       "status": "included",
       "kind": "研究进展",
-      "disease": "呼吸道感染与综合学习"
+      "disease": "社区获得性肺炎"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/289",
@@ -3606,21 +3607,21 @@
       "title": "说出你的故事 | 肺炎临床诊疗经验分享有礼！",
       "status": "included",
       "kind": "学术活动",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/476",
       "title": "肺炎知识 PK 赛，谁是最终答题王？",
       "status": "included",
       "kind": "学术活动",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/477",
       "title": "2019 年京港感染论坛 CAP-China 专题直播",
       "status": "included",
       "kind": "学术活动",
-      "disease": "呼吸道感染与综合学习"
+      "disease": "社区获得性肺炎"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/462",
@@ -4124,7 +4125,7 @@
       "title": "风湿免疫疾病患者并发NTM感染",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1158",
@@ -4166,7 +4167,7 @@
       "title": "革兰氏阳性菌肺炎: 噬菌体治疗的可能性",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1102",
@@ -4180,7 +4181,7 @@
       "title": "隐源性机化性肺炎（COP） --文献学习",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1082",
@@ -4490,7 +4491,7 @@
       "title": "世界范围内ST11型肺炎克雷伯菌的基因组特征",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/591",
@@ -5456,7 +5457,7 @@
       "title": "呼吸道病毒感染的免疫调节机制：从急性发病到慢性后遗症",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/1015",
@@ -5728,7 +5729,7 @@
       "title": "中国成人HAP的临床和微生物学特征：一项为期十年的前瞻性观察研究",
       "status": "included",
       "kind": "研究进展",
-      "disease": "医院获得性肺炎"
+      "disease": "病原学诊断"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/682",
@@ -5953,7 +5954,7 @@
       "title": "蒋荣猛主任：我国病毒性肺炎诊疗现状",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/308",
@@ -6175,7 +6176,7 @@
       "title": "病毒性肺炎：我们离精准抗病毒治疗有多远",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/371",
@@ -6335,7 +6336,7 @@
       "title": "过敏性肺炎的影像学表现",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/915",
@@ -6349,7 +6350,7 @@
       "title": "【肺炎精粹】“一咳嗽就是感染”？——探究慢性咳嗽的少见病因",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/913",
@@ -6559,7 +6560,7 @@
       "title": "CAP-China学术沙龙（武汉金银潭站）",
       "status": "included",
       "kind": "研究进展",
-      "disease": "呼吸道感染与综合学习"
+      "disease": "社区获得性肺炎"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/809",
@@ -6608,7 +6609,7 @@
       "title": "免疫检查点抑制剂相关肺炎—临床与影像",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/893",
@@ -6636,21 +6637,21 @@
       "title": "【会议报道】第一届呼吸感染免疫论坛（下午场）",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/889",
       "title": "【会议报道】第一届呼吸感染免疫论坛（上午场）",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/883",
       "title": "第一届呼吸感染免疫论坛",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/882",
@@ -6669,7 +6670,7 @@
       "title": "隐源性机化性肺炎与继发性机化性肺炎的异同",
       "status": "included",
       "kind": "研究进展",
-      "disease": "社区获得性肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/877",
@@ -6697,14 +6698,14 @@
       "title": "第一届呼吸感染免疫论坛预通知（第二轮）",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "呼吸道感染与综合学习"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/863",
       "title": "免疫低下宿主与免疫正常宿主病毒性肺炎的临床特点对比——一项较大规模、多中心、回顾性研究",
       "status": "included",
       "kind": "研究进展",
-      "disease": "特殊人群肺炎"
+      "disease": "肺炎综合"
     },
     {
       "url": "https://www.chinapneumonia.cn/hotinfo/id/874",
