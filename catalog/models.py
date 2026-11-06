@@ -1,4 +1,5 @@
 import re
+from datetime import date
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -141,14 +142,16 @@ class Member(OrderedContent):
 
 
 class Publication(OrderedContent):
-    KINDS = [("paper", "研究论文"), ("award", "奖项"), ("patent", "专利"), ("book", "著作"), ("guideline", "指南与共识")]
+    KINDS = [("paper", "研究论文"), ("award", "奖项"), ("patent", "专利"), ("software", "软件著作权"), ("book", "著作"), ("guideline", "指南与共识")]
     ROLES = [("unverified", "未标注"), ("lead", "课题组牵头或通讯"), ("participant", "课题组参与")]
     kind = models.CharField("成果类型", max_length=20, choices=KINDS, default="paper")
     title = models.CharField("成果题目", max_length=1000)
-    authors = models.TextField("作者或获奖人", blank=True)
+    authors = models.TextField("作者、发明人或权利人", blank=True)
     year = models.PositiveIntegerField("年份", validators=[MinValueValidator(1900), MaxValueValidator(2200)])
     journal = models.CharField("期刊或颁发机构", max_length=300, blank=True)
     citation = models.CharField("卷期、页码或编号", max_length=300, blank=True)
+    registration_number = models.CharField("专利号或登记号", max_length=80, blank=True)
+    registered_on = models.DateField("授权公告日或登记日期", null=True, blank=True)
     url = models.URLField("原文链接", max_length=2000, blank=True, validators=[validate_web_url])
     summary = models.TextField("中文概述", blank=True, help_text="仅使用团队提供的介绍或原文摘录，不使用 AI 改写。")
     pmid = models.CharField("PMID", max_length=12, unique=True, null=True, blank=True)
@@ -167,6 +170,8 @@ class Publication(OrderedContent):
 
     def clean(self):
         super().clean()
+        if isinstance(self.registered_on, date) and self.year != self.registered_on.year:
+            raise ValidationError({"year": "年份应与授权公告日或登记日期一致。"})
         try:
             self.pmid = normalize_pmid(self.pmid)
         except ValueError as exc:

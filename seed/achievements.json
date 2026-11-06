@@ -1,0 +1,83 @@
+{
+  "checkpoint": "verified-patents-20261106",
+  "publications": [
+    {
+      "kind": "patent",
+      "slug": "patent-cn113156113b",
+      "title": "用于体外评价新型冠状病毒ADE效应的系统及其构建方法",
+      "authors": "曹彬；王在；李海波；邓婷婷；张瑜廉；聂强强；杨晟楠；刘培培",
+      "registration_number": "ZL 2021 1 0111066.8",
+      "registered_on": "2023-02-07",
+      "year": 2023,
+      "url": "https://patents.google.com/patent/CN113156113B/zh",
+      "position": 201,
+      "is_published": true,
+      "source_note": "2026-11-06 核对国家知识产权局授权公告 CN113156113B 首页（Google Patents 提供原件）。原清单日期为2023/10/3，按授权公告日更正为2023-02-07；名称、申请号及发明人顺序已核对。PDF：https://patentimages.storage.googleapis.com/0f/df/5a/c086fbea13e80c/CN113156113B.pdf"
+    },
+    {
+      "kind": "patent",
+      "slug": "patent-cn115725658b",
+      "title": "一种新型的基于水疱性口炎病毒的CRISPR RNA递送系统及其应用",
+      "authors": "李海波；曹彬；邓笑颜",
+      "registration_number": "ZL 2022 1 1414158.4",
+      "registered_on": "2025-03-04",
+      "year": 2025,
+      "url": "https://patents.google.com/patent/CN115725658B/zh",
+      "position": 204,
+      "is_published": true,
+      "source_note": "2026-11-06 核对国家知识产权局授权公告 CN115725658B 首页。原清单日期2023/2/7，更正为2025-03-04；发明人原顺序曹彬、李海波、邓笑颜，更正为公告顺序李海波、曹彬、邓笑颜。PDF：https://patentimages.storage.googleapis.com/cc/97/9a/a28ccc9475b77f/CN115725658B.pdf"
+    },
+    {
+      "kind": "patent",
+      "slug": "patent-cn116598005b",
+      "title": "基于宿主序列信息的下呼吸道感染概率预测系统及装置",
+      "authors": "邹晓辉；曹彬",
+      "registration_number": "ZL 2023 1 0870853.X",
+      "registered_on": "2023-10-03",
+      "year": 2023,
+      "url": "https://patents.google.com/patent/CN116598005B/zh",
+      "position": 200,
+      "is_published": true,
+      "source_note": "2026-11-06 核对国家知识产权局授权公告 CN116598005B 首页。原清单日期2025/3/4，更正为授权公告日2023-10-03；名称、编号和发明人一致。PDF：https://patentimages.storage.googleapis.com/ad/f0/8b/8a7e690094bdba/CN116598005B.pdf"
+    },
+    {
+      "kind": "patent",
+      "slug": "patent-cn119351536b",
+      "title": "用于重症病毒性肺炎诊断及治疗的分子标志物",
+      "authors": "曹彬；尚聪聪；余家沛；李辉",
+      "registration_number": "ZL 2024 1 1313198.9",
+      "registered_on": "2025-07-11",
+      "year": 2025,
+      "url": "https://patents.google.com/patent/CN119351536B/zh",
+      "position": 202,
+      "is_published": true,
+      "source_note": "2026-11-06 核对国家知识产权局授权公告 CN119351536B 首页。原清单编号ZL 2024 1 1313198缺少校验位，按公告申请号补全为ZL 2024 1 1313198.9；名称、授权日及发明人一致。PDF：https://patentimages.storage.googleapis.com/ea/84/f0/598dfedbb82f65/CN119351536B.pdf"
+    },
+    {
+      "kind": "patent",
+      "slug": "patent-cn119269714b",
+      "title": "血液及肺泡上皮衬液中先诺特韦和利托那韦浓度的检测方法",
+      "authors": "曹彬；王辉；曹林林；赵超越；周飞",
+      "registration_number": "ZL 2024 1 1795407.8",
+      "registered_on": "2025-07-01",
+      "year": 2025,
+      "url": "https://patents.google.com/patent/CN119269714B/zh",
+      "position": 203,
+      "is_published": true,
+      "source_note": "2026-11-06 核对国家知识产权局授权公告 CN119269714B 首页，名称、编号、授权日和发明人顺序一致。公告列明共同专利权人为中日友好医院（中日友好临床医学研究所）和北京大学人民医院。PDF：https://patentimages.storage.googleapis.com/e6/62/03/91d5b5eddce5aa/CN119269714B.pdf"
+    },
+    {
+      "kind": "patent",
+      "slug": "patent-cn119988519b",
+      "title": "电子病历结构化转换的方法、设备和程序产品",
+      "authors": "司超增；曹彬；夏杰峰；王业明；刘敏；胡宇；夏沁芳；田艳彬",
+      "registration_number": "ZL 2025 1 0071370.2",
+      "registered_on": "2025-10-21",
+      "year": 2025,
+      "url": "https://patents.google.com/patent/CN119988519B/zh",
+      "position": 201,
+      "is_published": true,
+      "source_note": "2026-11-06 核对Google Patents CN119988519B著录记录：名称、申请号202510071370.2、授权公告日2025-10-21、8位发明人及顺序与原清单一致。Patsnap著录页交叉确认申请号、公告日和权利人：https://eureka.patsnap.com/patent/CN119988519B 。本次未取得授权公告PDF，不将聚合平台状态解读为当前专利权有效性的法律结论。"
+    }
+  ]
+}

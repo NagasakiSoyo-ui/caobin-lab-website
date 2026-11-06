@@ -1,5 +1,5 @@
 {% extends "public/base.html" %}{% block content %}{% include "public/intro.html" %}
-<section class="section container publications-catalog" id="catalog"><h2>研究论文 <span>按年排序</span></h2>
+<section class="section container publications-catalog" id="catalog"><h2>研究成果 <span>按年排序</span></h2>
 {% if publications %}<nav class="publication-years" aria-label="按年份查看研究成果">{% for year in publication_years %}<a href="#year-{{ year }}" data-publication-year="{{ year }}">{{ year }}</a>{% endfor %}<a href="#pub-list" data-publication-year="all">全部</a></nav><p id="pub-count" class="visually-hidden" role="status" aria-live="polite">共 {{ publications|length }} 条成果</p>{% endif %}
 <div id="pub-list">{% regroup publications by year as years %}{% for year in years %}<section class="pub-year" id="year-{{ year.grouper }}" data-year-group="{{ year.grouper }}"><h3 class="year-heading">{{ year.grouper }}</h3><div class="publication-cards">{% for item in year.list %}{% include "public/publication_entry.html" %}{% endfor %}</div></section>{% empty %}<p class="empty-state">成果目录整理中。</p>{% endfor %}</div>
 </section>{% endblock %}

@@ -153,11 +153,13 @@ class MemberAdmin(ContentAdmin):
 class PublicationAdmin(StableSlugMixin, ContentAdmin):
     list_display = ("title", "kind", "year", "journal", "pmid", "is_published")
     list_filter = ("kind", "year", "is_published", "directions")
-    search_fields = ("title", "authors", "journal", "pmid", "doi")
+    search_fields = ("title", "authors", "journal", "pmid", "doi", "registration_number")
     readonly_fields = ("figure_list", "updated_at")
     fieldsets = [
         ("成果信息", {"fields": ["kind", "title", "authors", "year", "journal", "citation", "edit_version"]}),
         ("标识与链接", {"fields": ["pmid", "doi", "pmcid", "url", "slug"]}),
+        ("专利与软件著作权", {"fields": ["registration_number", "registered_on"],
+                         "description": "填写核实后的专利号或登记号及日期；研究论文无需填写。"}),
         ("中文概述与关联", {"fields": ["summary", "directions", "lab_role", "source_note"]}),
         ("配图", {"fields": ["figure_list"]}),
         ("展示设置", {"fields": ["position", "is_published", "updated_at"],
