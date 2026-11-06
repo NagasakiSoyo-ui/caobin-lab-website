@@ -1,17 +1,20 @@
 from django import forms
 from django.contrib import admin, messages
 from django.db import transaction
+from django.db.models import ImageField
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html, format_html_join
 from .forms import VersionedForm
+from .widgets import AdminImageWidget
 from .models import (SiteSettings, Page, ResearchDirection, Project, Member, Publication, Resource,
                      Figure, PubMedCandidate, PubMedImportRun)
 from .pubmed import ImportFailure, accept, reset_to_pending
 
-admin.site.site_header = "课题组 · 内容管理"
-admin.site.site_title = "网站管理台"
-admin.site.index_title = "内容工作台"
+admin.site.site_header = "后台管理"
+admin.site.site_title = "后台管理"
+admin.site.index_title = "后台管理"
 admin.site.site_url = "/"
 
 
@@ -20,6 +23,7 @@ class ContentAdmin(admin.ModelAdmin):
     readonly_fields = ("updated_at",)
     list_per_page = 30
     save_on_top = True
+    formfield_overrides = {ImageField: {"widget": AdminImageWidget}}
 
     def save_model(self, request, obj, form, change):
         if change:
@@ -78,13 +82,25 @@ class ResearchAdmin(StableSlugMixin, ContentAdmin):
     list_display = ("title", "slug", "position", "is_published", "updated_at")
     list_filter = ("is_published",)
     search_fields = ("title", "text", "summary")
+    readonly_fields = ("figure_list", "updated_at")
     fieldsets = [
         ("研究方向", {"fields": ["title", "short_title", "slug", "summary", "text", "edit_version"]}),
+        ("配图管理", {"fields": ["figure_list"],
+                    "description": "可添加多张图片；显示顺序数字越小越靠前，第一张公开图片作为方向列表封面。"}),
         ("研究层次（首页研究布局）", {"fields": ["covers_pathogen", "covers_host", "covers_clinical", "covers_intervention"],
                               "description": "表示该方向覆盖的研究层次，用于首页研究布局，不表示因果关系。"}),
         ("展示设置", {"fields": ["position", "is_published", "updated_at"],
-                  "description": "方向页配图在「研究配图」中选择展示的研究方向；关联课题和成果分别在课题和成果中设置。"}),
+                  "description": "关联课题和成果分别在课题和成果中设置。"}),
     ]
+
+    @admin.display(description="本方向图片")
+    def figure_list(self, obj):
+        if not obj or not obj.pk:
+            return "先保存研究方向，再添加图片。"
+        return render_to_string("admin/catalog/direction_figures.html", {
+            "figures": obj.figures.select_related("publication"),
+            "add_url": reverse("admin:catalog_figure_add") + f"?directions={obj.pk}",
+        })
 
 
 @admin.register(Project)
@@ -104,10 +120,6 @@ class MemberAdmin(ContentAdmin):
         ("个人介绍", {"fields": ["school", "workplace", "cohort", "bio"]}),
         ("展示设置", {"fields": ["position", "is_published", "updated_at"]}),
     ]
-
-    class Media:
-        js = ("admin-photo-preview.js",)
-
 
 @admin.register(Publication)
 class PublicationAdmin(StableSlugMixin, ContentAdmin):
@@ -142,16 +154,23 @@ class FigureAdmin(ContentAdmin):
     list_filter = ("is_published", "kind", "directions")
     search_fields = ("title", "caption", "label", "publication__title", "credit")
     autocomplete_fields = ("publication",)
-    readonly_fields = ("preview", "updated_at")
+    readonly_fields = ("updated_at",)
     actions = ("publish", "unpublish")
     fieldsets = [
-        ("图片", {"fields": ["kind", "image", "preview", "edit_version"],
+        ("图片", {"fields": ["kind", "image", "edit_version"],
                 "description": "上传团队提供或有原始出处的 JPG/PNG/WebP 图片，不使用 AI 生成图片。"}),
         ("说明", {"fields": ["publication", "label", "title", "caption", "alt"]}),
         ("出处记录", {"fields": ["credit", "source_url", "license_note"]}),
         ("展示", {"fields": ["directions", "position", "is_published", "updated_at"],
-                "description": "论文原图只有在所属成果公开时才会在前台出现。"}),
+                "description": "选择展示方向并勾选公开后，图片才会出现在对应方向页。论文原图还需要所属成果已公开。删除整张配图请使用页面底部的“删除”；只从某方向撤下，取消该方向的勾选后保存。"}),
     ]
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if db_field.name == "image":
+            # A figure is an image record, unlike an optional member photo or cover.
+            # Clearing its only file cannot produce a valid figure; delete the record instead.
+            kwargs["required"] = True
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
 
     @admin.display(description="预览")
     def preview(self, obj):
@@ -161,9 +180,13 @@ class FigureAdmin(ContentAdmin):
 
     @admin.display(description="前台状态")
     def front_status(self, obj):
-        if obj.is_public:
-            return "已显示"
-        return "成果未公开" if obj.is_published else "草稿"
+        if not obj.is_published:
+            return "草稿"
+        if not obj.is_public:
+            return "所属成果未公开"
+        if not obj.directions.filter(is_published=True).exists():
+            return "未关联公开方向"
+        return "已显示"
 
     def _set_published(self, request, queryset, value, label):
         # Save each figure like an ordinary edit: bumps version, refreshes updated_at, writes the admin log.

@@ -5,6 +5,7 @@ from PIL import Image
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
 from django.core.exceptions import ValidationError
+from django.db.models.fields.files import FieldFile
 
 
 def upload_path(instance, filename):
@@ -12,6 +13,10 @@ def upload_path(instance, filename):
 
 
 def validate_image(file):
+    # ModelForm validates every model field, including unchanged stored files.
+    # Existing content was admitted by upload/import; validate only new file bytes.
+    if isinstance(file, FieldFile) and file._committed:
+        return
     if file.size > 10 * 1024 * 1024:
         raise ValidationError("图片不能超过 10 MB。")
     if Path(file.name).suffix.lower() not in (".jpg", ".jpeg", ".png", ".webp"):
@@ -52,6 +57,8 @@ def pdf_metadata(file):
 
 
 def validate_pdf(file):
+    if isinstance(file, FieldFile) and file._committed:
+        return
     pdf_metadata(file)
 
 
