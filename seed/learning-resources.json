@@ -1,0 +1,326 @@
+{
+  "checkpoint": "guidelines-resources-20261106",
+  "retire": [
+    {
+      "title": "支气管哮喘防治指南（2024年版）",
+      "document": "initial/documents/resource-08.pdf"
+    },
+    {
+      "title": "慢性阻塞性肺疾病急性加重围出院期管理与随访指南（2024年版）",
+      "document": "initial/documents/resource-07.pdf"
+    },
+    {
+      "title": "慢性阻塞性肺疾病急性加重高风险患者识别与管理中国专家共识",
+      "document": "initial/documents/resource-01.pdf"
+    },
+    {
+      "title": "慢性阻塞性肺疾病诊治指南（2021年修订版）",
+      "document": "initial/documents/resource-03.pdf"
+    },
+    {
+      "title": "中国成人支气管扩张症诊断与治疗专家共识",
+      "document": "initial/documents/resource-04.pdf"
+    }
+  ],
+  "resources": [
+    {
+      "fields": {
+        "title": "靶向高通量测序在感染性疾病中应用与实践专家共识",
+        "kind": "专家共识",
+        "disease": "病原学诊断",
+        "year": 2024,
+        "version_label": "2024年刊出",
+        "journal": "中华医学杂志",
+        "position": 101,
+        "is_published": true,
+        "pages": 9,
+        "file_bytes": 14795571
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-01.pdf",
+        "sha256": "342e5f5db142c3cda88de228abcf2c0cb0ae0af293bdaae4461e8715a17a7254"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-01.jpg",
+        "sha256": "cd6c8a24c4b77674793a4d7cafb7782e5d1cd8aff3d28ab69d6a068d0c5fd8de"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "实体肿瘤患者伴发肺炎临床诊疗实践中国专家共识（2024版）",
+        "kind": "专家共识",
+        "disease": "肿瘤合并肺炎",
+        "year": 2024,
+        "version_label": "2024版",
+        "journal": "中华肿瘤杂志",
+        "position": 102,
+        "is_published": true,
+        "pages": 20,
+        "file_bytes": 3084157
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-02.pdf",
+        "sha256": "b5d128dc4633a56cea82a94f9f1fa37f415d27c49126071a239686146f2029a9"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-02.jpg",
+        "sha256": "e5792120ef1b9f92a70ecbf9915b7e33b9e4780a72edd9af2062228ed3ce3c24"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "综合医疗机构结核病发病高危人群的预防性治疗专家共识",
+        "kind": "专家共识",
+        "disease": "结核病",
+        "year": 2024,
+        "version_label": "2024年刊出",
+        "journal": "中华结核和呼吸杂志",
+        "position": 103,
+        "is_published": true,
+        "pages": 13,
+        "file_bytes": 2072915
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-03.pdf",
+        "sha256": "ba4efefe6b1654bf1411428eb90ba613b46f2e49418a9ce77d5b4f186c2f2744"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-03.jpg",
+        "sha256": "744539b3e1e1ad2ff04a4986296ae9c500d470bd5568fddc5bf1bc180e319ce2"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "下呼吸道感染宏基因组二代测序报告临床解读路径专家共识",
+        "kind": "专家共识",
+        "disease": "病原学诊断",
+        "year": 2023,
+        "version_label": "2023年刊出",
+        "journal": "中华结核和呼吸杂志",
+        "position": 104,
+        "is_published": true,
+        "pages": 14,
+        "file_bytes": 2546439
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-04.pdf",
+        "sha256": "410062114a1fb422df729aab1dc8646efd8ea0fc366e828d7b761643bc4a5448"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-04.jpg",
+        "sha256": "eec1de4e5e11d2c783a6bf85958c57d2d2b12efd8bb81ffcf4f413f809628bca"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "Diagnosis and Management of Community-acquired Pneumonia: An Official American Thoracic Society Clinical Practice Guideline",
+        "kind": "指南",
+        "disease": "社区获得性肺炎",
+        "year": 2025,
+        "version_label": "2025年在线发表 · 英文",
+        "journal": "American Journal of Respiratory and Critical Care Medicine",
+        "position": 105,
+        "is_published": true,
+        "pages": 119,
+        "file_bytes": 1827209
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-05.pdf",
+        "sha256": "f6d9c9e85f0d9a1532de5a14c9a478574b2facac9b6c6ceda5dcbcf8383f91bb"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-05.jpg",
+        "sha256": "8085fbf4fa754f4cf8a50a47de370e0b1fd97667ce60131d3bd417bc4111d5cf"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "新型冠状病毒肺炎防治专家意见",
+        "kind": "专家意见",
+        "disease": "新型冠状病毒感染",
+        "year": 2020,
+        "version_label": "2020年刊出",
+        "journal": "中华结核和呼吸杂志",
+        "position": 106,
+        "is_published": true,
+        "pages": 17,
+        "file_bytes": 21149123
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-06.pdf",
+        "sha256": "d7d95da87e0b305fd0687b0c476f2a1a33f2b51afcc51e4eb7abdae3a452e766"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-06.jpg",
+        "sha256": "2f076d8a773e6ff5374a6787c521a9d02c0dc214646fd3c0a0e6a9479b67eeda"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "流行性感冒诊疗方案（2020年版）",
+        "kind": "诊疗方案",
+        "disease": "流感",
+        "year": 2020,
+        "version_label": "2020年版",
+        "journal": "中华临床感染病杂志",
+        "position": 107,
+        "is_published": true,
+        "pages": 6,
+        "file_bytes": 909046
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-07.pdf",
+        "sha256": "847606d5699084e0f07f5360f74e9a13f724490ec6bf5d6362194ed9d9fdaa6e"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-07.jpg",
+        "sha256": "1f63937e55c9555e7d89461354dfb1ffe6666c56a58897b205c3b7783b08d45e"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "Clinical practice guideline for long COVID prevention and treatment",
+        "kind": "指南",
+        "disease": "长新冠",
+        "year": 2026,
+        "version_label": "2026年 · Early View · 英文",
+        "journal": "European Respiratory Journal",
+        "position": 108,
+        "is_published": true,
+        "pages": 246,
+        "file_bytes": 18960310
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-08.pdf",
+        "sha256": "09e0a6c5755b963cd642a83bee8e7957885ba158a37871c235613b51d4c13e44"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-08.jpg",
+        "sha256": "8eed3028e95d1f2373c1047573027154eeda30506e26a40f8b9149e07445e506"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "呼吸道感染病原学诊断年度进展2021",
+        "kind": "年度综述",
+        "disease": "病原学诊断",
+        "year": 2022,
+        "version_label": "2021年度进展 · 2022年刊出",
+        "journal": "中华结核和呼吸杂志",
+        "position": 109,
+        "is_published": true,
+        "pages": 5,
+        "file_bytes": 1156847
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-09.pdf",
+        "sha256": "610c3c8d2e2f8881e8d559ecef897c91e1abff1683234e06b3cc0eed0f6b0762"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-09.jpg",
+        "sha256": "90532ac8bd07e6bc1fdb0cbc400cda38fc5e38cbdfd78da1532ef0ff3de0157c"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "中国成人2019冠状病毒病的诊治与防控指南",
+        "kind": "指南",
+        "disease": "新型冠状病毒感染",
+        "year": 2021,
+        "version_label": "2021年刊出",
+        "journal": "中华医学杂志",
+        "position": 111,
+        "is_published": true,
+        "pages": 64,
+        "file_bytes": 29580370
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-11.pdf",
+        "sha256": "33e7cf53a92df8bbb0889f1404269f08efa9d2e24c8db6fba34d02c5e3901e6e"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-11.jpg",
+        "sha256": "5776f8cd9f6e3a14d1f993b9b3b2e4106c1eb43810846a6f6f5061120e8f430f"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "中国流感治疗与药物预防临床实践指南（2025版）",
+        "kind": "指南",
+        "disease": "流感",
+        "year": 2026,
+        "version_label": "2025版 · 2026年刊出",
+        "journal": "中华医学杂志",
+        "position": 112,
+        "is_published": true,
+        "pages": 18,
+        "file_bytes": 2858679
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-12.pdf",
+        "sha256": "184f1d49b8e776206aeeb883e715f81d5365d1dcb9aeb237a5c8f24d471850c2"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-12.jpg",
+        "sha256": "71cfb286c9505ba9132ce553a63f2660c50fcfbc3b4f4e05f585f4e1b6d5b063"
+      },
+      "previous_document": "initial/documents/resource-05.pdf"
+    },
+    {
+      "fields": {
+        "title": "《中国流感治疗与药物预防临床实践指南（2025版）》解读",
+        "kind": "指南解读",
+        "disease": "流感",
+        "year": 2026,
+        "version_label": "2026年刊出",
+        "journal": "中华医学杂志",
+        "position": 113,
+        "is_published": true,
+        "pages": 3,
+        "file_bytes": 687384
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-13.pdf",
+        "sha256": "f49d3334800074b505f0d97b6debe45a03efc8a5e1fa07688ada654482bc8496"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-13.jpg",
+        "sha256": "e861d99a79255b8b040522736656a3d7792f64b1c380b8a87d30ed36b9d365aa"
+      },
+      "previous_document": ""
+    },
+    {
+      "fields": {
+        "title": "免疫抑制宿主重症肺炎诊断与治疗专家共识",
+        "kind": "专家共识",
+        "disease": "免疫抑制宿主肺炎",
+        "year": 2026,
+        "version_label": "2026年刊出",
+        "journal": "中华结核和呼吸杂志",
+        "position": 114,
+        "is_published": true,
+        "pages": 18,
+        "file_bytes": 2733069
+      },
+      "document": {
+        "path": "documents/guidelines-20261106-14.pdf",
+        "sha256": "4182b982130621147e86ac5fb4b388ed54c3dc43676c52d46b417772b2fc5ae4"
+      },
+      "cover": {
+        "path": "assets/covers/guidelines-20261106-14.jpg",
+        "sha256": "f2ddda00407e08d518b060311dbd4efa486b498d784cf6f80f30861d9215b20d"
+      },
+      "previous_document": ""
+    }
+  ]
+}

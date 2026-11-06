@@ -1,0 +1,137 @@
+{
+  "source_archive": "指南共识.zip",
+  "source_sha256": "eafb9f2e2268c1e1f7d35bc725f9278453e58e4b5ca5f402741dd5cd9e07a168",
+  "review": "原文首页标题、期刊年份、页数；所有首页已渲染检查。PDF文件保持原始字节，封面为首页缩略图。",
+  "duplicate": {
+    "kept": 4,
+    "excluded": 10,
+    "sha256": "410062114a1fb422df729aab1dc8646efd8ea0fc366e828d7b761643bc4a5448"
+  },
+  "retired": [
+    {
+      "title": "支气管哮喘防治指南（2024年版）",
+      "document": "initial/documents/resource-08.pdf"
+    },
+    {
+      "title": "慢性阻塞性肺疾病急性加重围出院期管理与随访指南（2024年版）",
+      "document": "initial/documents/resource-07.pdf"
+    },
+    {
+      "title": "慢性阻塞性肺疾病急性加重高风险患者识别与管理中国专家共识",
+      "document": "initial/documents/resource-01.pdf"
+    },
+    {
+      "title": "慢性阻塞性肺疾病诊治指南（2021年修订版）",
+      "document": "initial/documents/resource-03.pdf"
+    },
+    {
+      "title": "中国成人支气管扩张症诊断与治疗专家共识",
+      "document": "initial/documents/resource-04.pdf"
+    }
+  ],
+  "records": [
+    {
+      "archive_number": 1,
+      "title": "靶向高通量测序在感染性疾病中应用与实践专家共识",
+      "doi": "10.3760/cma.j.cn112137-20240927-02208",
+      "sha256": "342e5f5db142c3cda88de228abcf2c0cb0ae0af293bdaae4461e8715a17a7254",
+      "pages": 9
+    },
+    {
+      "archive_number": 2,
+      "title": "实体肿瘤患者伴发肺炎临床诊疗实践中国专家共识（2024版）",
+      "doi": "10.3760/cma.j.cn112152-20240606-00242",
+      "sha256": "b5d128dc4633a56cea82a94f9f1fa37f415d27c49126071a239686146f2029a9",
+      "pages": 20
+    },
+    {
+      "archive_number": 3,
+      "title": "综合医疗机构结核病发病高危人群的预防性治疗专家共识",
+      "doi": "10.3760/cma.j.cn112147-20240328-00173",
+      "sha256": "ba4efefe6b1654bf1411428eb90ba613b46f2e49418a9ce77d5b4f186c2f2744",
+      "pages": 13
+    },
+    {
+      "archive_number": 4,
+      "title": "下呼吸道感染宏基因组二代测序报告临床解读路径专家共识",
+      "doi": "10.3760/cma.j.cn112147-20220701-00553",
+      "sha256": "410062114a1fb422df729aab1dc8646efd8ea0fc366e828d7b761643bc4a5448",
+      "pages": 14
+    },
+    {
+      "archive_number": 5,
+      "title": "Diagnosis and Management of Community-acquired Pneumonia: An Official American Thoracic Society Clinical Practice Guideline",
+      "doi": "10.1164/rccm.202507-1692ST",
+      "sha256": "f6d9c9e85f0d9a1532de5a14c9a478574b2facac9b6c6ceda5dcbcf8383f91bb",
+      "pages": 119
+    },
+    {
+      "archive_number": 6,
+      "title": "新型冠状病毒肺炎防治专家意见",
+      "doi": "",
+      "sha256": "d7d95da87e0b305fd0687b0c476f2a1a33f2b51afcc51e4eb7abdae3a452e766",
+      "pages": 17
+    },
+    {
+      "archive_number": 7,
+      "title": "流行性感冒诊疗方案（2020年版）",
+      "doi": "10.3760/cma.j.issn.1674-2397.2020.06.001",
+      "sha256": "847606d5699084e0f07f5360f74e9a13f724490ec6bf5d6362194ed9d9fdaa6e",
+      "pages": 6
+    },
+    {
+      "archive_number": 8,
+      "title": "Clinical practice guideline for long COVID prevention and treatment",
+      "doi": "10.1183/13993003.02611-2025",
+      "sha256": "09e0a6c5755b963cd642a83bee8e7957885ba158a37871c235613b51d4c13e44",
+      "pages": 246
+    },
+    {
+      "archive_number": 9,
+      "title": "呼吸道感染病原学诊断年度进展2021",
+      "doi": "10.3760/cma.j.cn112147-20211116-00809",
+      "sha256": "610c3c8d2e2f8881e8d559ecef897c91e1abff1683234e06b3cc0eed0f6b0762",
+      "pages": 5
+    },
+    {
+      "archive_number": 11,
+      "title": "中国成人2019冠状病毒病的诊治与防控指南",
+      "doi": "10.3760/cma.j.cn112137-20210112-00090",
+      "sha256": "33e7cf53a92df8bbb0889f1404269f08efa9d2e24c8db6fba34d02c5e3901e6e",
+      "pages": 64
+    },
+    {
+      "archive_number": 12,
+      "title": "中国流感治疗与药物预防临床实践指南（2025版）",
+      "doi": "10.3760/cma.j.cn112137-20251120-03042",
+      "sha256": "184f1d49b8e776206aeeb883e715f81d5365d1dcb9aeb237a5c8f24d471850c2",
+      "pages": 18
+    },
+    {
+      "archive_number": 13,
+      "title": "《中国流感治疗与药物预防临床实践指南（2025版）》解读",
+      "doi": "10.3760/cma.j.cn112137-20251130-03131",
+      "sha256": "f49d3334800074b505f0d97b6debe45a03efc8a5e1fa07688ada654482bc8496",
+      "pages": 3
+    },
+    {
+      "archive_number": 14,
+      "title": "免疫抑制宿主重症肺炎诊断与治疗专家共识",
+      "doi": "10.3760/cma.j.cn112147-20250729-00449",
+      "sha256": "4182b982130621147e86ac5fb4b388ed54c3dc43676c52d46b417772b2fc5ae4",
+      "pages": 18
+    }
+  ],
+  "cross_checks": [
+    "https://pubmed.ncbi.nlm.nih.gov/40679934/",
+    "https://pubmed.ncbi.nlm.nih.gov/41856572/",
+    "https://rs.yiigle.com/cmaid/1608795",
+    "https://rs.yiigle.com/cmaid/1517258"
+  ],
+  "notes": [
+    "ATS指南为所供2025年在线发表稿119页，正式卷期在2026年；网站版本注明在线发表年份。",
+    "长新冠指南为所供Early View稿246页。",
+    "新旧流感指南DOI相同，更新原条目文件，不重复建卡。",
+    "文件名中免疫抑制宿主共识的（2026）未出现在原文标题中，显示标题按原文，年份另列。"
+  ]
+}
