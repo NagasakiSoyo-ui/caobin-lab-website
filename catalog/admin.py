@@ -339,11 +339,11 @@ class ImportRunAdmin(admin.ModelAdmin):
 class ResourceAdmin(ContentAdmin):
     list_display = ("title", "kind", "disease", "year", "is_published")
     list_filter = ("kind", "disease", "is_published")
-    search_fields = ("title", "english", "journal")
+    search_fields = ("title", "english", "journal", "authors")
     readonly_fields = ("pages", "file_bytes", "updated_at")
     fieldsets = [
         ("资料信息", {"fields": ["title", "english", "kind", "disease", "edit_version"]}),
-        ("出版信息", {"fields": ["year", "version_label", "journal"]}),
-        ("文件", {"fields": ["document", "cover", "pages", "file_bytes"]}),
+        ("出版信息", {"fields": ["year", "published_on", "authors", "version_label", "journal"]}),
+        ("文件与链接", {"fields": ["document", "source_url", "cover", "pages", "file_bytes"]}),
         ("展示设置", {"fields": ["position", "is_published", "updated_at"]}),
     ]

@@ -26,6 +26,8 @@ call_command("seed_resources")
 call_command("seed_publications")
 call_command("seed_achievements")
 call_command("seed_achievements", file=str(root / "seed/software.json"))
+call_command("seed_achievements", file=str(root / "seed/chinapneumonia-publications.json"))
+call_command("seed_resources", file=str(root / "seed/chinapneumonia-resources.json"))
 call_command("collectstatic", interactive=False, verbosity=0)
 if not args.no_admin and not get_user_model().objects.filter(is_superuser=True).exists():
     print("请设置管理员账号和密码。密码输入时不回显，至少 12 位。")

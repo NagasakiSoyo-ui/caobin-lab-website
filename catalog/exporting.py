@@ -77,6 +77,8 @@ def readable_names(resources):
     <a download> and the PDF viewer saves under the file's own name, so the one exported copy carries it."""
     renamed, used = {}, set()
     for resource in resources:
+        if not resource.document:
+            continue
         url = resource.document.url
         if url in renamed:
             continue

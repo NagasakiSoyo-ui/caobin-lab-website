@@ -35,7 +35,9 @@ class Command(BaseCommand):
                 raise CommandError(f"清单中标题重复：{fields['title']}")
             titles.add(fields['title'])
             for field in ('document', 'cover'):
-                spec = item[field]
+                spec = item.get(field)
+                if not spec:
+                    continue
                 source = (source_root / spec['path']).resolve()
                 name = 'initial/' + spec['path']
                 target = (media_root / name).resolve()
@@ -49,9 +51,13 @@ class Command(BaseCommand):
                 fields[field] = name
             # PDFs were reviewed before admission; keep the original bytes, including
             # reader-compatible permission encryption. No PDF rewriting at startup.
-            if source_root.joinpath(item['document']['path']).stat().st_size != fields['file_bytes'] or fields['pages'] < 1:
+            if item.get('document') and (source_root.joinpath(item['document']['path']).stat().st_size != fields['file_bytes'] or fields['pages'] < 1):
                 raise CommandError(f"PDF 元数据与清单不符：{fields['title']}")
-            match = Q(title=fields['title']) | Q(document=fields['document'])
+            match = Q(title=fields['title'])
+            if fields.get('document'):
+                match |= Q(document=fields['document'])
+            if fields.get('source_url'):
+                match |= Q(source_url=fields['source_url'])
             previous = item.get('previous_document')
             if previous:
                 match |= Q(document=previous)
@@ -59,6 +65,9 @@ class Command(BaseCommand):
             if len(existing) > 1:
                 raise CommandError(f"已有资料匹配不唯一：{fields['title']}")
             obj = existing[0] if existing else Resource()
+            # Catalogue additions never overwrite a customer's PDF, edits or draft.
+            if obj.pk and not item.get('document'):
+                continue
             if obj.pk and (obj.title != fields['title'] or obj.document.name not in (previous, fields['document'])):
                 raise CommandError(f"已有资料与清单冲突，未覆盖：{fields['title']}")
             if obj.pk:
@@ -67,7 +76,7 @@ class Command(BaseCommand):
                 setattr(obj, field, value)
             obj.full_clean()
             updates.append(obj)
-        for item in data['retire']:
+        for item in data.get('retire', []):
             existing = list(Resource.objects.select_for_update().filter(
                 Q(title=item['title']) | Q(document=item['document'])))
             for obj in existing:

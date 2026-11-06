@@ -28,40 +28,83 @@
     });
   }
 
+  function paginate(items, navigation, pageSize, afterRender) {
+    let matches = items;
+    let current = 1;
+    function render() {
+      const total = Math.max(1, Math.ceil(matches.length / pageSize));
+      current = Math.min(current, total);
+      const visible = new Set(matches.slice((current - 1) * pageSize, current * pageSize));
+      items.forEach(item => {item.hidden = !visible.has(item);});
+      navigation.replaceChildren();
+      navigation.hidden = total <= 1;
+      const changePage = page => {
+        current = page;
+        render();
+        const first = matches[(current - 1) * pageSize];
+        if (first) {
+          first.setAttribute('tabindex', '-1');
+          first.focus({preventScroll: true});
+          first.scrollIntoView({block: 'start', behavior: 'auto'});
+        }
+      };
+      const previous = document.createElement('button');
+      previous.type = 'button'; previous.textContent = '上一页'; previous.disabled = current === 1;
+      previous.addEventListener('click', () => changePage(current - 1));
+      const select = document.createElement('select');
+      select.setAttribute('aria-label', '跳转到页');
+      for (let page = 1; page <= total; page++) {
+        const option = document.createElement('option');
+        option.value = String(page); option.textContent = `第 ${page} / ${total} 页`; option.selected = page === current;
+        select.append(option);
+      }
+      select.addEventListener('change', () => changePage(Number(select.value)));
+      const next = document.createElement('button');
+      next.type = 'button'; next.textContent = '下一页'; next.disabled = current === total;
+      next.addEventListener('click', () => changePage(current + 1));
+      navigation.append(previous, select, next);
+      if (afterRender) afterRender();
+    }
+    return filtered => {matches = filtered; current = 1; render();};
+  }
+
   const resourceForm = document.getElementById('resource-filters');
   if (resourceForm) {
     const search = document.getElementById('resource-search');
     const kind = document.getElementById('resource-kind');
     const disease = document.getElementById('resource-disease');
     const cards = [...document.querySelectorAll('#resource-grid .resource-card')];
+    const showPage = paginate(cards, document.getElementById('resource-pagination'), 12);
     const filter = () => {
       const query = normalize(search.value);
-      let count = 0;
-      for (const card of cards) {
-        const matches = (!query || normalize(card.dataset.search).includes(query)) &&
-          (!kind.value || card.dataset.kind === kind.value) && (!disease.value || card.dataset.disease === disease.value);
-        card.hidden = !matches;
-        count += Number(matches);
-      }
-      document.getElementById('result-count').textContent = `显示 ${count} / ${cards.length} 份资料`;
-      document.getElementById('resource-empty').hidden = count > 0;
+      const matches = cards.filter(card => (!query || normalize(card.dataset.search).includes(query)) &&
+          (!kind.value || card.dataset.kind === kind.value) && (!disease.value || card.dataset.disease === disease.value));
+      showPage(matches);
+      document.getElementById('result-count').textContent = `找到 ${matches.length} / ${cards.length} 份资料`;
+      document.getElementById('resource-empty').hidden = matches.length > 0;
     };
     bindFilter(resourceForm, [search, kind, disease], filter);
     document.getElementById('clear-filters').addEventListener('click', () => {resourceForm.reset(); search.focus();});
+    filter();
   }
 
   const yearLinks = [...document.querySelectorAll('[data-publication-year]')];
   if (yearLinks.length) {
     const catalog = document.getElementById('pub-list');
     const groups = [...catalog.querySelectorAll('[data-year-group]')];
+    const papers = [...catalog.querySelectorAll('.pub-entry')];
+    const showPage = paginate(papers, document.getElementById('publication-pagination'), 20, () => {
+      groups.forEach(group => {group.hidden = ![...group.querySelectorAll('.pub-entry')].some(item => !item.hidden);});
+    });
     const selectYear = year => {
-      groups.forEach(group => {group.hidden = year !== 'all' && group.dataset.yearGroup !== year;});
+      const matches = papers.filter(item => year === 'all' || item.dataset.year === year);
+      showPage(matches);
       yearLinks.forEach(link => {
         if (link.dataset.publicationYear === year) link.setAttribute('aria-current', 'true');
         else link.removeAttribute('aria-current');
       });
       catalog.classList.toggle('single-year', year !== 'all');
-      const count = groups.filter(group => !group.hidden).reduce((total, group) => total + group.querySelectorAll('.pub-entry').length, 0);
+      const count = matches.length;
       document.getElementById('pub-count').textContent = `${year === 'all' ? '全部年份' : year + ' 年'}，${count} 条论文`;
     };
     yearLinks.forEach(link => link.addEventListener('click', event => {

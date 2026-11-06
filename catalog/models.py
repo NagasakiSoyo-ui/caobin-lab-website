@@ -329,17 +329,37 @@ class Resource(OrderedContent):
     english = models.CharField("英文标题", max_length=700, blank=True)
     kind = models.CharField("资料类型", max_length=50, help_text="例如：指南、专家共识、指南摘要。")
     disease = models.CharField("疾病方向", max_length=100)
-    year = models.PositiveIntegerField("发表年份", validators=[MinValueValidator(1900), MaxValueValidator(2200)])
+    year = models.PositiveIntegerField("发表年份", null=True, blank=True, validators=[MinValueValidator(1900), MaxValueValidator(2200)])
+    published_on = models.DateField("发布日期", null=True, blank=True)
+    authors = models.CharField("作者或讲者", max_length=500, blank=True)
     version_label = models.CharField("版本说明", max_length=200, blank=True, help_text="例如：2025版 · 2026年刊出。")
     journal = models.CharField("来源或期刊", max_length=200, blank=True)
-    document = models.FileField("PDF 原文", upload_to=upload_path, validators=[validate_pdf])
+    document = models.FileField("PDF 原文", upload_to=upload_path, validators=[validate_pdf], blank=True)
+    source_url = models.URLField("原文或课程链接", max_length=2000, blank=True, validators=[validate_web_url])
     cover = models.ImageField("封面图片", upload_to=upload_path, validators=[validate_image], blank=True)
     pages = models.PositiveIntegerField("页数", default=0, editable=False)
     file_bytes = models.PositiveIntegerField("文件大小", default=0, editable=False)
 
     class Meta(OrderedContent.Meta):
-        ordering = ["-year", "position", "pk"]
+        ordering = ["-year", "-published_on", "position", "pk"]
+        constraints = [models.UniqueConstraint(fields=['source_url'], condition=~models.Q(source_url=''),
+                                               name='unique_resource_source_url')]
         verbose_name = verbose_name_plural = "学习资料"
+
+    def clean(self):
+        super().clean()
+        if not self.document and not self.source_url:
+            raise ValidationError("请上传 PDF 或填写原文、课程链接。")
+        if self.published_on and self.year != self.published_on.year:
+            raise ValidationError({'year': "发表年份应与发布日期一致。"})
+
+    @property
+    def reading_url(self):
+        return self.document.url if self.document else self.source_url
+
+    @property
+    def is_video(self):
+        return self.kind == '视频课程'
 
     def save(self, *args, **kwargs):
         if self.document and (not self.document._committed or not self.pages):
