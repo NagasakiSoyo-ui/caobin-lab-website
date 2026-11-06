@@ -122,7 +122,7 @@ def website_archive():
     with transaction.atomic():
         documents, media = {}, set()
         shared = website_context("index")
-        renamed = readable_names(shared["resources"])
+        renamed = readable_names(shared["resources"] + shared["publications"])
         for filename, template, context in page_manifest(shared):
             html = render_to_string(template, context)
             media.update(media_references(html))

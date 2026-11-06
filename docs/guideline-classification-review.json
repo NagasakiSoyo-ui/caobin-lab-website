@@ -1,0 +1,129 @@
+{
+  "source_archive": "指南共识.zip",
+  "unique_documents": 13,
+  "duplicate_archive_numbers": [
+    4,
+    10
+  ],
+  "learning_only": 1,
+  "team_guidelines": 10,
+  "team_papers": 2,
+  "old_archive_learning_documents": 9,
+  "old_archive_policy": "旧包全部保留学习，不按包自动纳入成果；重复流感指南按原文署名独立认定。",
+  "records": [
+    {
+      "number": 1,
+      "title": "靶向高通量测序在感染性疾病中应用与实践专家共识",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112137-20240927-02208",
+      "pdf_sha256": "342e5f5db142c3cda88de228abcf2c0cb0ae0af293bdaae4461e8715a17a7254"
+    },
+    {
+      "number": 2,
+      "title": "实体肿瘤患者伴发肺炎临床诊疗实践中国专家共识（2024版）",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112152-20240606-00242",
+      "pdf_sha256": "b5d128dc4633a56cea82a94f9f1fa37f415d27c49126071a239686146f2029a9"
+    },
+    {
+      "number": 3,
+      "title": "综合医疗机构结核病发病高危人群的预防性治疗专家共识",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112147-20240328-00173",
+      "pdf_sha256": "ba4efefe6b1654bf1411428eb90ba613b46f2e49418a9ce77d5b4f186c2f2744"
+    },
+    {
+      "number": 4,
+      "title": "下呼吸道感染宏基因组二代测序报告临床解读路径专家共识",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112147-20220701-00553",
+      "pdf_sha256": "410062114a1fb422df729aab1dc8646efd8ea0fc366e828d7b761643bc4a5448"
+    },
+    {
+      "number": 5,
+      "title": "Diagnosis and Management of Community-acquired Pneumonia: An Official American Thoracic Society Clinical Practice Guideline",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页作者名单中列 Bin Cao；通讯作者为 Barbara E. Jones，归类为团队参与。",
+      "doi": "10.1164/rccm.202507-1692st",
+      "pdf_sha256": "f6d9c9e85f0d9a1532de5a14c9a478574b2facac9b6c6ceda5dcbcf8383f91bb"
+    },
+    {
+      "number": 6,
+      "title": "新型冠状病毒肺炎防治专家意见",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112147-112147-20200321-00392",
+      "pdf_sha256": "d7d95da87e0b305fd0687b0c476f2a1a33f2b51afcc51e4eb7abdae3a452e766"
+    },
+    {
+      "number": 7,
+      "title": "流行性感冒诊疗方案（2020年版）",
+      "destination": "学习资料",
+      "evidence": "PDF 第 1 页署名为中华人民共和国国家卫生健康委员会、国家中医药管理局；未据引用或背景推定团队署名。"
+    },
+    {
+      "number": 8,
+      "title": "Clinical practice guideline for long COVID prevention and treatment",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列 Bin Cao 为首位作者。",
+      "doi": "10.1183/13993003.02611-2025",
+      "pdf_sha256": "09e0a6c5755b963cd642a83bee8e7957885ba158a37871c235613b51d4c13e44"
+    },
+    {
+      "number": 9,
+      "title": "呼吸道感染病原学诊断年度进展2021",
+      "destination": "研究成果 / 研究论文",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112147-20211116-00809",
+      "pdf_sha256": "610c3c8d2e2f8881e8d559ecef897c91e1abff1683234e06b3cc0eed0f6b0762"
+    },
+    {
+      "number": 11,
+      "title": "中国成人2019冠状病毒病的诊治与防控指南",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112137-20210112-00090",
+      "pdf_sha256": "33e7cf53a92df8bbb0889f1404269f08efa9d2e24c8db6fba34d02c5e3901e6e"
+    },
+    {
+      "number": 12,
+      "title": "中国流感治疗与药物预防临床实践指南（2025版）",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": true,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112137-20251120-03042",
+      "pdf_sha256": "184f1d49b8e776206aeeb883e715f81d5365d1dcb9aeb237a5c8f24d471850c2"
+    },
+    {
+      "number": 13,
+      "title": "《中国流感治疗与药物预防临床实践指南（2025版）》解读",
+      "destination": "研究成果 / 研究论文",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112137-20251130-03131",
+      "pdf_sha256": "f49d3334800074b505f0d97b6debe45a03efc8a5e1fa07688ada654482bc8496"
+    },
+    {
+      "number": 14,
+      "title": "免疫抑制宿主重症肺炎诊断与治疗专家共识",
+      "destination": "研究成果 / 指南与共识",
+      "keep_learning": false,
+      "evidence": "PDF 第 1 页列曹彬为通讯作者。",
+      "doi": "10.3760/cma.j.cn112147-20250729-00449",
+      "pdf_sha256": "4182b982130621147e86ac5fb4b388ed54c3dc43676c52d46b417772b2fc5ae4"
+    }
+  ]
+}

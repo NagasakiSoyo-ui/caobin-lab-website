@@ -73,6 +73,11 @@
     const search = document.getElementById('resource-search');
     const kind = document.getElementById('resource-kind');
     const disease = document.getElementById('resource-disease');
+    const overview = document.getElementById('resource-overview');
+    const catalogue = document.getElementById('resource-catalog');
+    const showAll = document.getElementById('resource-show-all');
+    const back = document.getElementById('resource-overview-back');
+    let browsingAll = location.hash === '#resource-catalog';
     const cards = [...document.querySelectorAll('#resource-grid .resource-card')];
     const showPage = paginate(cards, document.getElementById('resource-pagination'), 12);
     const filter = () => {
@@ -80,10 +85,39 @@
       const matches = cards.filter(card => (!query || normalize(card.dataset.search).includes(query)) &&
           (!kind.value || card.dataset.kind === kind.value) && (!disease.value || card.dataset.disease === disease.value));
       showPage(matches);
+      const browsing = browsingAll || Boolean(query || kind.value || disease.value);
+      overview.hidden = browsing;
+      catalogue.hidden = !browsing;
+      back.hidden = !browsing;
+      showAll.hidden = browsing;
       document.getElementById('result-count').textContent = `找到 ${matches.length} / ${cards.length} 份资料`;
       document.getElementById('resource-empty').hidden = matches.length > 0;
     };
+    resourceForm.addEventListener('reset', () => {browsingAll = false;});
     bindFilter(resourceForm, [search, kind, disease], filter);
+    const returnOverview = () => {
+      resourceForm.reset();
+      history.replaceState(null, '', location.pathname + location.search);
+      search.focus();
+    };
+    back.addEventListener('click', returnOverview);
+    showAll.addEventListener('click', event => {
+      event.preventDefault();
+      browsingAll = true;
+      filter();
+      catalogue.scrollIntoView({block: 'start'});
+    });
+    document.querySelectorAll('[data-resource-category]').forEach(link => {
+      link.addEventListener('click', event => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        search.value = ''; disease.value = ''; kind.value = link.dataset.resourceCategory;
+        browsingAll = true;
+        filter();
+        resourceForm.scrollIntoView({block: 'start'});
+        kind.focus({preventScroll: true});
+      });
+    });
     document.getElementById('clear-filters').addEventListener('click', () => {resourceForm.reset(); search.focus();});
     filter();
   }

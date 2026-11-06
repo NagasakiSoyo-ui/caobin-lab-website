@@ -14,6 +14,12 @@ LAYERS = [("pathogen", "病原"), ("host", "宿主"), ("clinical", "临床"), ("
 UNSAFE_FILENAME = re.compile(r'[\x00-\x1f\x7f<>:"/\\|?*]+')
 
 
+def pdf_download_name(title):
+    name = " ".join(UNSAFE_FILENAME.sub(" ", title).split())
+    name = name.encode()[:180].decode(errors="ignore").strip(" .")
+    return f"{name or 'document'}.pdf"
+
+
 class Versioned(models.Model):
     version = models.PositiveIntegerField("版本", default=1, editable=False)
     updated_at = models.DateTimeField("最后修改", auto_now=True)
@@ -153,6 +159,7 @@ class Publication(OrderedContent):
     registration_number = models.CharField("专利号或登记号", max_length=80, blank=True)
     registered_on = models.DateField("授权公告日或登记日期", null=True, blank=True)
     url = models.URLField("原文链接", max_length=2000, blank=True, validators=[validate_web_url])
+    document = models.FileField("PDF 原文", upload_to=upload_path, validators=[validate_pdf], blank=True)
     summary = models.TextField("中文概述", blank=True, help_text="仅使用团队提供的介绍或原文摘录，不使用 AI 改写。")
     pmid = models.CharField("PMID", max_length=12, unique=True, null=True, blank=True)
     doi = models.CharField("DOI", max_length=200, unique=True, null=True, blank=True, help_text="保存时自动去掉 https://doi.org/ 前缀并转为小写。")
@@ -189,7 +196,11 @@ class Publication(OrderedContent):
 
     @property
     def original_url(self):
-        return self.url or self.doi_url or self.pubmed_url
+        return self.document.url if self.document else (self.url or self.doi_url or self.pubmed_url)
+
+    @property
+    def download_name(self):
+        return pdf_download_name(self.title)
 
     @property
     def pubmed_url(self):
@@ -358,6 +369,10 @@ class Resource(OrderedContent):
         return self.document.url if self.document else self.source_url
 
     @property
+    def category(self):
+        return '指南与共识' if self.kind in ('指南', '专家共识', '指南摘要', '指南与共识') else self.kind
+
+    @property
     def is_video(self):
         return self.kind == '视频课程'
 
@@ -370,9 +385,7 @@ class Resource(OrderedContent):
     def download_name(self):
         """Readable PDF file name taken from the title; characters not allowed in file names become spaces.
         Kept within 180 UTF-8 bytes so it fits common file-system name limits."""
-        name = " ".join(UNSAFE_FILENAME.sub(" ", self.title).split())
-        name = name.encode()[:180].decode(errors="ignore").strip(" .")
-        return f"{name or 'document'}.pdf"
+        return pdf_download_name(self.title)
 
     @property
     def megabytes(self):
