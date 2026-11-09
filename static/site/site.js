@@ -80,8 +80,11 @@
     const back = document.getElementById('resource-overview-back');
     let browsingAll = false;
     let searchHistoryEntry = false;
+    let appliedFilterKey;
+    const filterKey = () => JSON.stringify([search.value, kind.value, disease.value, browsingAll]);
     const cards = [...document.querySelectorAll('#resource-grid .resource-card')];
     const saveURL = (page, mode = 'push') => {
+      searchHistoryEntry = false;
       const url = new URL(location.href);
       for (const [key, value] of Object.entries({q: search.value, kind: kind.value, disease: disease.value,
           view: browsingAll ? 'all' : '', page: page > 1 ? String(page) : ''})) {
@@ -105,6 +108,7 @@
       document.getElementById('result-count').textContent = `找到 ${matches.length} / ${cards.length} 份资料`;
       document.getElementById('resource-empty').hidden = matches.length > 0;
       saveURL(current, mode);
+      appliedFilterKey = filterKey();
     };
     const restore = () => {
       searchHistoryEntry = false;
@@ -125,7 +129,11 @@
       if (event && event.isComposing) return;
       const editing = event && event.target === search &&
         (event.type === 'input' || event.type === 'compositionend');
-      filter(1, editing && searchHistoryEntry ? 'replace' : 'push');
+      // Blur emits change after input. Rebuilding unchanged results here removes
+      // the pagination control between mousedown and click, swallowing the click.
+      if (filterKey() !== appliedFilterKey) {
+        filter(1, editing && searchHistoryEntry ? 'replace' : 'push');
+      }
       searchHistoryEntry = Boolean(editing);
     };
     bindFilter(resourceForm, [search, kind, disease], updateFilter);
