@@ -11,7 +11,7 @@ from urllib.parse import urlsplit
 from .forms import VersionedForm
 from .widgets import AdminImageWidget
 from .models import (SiteSettings, HomeSlide, Page, ResearchDirection, Project, Member, Publication, Resource,
-                     Figure, PubMedCandidate, PubMedImportRun)
+                     Figure, PubMedCandidate, PubMedImportRun, News)
 from .pubmed import ImportFailure, accept, reset_to_pending
 from .presentation import public_home_slides
 
@@ -43,7 +43,7 @@ class ContentAdmin(admin.ModelAdmin):
                     page = reverse("direction", args=[direction.slug]) + f"#figure-{obj.pk}"
             else:
                 route = {SiteSettings: "index", HomeSlide: "index", Member: "team", Project: "projects",
-                         Publication: "publications", Resource: "resources"}.get(type(obj))
+                         Publication: "publications", Resource: "resources", News: "news"}.get(type(obj))
                 if route:
                     page = reverse(route)
         context["saved_page_url"] = page
@@ -84,6 +84,17 @@ class SiteSettingsAdmin(ContentAdmin):
     def save_model(self, request, obj, form, change):
         obj.pk = 1
         super().save_model(request, obj, form, change)
+
+
+@admin.register(News)
+class NewsAdmin(ContentAdmin):
+    list_display = ("title", "published_on", "position", "is_published", "updated_at")
+    list_filter = ("is_published", "published_on")
+    search_fields = ("title", "text")
+    fieldsets = [
+        ("动态内容", {"fields": ["title", "published_on", "text", "photo", "source_url", "edit_version"]}),
+        ("展示设置", {"fields": ["position", "is_published", "updated_at"]}),
+    ]
 
 
 @admin.register(HomeSlide)

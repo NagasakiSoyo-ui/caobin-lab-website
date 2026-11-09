@@ -59,7 +59,7 @@ class SiteSettings(Versioned):
 
 class Page(Versioned):
     ROUTES = [("index", "首页"), ("research", "研究方向"), ("projects", "科研课题"), ("publications", "研究成果"),
-              ("team", "研究团队"), ("resources", "学习资料"), ("contact", "联系我们")]
+              ("team", "研究团队"), ("resources", "学习资料"), ("news", "学术动态"), ("contact", "联系我们")]
     slug = models.CharField("栏目", max_length=20, choices=ROUTES, unique=True)
     title = models.CharField("栏目名称", max_length=50)
     english = models.CharField("英文名称", max_length=100, blank=True)
@@ -68,6 +68,21 @@ class Page(Versioned):
     class Meta:
         verbose_name = verbose_name_plural = "栏目文字"
         ordering = ["pk"]
+
+    def __str__(self):
+        return self.title
+
+
+class News(OrderedContent):
+    title = models.CharField("标题", max_length=300)
+    published_on = models.DateField("日期", default=date.today)
+    text = models.TextField("正文", blank=True, help_text="填写实际动态内容，段落之间空一行，无需输入 HTML。")
+    photo = models.ImageField("配图", upload_to=upload_path, validators=[validate_image], blank=True)
+    source_url = models.URLField("原文链接", max_length=2000, blank=True, validators=[validate_web_url])
+
+    class Meta(OrderedContent.Meta):
+        ordering = ["position", "-published_on", "-pk"]
+        verbose_name = verbose_name_plural = "学术动态"
 
     def __str__(self):
         return self.title

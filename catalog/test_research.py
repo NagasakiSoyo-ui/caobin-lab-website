@@ -85,13 +85,15 @@ class ResearchSiteTests(MediaMixin, TestCase):
             return {n: archive.read(n).decode() for n in archive.namelist() if n.endswith(".html")}, set(archive.namelist())
 
     # --- structure and content -------------------------------------------------------
-    def test_seven_sections_and_original_content_preserved(self):
+    def test_eight_sections_and_original_content_preserved(self):
         index = self.client.get("/index.html")
         for slug, title in Page.ROUTES:
             self.assertContains(index, f'href="{slug}.html"')
         nav = index.content.decode().split('id="site-nav"')[1].split("</nav>")[0]
-        self.assertEqual(nav.count("<a "), 7)
-        for absent in ("动态", "新闻", "招聘"):
+        self.assertEqual(nav.count("<a "), 8)
+        self.assertLess(nav.index('resources.html'), nav.index('news.html'))
+        self.assertLess(nav.index('news.html'), nav.index('contact.html'))
+        for absent in ("新闻", "招聘"):
             self.assertNotIn(absent, nav)
         self.assertContains(index, 'href="projects.html"')
         projects = self.client.get("/projects.html")
@@ -205,7 +207,7 @@ class ResearchSiteTests(MediaMixin, TestCase):
         pages, names = self.html_pages()
         for direction in ResearchDirection.objects.all():
             self.assertIn(direction.page_name, pages)
-        self.assertEqual(len(pages), 13)
+        self.assertEqual(len(pages), 14)
         self.assertFalse(any(name.startswith("publication-") for name in pages))
         for html in pages.values():
             self.assertNotRegex(html, r'href="publication-[^"]+\.html"')

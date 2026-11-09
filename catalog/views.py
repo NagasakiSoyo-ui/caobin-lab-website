@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, FileResponse, Http404
 from django.views.decorators.http import require_GET
-from .models import Resource, Publication, SiteSettings, Member, HomeSlide, Figure
+from .models import Resource, Publication, SiteSettings, Member, HomeSlide, Figure, News
 from .presentation import render_website, render_direction, public_figures, public_home_slides
 from .exporting import website_archive
 
@@ -49,6 +49,7 @@ def media_file(request, filename):
         (SiteSettings, 'leader_photo', SiteSettings.objects.all()),
         (Member, 'photo', Member.objects.filter(is_published=True)),
         (HomeSlide, 'photo', public_home_slides()),
+        (News, 'photo', News.objects.filter(is_published=True)),
         (Figure, 'image', public_figures()),
     ]
     name, allowed = file.name, False

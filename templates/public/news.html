@@ -1,0 +1,7 @@
+{% extends "public/base.html" %}{% block content %}{% include "public/intro.html" %}
+<section class="container section news-list" aria-label="学术动态">{% for item in news %}
+<article class="news-entry" id="news-{{ item.pk }}"><time datetime="{{ item.published_on|date:'Y-m-d' }}">{{ item.published_on|date:'Y-m-d' }}</time><h2>{{ item.title }}</h2>
+{% if item.photo %}<img class="news-photo" src="{{ item.photo.url }}" alt="{{ item.title }}" loading="lazy">{% endif %}
+{% if item.text %}<div class="news-text">{{ item.text|linebreaks }}</div>{% endif %}
+{% if item.source_url %}<a class="text-link" href="{{ item.source_url }}" target="_blank" rel="noopener">阅读原文 ↗</a>{% endif %}</article>
+{% endfor %}</section>{% endblock %}

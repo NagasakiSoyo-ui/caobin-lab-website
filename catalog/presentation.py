@@ -5,7 +5,7 @@ publication, published figure of a published publication) are applied in one pla
 """
 from django.db.models import Prefetch, Q
 from django.template.loader import render_to_string
-from .models import SiteSettings, HomeSlide, Page, ResearchDirection, Project, Member, Publication, Resource, Figure
+from .models import SiteSettings, HomeSlide, Page, ResearchDirection, Project, Member, Publication, Resource, Figure, News
 
 
 def public_figures():
@@ -66,6 +66,7 @@ def website_context(slug):
         "member_groups": [{"id": key, "title": title, "members": [m for m in members if m.group == key]}
                           for key, title in Member.GROUPS],
         "resources": resources,
+        "news": list(News.objects.filter(is_published=True)),
         "resource_diseases": sorted({r.disease for r in resources}),
         "leader_paragraphs": [p.strip() for p in site.leader_bio.split("\n\n") if p.strip()],
     }
