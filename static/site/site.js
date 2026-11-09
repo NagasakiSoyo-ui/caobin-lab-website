@@ -79,6 +79,7 @@
     const showAll = document.getElementById('resource-show-all');
     const back = document.getElementById('resource-overview-back');
     let browsingAll = false;
+    let searchHistoryEntry = false;
     const cards = [...document.querySelectorAll('#resource-grid .resource-card')];
     const saveURL = (page, mode = 'push') => {
       const url = new URL(location.href);
@@ -106,6 +107,7 @@
       saveURL(current, mode);
     };
     const restore = () => {
+      searchHistoryEntry = false;
       const params = new URL(location.href).searchParams;
       search.value = params.get('q') || '';
       for (const [field, key] of [[kind, 'kind'], [disease, 'disease']]) {
@@ -117,7 +119,17 @@
       filter(Number.isSafeInteger(page) && page > 0 ? page : 1, 'replace');
     };
     resourceForm.addEventListener('reset', () => {browsingAll = false;});
-    bindFilter(resourceForm, [search, kind, disease], () => filter());
+    const updateFilter = event => {
+      // A composing syllable is not a submitted query. One editing session gets one
+      // history entry, so Back returns to the previous view instead of undoing letters.
+      if (event && event.isComposing) return;
+      const editing = event && event.target === search &&
+        (event.type === 'input' || event.type === 'compositionend');
+      filter(1, editing && searchHistoryEntry ? 'replace' : 'push');
+      searchHistoryEntry = Boolean(editing);
+    };
+    bindFilter(resourceForm, [search, kind, disease], updateFilter);
+    resourceForm.addEventListener('compositionend', updateFilter);
     back.addEventListener('click', () => {resourceForm.reset(); search.focus();});
     showAll.addEventListener('click', event => {
       event.preventDefault();
