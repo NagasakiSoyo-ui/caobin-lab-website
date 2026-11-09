@@ -37,7 +37,8 @@ class HomeCarouselTests(MediaMixin, TestCase):
         html = self.client.get('/index.html').content.decode()
         self.assertEqual(html.count('data-slide role='), 4)
         self.assertEqual(html.count('hidden inert aria-hidden="true"'), 3)
-        self.assertEqual(html.count('<h1>'), 1)
+        self.assertEqual(html.count('<h1 '), 1)
+        self.assertIn('<h1 class="visually-hidden">', html)
         self.assertIn('data-carousel-play hidden', html)
 
     def test_restart_preserves_customer_edits_and_deletions(self):

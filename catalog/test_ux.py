@@ -35,12 +35,11 @@ class UsabilityFixTests(MediaMixin, TestCase):
                          (settings.BASE_DIR / "seed/documents/resource-05.pdf").read_bytes())
         self.assertContains(self.client.get("/resources.html"), f'download="{resource.title}.pdf"')
 
-    def test_unpublished_resource_and_images_keep_stored_file_name(self):
+    def test_unpublished_resource_is_private_and_public_image_keeps_file_name(self):
         resource = Resource.objects.get(document="initial/documents/resource-05.pdf")
         Resource.objects.filter(pk=resource.pk).update(is_published=False)
         with closing(self.client.get(resource.document.url)) as response:
-            self.assertEqual(response["Content-Disposition"], 'inline; filename="resource-05.pdf"')
-            self.assertNotIn(quote(resource.title), response["Content-Disposition"])
+            self.assertEqual(response.status_code, 404)
         figure = Figure.objects.exclude(image="").first()
         with closing(self.client.get(figure.image.url)) as image:
             self.assertEqual(image["Content-Disposition"], f'inline; filename="{figure.image.name.rsplit("/", 1)[-1]}"')

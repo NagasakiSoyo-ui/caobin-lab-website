@@ -90,6 +90,7 @@ class HomeSlideAdmin(ContentAdmin):
     search_fields = ("title", "intro")
     fieldsets = [
         ("轮播内容", {"fields": ["title", "english", "intro", "photo", "image_fit", "edit_version"]}),
+        ("来源关联", {"fields": ["source_direction", "source_figure"], "classes": ["collapse"]}),
         ("展示设置", {"fields": ["position", "is_published", "updated_at"],
                     "description": "数字越小越靠前。取消公开可暂时撤下；全部撤下时首页不显示轮播。"}),
     ]
@@ -351,10 +352,24 @@ class ResourceAdmin(ContentAdmin):
     list_display = ("title", "kind", "disease", "year", "is_published")
     list_filter = ("kind", "disease", "is_published")
     search_fields = ("title", "english", "journal", "authors")
-    readonly_fields = ("pages", "file_bytes", "updated_at")
+    readonly_fields = ("pages", "file_bytes", "display_category", "updated_at")
     fieldsets = [
-        ("资料信息", {"fields": ["title", "english", "kind", "disease", "edit_version"]}),
+        ("资料信息", {"fields": ["title", "english", "kind", "display_category", "disease", "edit_version"]}),
         ("出版信息", {"fields": ["year", "published_on", "authors", "version_label", "journal"]}),
         ("文件与链接", {"fields": ["document", "source_url", "cover", "pages", "file_bytes"]}),
         ("展示设置", {"fields": ["position", "is_published", "updated_at"]}),
     ]
+
+    @admin.display(description="前台分类")
+    def display_category(self, obj):
+        return obj.category if obj and obj.kind else "选择资料类型并保存后显示。"
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if db_field.name == "kind":
+            # Existing editorial types remain distinct. The form prevents accidental new
+            # spellings without reclassifying imported records or maintaining a second enum.
+            kinds = Resource.objects.order_by('kind').values_list('kind', flat=True).distinct()
+            return forms.ChoiceField(label=db_field.verbose_name,
+                                     choices=[('', '---------')] + [(kind, kind) for kind in kinds],
+                                     help_text="选择已有资料类型，避免同一类型因不同写法形成重复分类。")
+        return super().formfield_for_dbfield(db_field, request, **kwargs)

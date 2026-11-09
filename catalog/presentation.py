@@ -18,6 +18,12 @@ def public_directions():
     return ResearchDirection.objects.filter(is_published=True)
 
 
+def public_home_slides():
+    return (HomeSlide.objects.filter(is_published=True)
+            .filter(Q(source_direction__isnull=True) | Q(source_direction__in=public_directions()))
+            .filter(Q(source_figure__isnull=True) | Q(source_figure__in=public_figures())))
+
+
 def public_publications():
     return (Publication.objects.filter(is_published=True)
             .prefetch_related(Prefetch("directions", queryset=public_directions())))
@@ -55,7 +61,7 @@ def website_context(slug):
             achievement_sections.append({"kind": kind, "title": "国家发明专利" if kind == "patent" else label, "items": items})
     return {
         "site": site, "pages": pages, "page": current, "route": slug,
-        "home_slides": list(HomeSlide.objects.filter(is_published=True)),
+        "home_slides": list(public_home_slides()),
         "directions": directions,
         "projects": list(public_projects()),
         "publications": publications,

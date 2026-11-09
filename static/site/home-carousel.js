@@ -27,7 +27,15 @@
 
   function show(index, manual = true) {
     if (manual) enabled = false;
+    const focusIndex = [...slides[current].querySelectorAll('a,button')].indexOf(document.activeElement);
     current = (index + slides.length) % slides.length;
+    // Move focus before making the old slide inert, so keyboard navigation never falls to body.
+    if (focusIndex >= 0) {
+      slides[current].classList.add('is-active');
+      slides[current].inert = false;
+      slides[current].setAttribute('aria-hidden', 'false');
+      (slides[current].querySelectorAll('a,button')[focusIndex] || dots[current]).focus({preventScroll: true});
+    }
     slides.forEach((slide, i) => {
       const active = i === current;
       slide.classList.toggle('is-active', active);

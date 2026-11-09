@@ -77,6 +77,12 @@ class HomeSlide(OrderedContent):
     english = models.CharField("英文标题", max_length=300, blank=True)
     intro = models.TextField("介绍", blank=True, help_text="使用团队提供的原文或已核实的原文摘录。")
     photo = models.ImageField("图片", upload_to=upload_path, validators=[validate_image], blank=True)
+    source_direction = models.ForeignKey("ResearchDirection", verbose_name="来源研究方向", null=True, blank=True,
+                                         on_delete=models.CASCADE, related_name="home_slides",
+                                         help_text="来源撤下时此轮播也不展示；删除来源会同时删除引用它的轮播。独立内容可留空。")
+    source_figure = models.ForeignKey("Figure", verbose_name="来源配图", null=True, blank=True,
+                                      on_delete=models.CASCADE, related_name="home_slides",
+                                      help_text="来源配图或所属成果撤下时此轮播也不展示。文字与图片仍由本表编辑，不自动改写。")
     image_fit = models.CharField("图片显示", max_length=10, default="cover",
                                  choices=[("cover", "铺满背景（适合照片）"), ("contain", "完整显示（适合论文配图）")])
 
@@ -365,11 +371,14 @@ class Resource(OrderedContent):
     class Meta(OrderedContent.Meta):
         ordering = ["-year", "-published_on", "position", "pk"]
         constraints = [models.UniqueConstraint(fields=['source_url'], condition=~models.Q(source_url=''),
-                                               name='unique_resource_source_url')]
+                                               name='unique_resource_source_url',
+                                               violation_error_message='该原文或课程链接已被另一份学习资料使用。')]
         verbose_name = verbose_name_plural = "学习资料"
 
     def clean(self):
         super().clean()
+        if self.source_url and Resource.objects.filter(source_url=self.source_url).exclude(pk=self.pk).exists():
+            raise ValidationError({'source_url': '该原文或课程链接已被另一份学习资料使用。'})
         if not self.document and not self.source_url:
             raise ValidationError("请上传 PDF 或填写原文、课程链接。")
         if self.published_on and self.year != self.published_on.year:
@@ -390,6 +399,10 @@ class Resource(OrderedContent):
     def save(self, *args, **kwargs):
         if self.document and (not self.document._committed or not self.pages):
             self.pages, self.file_bytes = pdf_metadata(self.document)
+        elif not self.document:
+            self.pages = self.file_bytes = 0
+        if kwargs.get('update_fields') and 'document' in kwargs['update_fields']:
+            kwargs['update_fields'] = set(kwargs['update_fields']) | {'pages', 'file_bytes'}
         super().save(*args, **kwargs)
 
     @property

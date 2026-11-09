@@ -7,7 +7,7 @@
       {% if slide.photo %}<img class="hero-photo hero-photo-{{ slide.image_fit }}" src="{{ slide.photo.url }}" alt="" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>{% endif %}
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="container hero-grid"><div class="hero-copy"><p class="kicker">{{ site.name }}</p>
-        {% if forloop.first %}<h1>{{ slide.title }}</h1>{% else %}<h2>{{ slide.title }}</h2>{% endif %}
+        <h2>{{ slide.title }}</h2>
         {% if slide.english %}<p class="hero-english" lang="en">{{ slide.english }}</p>{% endif %}
         {% if slide.intro %}<p class="hero-lead">{{ slide.intro }}</p>{% endif %}
         <div class="hero-actions"><a class="button primary" href="research.html">研究方向</a><a class="button ghost" href="team.html">研究团队</a></div>

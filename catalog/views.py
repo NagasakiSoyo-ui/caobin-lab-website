@@ -4,8 +4,8 @@ from django.contrib import admin
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, FileResponse, Http404
 from django.views.decorators.http import require_GET
-from .models import Resource
-from .presentation import render_website, render_direction
+from .models import Resource, Publication, SiteSettings, Member, HomeSlide, Figure
+from .presentation import render_website, render_direction, public_figures, public_home_slides
 from .exporting import website_archive
 
 CSP = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
@@ -41,13 +41,33 @@ def media_file(request, filename):
         raise Http404
     # Browsers let the response's Content-Disposition file name override <a download>, so a published
     # resource PDF is named after its title here too. It stays inline so "阅读原文" still opens in the browser.
-    name = file.name
-    if content_type == "application/pdf":
-        resource = Resource.objects.filter(document=file.relative_to(root).as_posix(), is_published=True).first()
-        if resource:
-            name = resource.download_name
+    relative = file.relative_to(root).as_posix()
+    references = [
+        (Resource, 'document', Resource.objects.filter(is_published=True)),
+        (Publication, 'document', Publication.objects.filter(is_published=True)),
+        (Resource, 'cover', Resource.objects.filter(is_published=True)),
+        (SiteSettings, 'leader_photo', SiteSettings.objects.all()),
+        (Member, 'photo', Member.objects.filter(is_published=True)),
+        (HomeSlide, 'photo', public_home_slides()),
+        (Figure, 'image', public_figures()),
+    ]
+    name, allowed = file.name, False
+    for model, field, public in references:
+        # Editors may preview draft files of models they can view. Removed/orphaned files
+        # stay on disk for backups but are not an anonymous file server.
+        query = model.objects.all() if request.user.is_active and request.user.is_staff and request.user.has_perm(
+            f'catalog.view_{model._meta.model_name}') else public
+        reference = query.filter(**{field: relative}).first()
+        if reference:
+            allowed = True
+            if field == 'document':
+                name = reference.download_name
+            break
+    if not allowed:
+        raise Http404
     response = FileResponse(file.open("rb"), content_type=content_type, filename=name)
     response["X-Content-Type-Options"] = "nosniff"
+    response["Cache-Control"] = "private, no-store"
     return response
 
 

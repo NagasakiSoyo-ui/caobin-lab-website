@@ -43,7 +43,9 @@ def pdf_metadata(file):
             raise ValidationError("文件内容不是有效的 PDF。")
         file.seek(0)
         reader = PdfReader(file, strict=False)
-        if reader.is_encrypted:
+        # Permissions-only PDFs have an empty user password and are readable as-is.
+        # Do not rewrite the original bytes or remove their permissions metadata.
+        if reader.is_encrypted and not reader.decrypt(""):
             raise ValidationError("请先解除 PDF 密码保护。")
         pages = len(reader.pages)
         if not pages:

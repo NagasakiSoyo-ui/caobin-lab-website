@@ -28,7 +28,7 @@
     });
   }
 
-  function paginate(items, navigation, pageSize, afterRender) {
+  function paginate(items, navigation, pageSize, afterRender, onChange) {
     let matches = items;
     let current = 1;
     function render() {
@@ -41,6 +41,7 @@
       const changePage = page => {
         current = page;
         render();
+        if (onChange) onChange(current);
         const first = matches[(current - 1) * pageSize];
         if (first) {
           first.setAttribute('tabindex', '-1');
@@ -65,7 +66,7 @@
       navigation.append(previous, select, next);
       if (afterRender) afterRender();
     }
-    return filtered => {matches = filtered; current = 1; render();};
+    return (filtered, page = 1) => {matches = filtered; current = page; render(); return current;};
   }
 
   const resourceForm = document.getElementById('resource-filters');
@@ -77,14 +78,24 @@
     const catalogue = document.getElementById('resource-catalog');
     const showAll = document.getElementById('resource-show-all');
     const back = document.getElementById('resource-overview-back');
-    let browsingAll = location.hash === '#resource-catalog';
+    let browsingAll = false;
     const cards = [...document.querySelectorAll('#resource-grid .resource-card')];
-    const showPage = paginate(cards, document.getElementById('resource-pagination'), 12);
-    const filter = () => {
+    const saveURL = (page, mode = 'push') => {
+      const url = new URL(location.href);
+      for (const [key, value] of Object.entries({q: search.value, kind: kind.value, disease: disease.value,
+          view: browsingAll ? 'all' : '', page: page > 1 ? String(page) : ''})) {
+        if (value) url.searchParams.set(key, value);
+        else url.searchParams.delete(key);
+      }
+      url.hash = browsingAll || search.value || kind.value || disease.value ? 'resource-catalog' : '';
+      if (url.href !== location.href) history[mode === 'replace' ? 'replaceState' : 'pushState'](null, '', url);
+    };
+    const showPage = paginate(cards, document.getElementById('resource-pagination'), 12, null, saveURL);
+    const filter = (page = 1, mode = 'push') => {
       const query = normalize(search.value);
       const matches = cards.filter(card => (!query || normalize(card.dataset.search).includes(query)) &&
           (!kind.value || card.dataset.kind === kind.value) && (!disease.value || card.dataset.disease === disease.value));
-      showPage(matches);
+      const current = showPage(matches, page);
       const browsing = browsingAll || Boolean(query || kind.value || disease.value);
       overview.hidden = browsing;
       catalogue.hidden = !browsing;
@@ -92,15 +103,22 @@
       showAll.hidden = browsing;
       document.getElementById('result-count').textContent = `找到 ${matches.length} / ${cards.length} 份资料`;
       document.getElementById('resource-empty').hidden = matches.length > 0;
+      saveURL(current, mode);
+    };
+    const restore = () => {
+      const params = new URL(location.href).searchParams;
+      search.value = params.get('q') || '';
+      for (const [field, key] of [[kind, 'kind'], [disease, 'disease']]) {
+        const value = params.get(key) || '';
+        field.value = [...field.options].some(option => option.value === value) ? value : '';
+      }
+      browsingAll = params.get('view') === 'all' || location.hash === '#resource-catalog';
+      const page = Number(params.get('page'));
+      filter(Number.isSafeInteger(page) && page > 0 ? page : 1, 'replace');
     };
     resourceForm.addEventListener('reset', () => {browsingAll = false;});
-    bindFilter(resourceForm, [search, kind, disease], filter);
-    const returnOverview = () => {
-      resourceForm.reset();
-      history.replaceState(null, '', location.pathname + location.search);
-      search.focus();
-    };
-    back.addEventListener('click', returnOverview);
+    bindFilter(resourceForm, [search, kind, disease], () => filter());
+    back.addEventListener('click', () => {resourceForm.reset(); search.focus();});
     showAll.addEventListener('click', event => {
       event.preventDefault();
       browsingAll = true;
@@ -108,6 +126,11 @@
       catalogue.scrollIntoView({block: 'start'});
     });
     document.querySelectorAll('[data-resource-category]').forEach(link => {
+      const url = new URL(location.href);
+      url.search = '';
+      url.searchParams.set('kind', link.dataset.resourceCategory);
+      url.hash = 'resource-catalog';
+      link.href = url.href;
       link.addEventListener('click', event => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
@@ -119,7 +142,10 @@
       });
     });
     document.getElementById('clear-filters').addEventListener('click', () => {resourceForm.reset(); search.focus();});
-    filter();
+    window.addEventListener('popstate', restore);
+    window.addEventListener('pageshow', restore);
+    window.addEventListener('hashchange', restore);
+    restore();
   }
 
   const yearLinks = [...document.querySelectorAll('[data-publication-year]')];

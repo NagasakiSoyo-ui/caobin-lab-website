@@ -141,7 +141,7 @@ class ImageEditingTests(MediaMixin, TestCase):
             member.refresh_from_db()
             self.assertEqual(member.photo.name, original)
 
-    def test_existing_protected_pdf_does_not_block_cover_edit_but_new_upload_is_checked(self):
+    def test_permissions_only_pdf_allows_cover_edit_and_original_reupload(self):
         resource = Resource.objects.get(document="initial/documents/resource-05.pdf")
         with resource.document.open("rb") as file:
             original = file.read()
@@ -153,7 +153,10 @@ class ImageEditingTests(MediaMixin, TestCase):
             self.assertEqual(file.read(), original)
         replacement = SimpleUploadedFile("protected.pdf", original, content_type="application/pdf")
         response = self.client.post(self.url(resource), {**self.payload(resource), 'document': replacement})
-        self.assertContains(response, '请先解除 PDF 密码保护')
+        self.assertEqual(response.status_code, 302)
+        resource.refresh_from_db()
+        with resource.document.open('rb') as file:
+            self.assertEqual(file.read(), original)
 
     def test_direction_image_management_prefills_and_deletes(self):
         direction = ResearchDirection.objects.first()

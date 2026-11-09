@@ -32,6 +32,7 @@ class Command(BaseCommand):
             if not (Path(settings.MEDIA_ROOT) / figure.image.name).is_file():
                 raise CommandError(f'首页轮播原图缺失：{figure.image.name}')
             HomeSlide.objects.create(title=direction.title, intro=direction.text, photo=figure.image.name,
+                                     source_direction=direction, source_figure=figure,
                                      image_fit='contain', position=position, is_published=True)
             created += 1
         SeedCheckpoint.objects.create(key=key, detail=f'首页轮播新增 {created} 张；标题和介绍取自现有研究方向，图片取自已公开论文原图。')
