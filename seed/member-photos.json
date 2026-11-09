@@ -1,0 +1,117 @@
+{
+  "checkpoint": "team-photos-20261109",
+  "members": [
+    {
+      "name": "周飞",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-周飞.png",
+        "sha256": "216b0fa5ff5180e46e54191ae44d4d10a2352bf18951b1fc51be71d6b0056691"
+      }
+    },
+    {
+      "name": "张玉林",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-张玉林.jpg",
+        "sha256": "3c10f70ccd261aff74de11b7a8efb8ec2e25dfa9d104a66ee4618284418deb7e"
+      }
+    },
+    {
+      "name": "徐九洋",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-徐九洋.jpg",
+        "sha256": "91e8d250ad21f35142f3015766470c0c996ab4e19da9436c115020aa0944d105"
+      }
+    },
+    {
+      "name": "李海波",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-李海波.jpg",
+        "sha256": "a19054a79701af5602065fe9701cb19eff75b9b1eb26c08eaf9321269e56620c"
+      }
+    },
+    {
+      "name": "李辉",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-李辉.png",
+        "sha256": "7867ce8a9b662f4b5e5f31861e80f2a70ab8b3715bb829fe6a659fe1ec9f4e38"
+      }
+    },
+    {
+      "name": "王一民",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-王一民.jpg",
+        "sha256": "51e0070b04a8a165d5e44fed67659bbcf4576fe69d5c8ddbacee164b6991f04a"
+      }
+    },
+    {
+      "name": "王业明",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-王业明.png",
+        "sha256": "c4b167e3a9db9ceac7900105a3fc7632ef5f0ce689ee0d1ab5a6f2d141979fa0"
+      }
+    },
+    {
+      "name": "王在",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-王在.jpg",
+        "sha256": "a1d70a5bbd27a5ca81a6bff5d066877cf82eb15fa744ef42286079dbebc35776"
+      }
+    },
+    {
+      "name": "谷晓颖",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-谷晓颖.jpg",
+        "sha256": "de53b174a6fb0e8dd63ac128519a0f18132ac4e05215bfa508c29112cecc2c8d"
+      }
+    },
+    {
+      "name": "赵建康",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-赵建康.jpg",
+        "sha256": "d2ea837c5ce55dea36c47c920139845ded0fd95a422fc83092922cd17e1d4299"
+      }
+    },
+    {
+      "name": "邹晓辉",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-邹晓辉.jpg",
+        "sha256": "931282d81089b38c0161e35e33f5a4a1ab7560a75641c204787f04da323c7f62"
+      }
+    },
+    {
+      "name": "鲁炳怀",
+      "group": "faculty",
+      "photo": {
+        "path": "assets/people/faculty-鲁炳怀.jpg",
+        "sha256": "2441185088ab62c3dffcd8a11c0e06594da26243ed8aa8ddde0156fa989ad3ec"
+      }
+    },
+    {
+      "name": "何迪",
+      "group": "postdocs",
+      "photo": {
+        "path": "assets/people/postdocs-何迪.jpg",
+        "sha256": "80d8053b550a0fde092c8449792141d6f3a65bec7d2215523882fd07780a9999"
+      }
+    },
+    {
+      "name": "李子尧",
+      "group": "postdocs",
+      "photo": {
+        "path": "assets/people/postdocs-李子尧.jpg",
+        "sha256": "f6e2ea09214846233668bbf62d1045aa588ddb7d95e8ceabbc79748d078027cf"
+      }
+    }
+  ]
+}

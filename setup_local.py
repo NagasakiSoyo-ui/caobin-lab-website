@@ -22,6 +22,7 @@ from django.core.management import call_command
 from django.contrib.auth import get_user_model
 call_command("migrate", interactive=False)
 call_command("seed_site")
+call_command("seed_member_photos")
 call_command("seed_resources")
 call_command("seed_publications")
 call_command("seed_achievements")
