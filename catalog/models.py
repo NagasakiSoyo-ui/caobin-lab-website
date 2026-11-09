@@ -370,7 +370,7 @@ class Resource(OrderedContent):
     file_bytes = models.PositiveIntegerField("文件大小", default=0, editable=False)
 
     class Meta(OrderedContent.Meta):
-        ordering = ["-year", "-published_on", "position", "pk"]
+        ordering = ["position", "-year", "-published_on", "pk"]
         constraints = [models.UniqueConstraint(fields=['source_url'], condition=~models.Q(source_url=''),
                                                name='unique_resource_source_url',
                                                violation_error_message='该原文或课程链接已被另一份学习资料使用。')]

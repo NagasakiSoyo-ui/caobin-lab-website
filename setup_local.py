@@ -32,6 +32,7 @@ call_command("seed_achievements", file=str(root / "seed/chinapneumonia-publicati
 call_command("seed_resources", file=str(root / "seed/chinapneumonia-resources.json"))
 call_command("classify_guidelines")
 call_command("curate_learning_resources")
+call_command("order_resources")
 call_command("seed_home_slides")
 call_command("collectstatic", interactive=False, verbosity=0)
 if not args.no_admin and not get_user_model().objects.filter(is_superuser=True).exists():

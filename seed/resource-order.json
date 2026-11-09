@@ -1,0 +1,35 @@
+{
+  "checkpoint": "representative-guidelines-order-20261109",
+  "resources": [
+    {
+      "title": "中国流感治疗与药物预防临床实践指南（2025版）",
+      "document": "initial/documents/guidelines-20261106-12.pdf",
+      "source_url": ""
+    },
+    {
+      "title": "中国成人社区获得性肺炎诊断和治疗指南（2016年版）",
+      "document": "initial/documents/resource-02.pdf",
+      "source_url": ""
+    },
+    {
+      "title": "侵袭性肺真菌病诊断与治疗指南（2025年版）",
+      "document": "",
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/41362140/"
+    },
+    {
+      "title": "支气管哮喘防治指南（2024年版）",
+      "document": "initial/documents/resource-08.pdf",
+      "source_url": ""
+    },
+    {
+      "title": "慢性阻塞性肺疾病急性加重围出院期管理与随访指南（2024年版）",
+      "document": "initial/documents/resource-07.pdf",
+      "source_url": ""
+    },
+    {
+      "title": "中国成人支气管扩张症诊断与治疗专家共识",
+      "document": "initial/documents/resource-04.pdf",
+      "source_url": ""
+    }
+  ]
+}

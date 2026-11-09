@@ -368,7 +368,7 @@ class ImportRunAdmin(admin.ModelAdmin):
 
 @admin.register(Resource)
 class ResourceAdmin(ContentAdmin):
-    list_display = ("title", "kind", "disease", "year", "is_published")
+    list_display = ("title", "kind", "disease", "year", "position", "is_published")
     list_filter = ("kind", "disease", "is_published")
     search_fields = ("title", "english", "journal", "authors")
     readonly_fields = ("pages", "file_bytes", "display_category", "updated_at")
