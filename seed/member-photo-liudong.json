@@ -1,0 +1,13 @@
+{
+  "checkpoint": "member-photo-liudong-20261109",
+  "members": [
+    {
+      "name": "刘东",
+      "group": "students",
+      "photo": {
+        "path": "assets/people/students-刘东.jpg",
+        "sha256": "eeaec0fc8e6a3933d2d588199b30052f9af94ef5163ab3b92a90f281cf8acdb7"
+      }
+    }
+  ]
+}

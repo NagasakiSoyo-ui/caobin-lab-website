@@ -38,13 +38,13 @@ const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await search.pressSequentially('流感');
     await search.press('Backspace');
     await search.press('Backspace');
-    await page.locator('[data-resource-category="视频课程"]').click();
+    await page.locator('[data-resource-category="指南与共识"]').click();
     const categoryURL = await currentURL();
     await search.pressSequentially('流感');
     await page.goBack();
     await page.waitForURL(categoryURL);
     assert.equal(await currentURL(), categoryURL);
-    assert.equal(await page.locator('#resource-kind').inputValue(), '视频课程');
+    assert.equal(await page.locator('#resource-kind').inputValue(), '指南与共识');
     assert.equal(await search.inputValue(), '');
 
     await open();

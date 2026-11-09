@@ -391,7 +391,7 @@ class Resource(OrderedContent):
 
     @property
     def category(self):
-        return '指南与共识' if self.kind in ('指南', '专家共识', '指南摘要', '指南与共识') else self.kind
+        return '指南与共识' if self.kind in ('指南', '专家共识', '指南摘要', '指南与共识', '诊疗方案') else self.kind
 
     @property
     def is_video(self):
