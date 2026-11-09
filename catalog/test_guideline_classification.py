@@ -78,17 +78,15 @@ class GuidelineClassificationTests(MediaMixin, TestCase):
                 obj = Publication.objects.get(doi=item['publication']['doi'])
                 self.assertTrue(obj.original_url.startswith('/media/'))
 
-    def test_overview_groups_types_and_caps_each_preview_without_losing_catalogue(self):
+    def test_catalogue_contains_all_public_resources_without_preview_gate(self):
         self.classify()
         for index in range(8):
             Resource.objects.create(title=f'病例 {index}', kind='病例讨论', disease='肺炎',
                                     source_url=f'https://example.org/{index}', year=2026, is_published=True)
         response = self.client.get('/resources.html')
-        groups = {group['kind']: group for group in response.context['resource_groups']}
-        self.assertEqual(groups['病例讨论']['count'], 8)
-        self.assertEqual(len(groups['病例讨论']['preview']), 3)
-        self.assertIn('指南与共识', groups)
-        self.assertNotIn('专家共识', groups)
         self.assertEqual(len(response.context['resources']), 18)
-        self.assertContains(response, 'resource-overview')
-        self.assertContains(response, '返回分类概览')
+        self.assertContains(response, 'class="resource-card"', count=18)
+        self.assertContains(response, 'id="resource-catalog"')
+        self.assertNotContains(response, 'resource-overview')
+        self.assertNotContains(response, '查看全部资料')
+        self.assertNotContains(response, 'resource-kind')

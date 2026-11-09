@@ -72,39 +72,30 @@
   const resourceForm = document.getElementById('resource-filters');
   if (resourceForm) {
     const search = document.getElementById('resource-search');
-    const kind = document.getElementById('resource-kind');
     const disease = document.getElementById('resource-disease');
-    const overview = document.getElementById('resource-overview');
-    const catalogue = document.getElementById('resource-catalog');
-    const showAll = document.getElementById('resource-show-all');
-    const back = document.getElementById('resource-overview-back');
-    let browsingAll = false;
     let searchHistoryEntry = false;
     let appliedFilterKey;
-    const filterKey = () => JSON.stringify([search.value, kind.value, disease.value, browsingAll]);
+    const filterKey = () => JSON.stringify([search.value, disease.value]);
     const cards = [...document.querySelectorAll('#resource-grid .resource-card')];
     const saveURL = (page, mode = 'push') => {
       searchHistoryEntry = false;
       const url = new URL(location.href);
-      for (const [key, value] of Object.entries({q: search.value, kind: kind.value, disease: disease.value,
-          view: browsingAll ? 'all' : '', page: page > 1 ? String(page) : ''})) {
+      url.searchParams.delete('kind');
+      url.searchParams.delete('view');
+      for (const [key, value] of Object.entries({q: search.value, disease: disease.value,
+          page: page > 1 ? String(page) : ''})) {
         if (value) url.searchParams.set(key, value);
         else url.searchParams.delete(key);
       }
-      url.hash = browsingAll || search.value || kind.value || disease.value ? 'resource-catalog' : '';
+      url.hash = page > 1 || search.value || disease.value ? 'resource-catalog' : '';
       if (url.href !== location.href) history[mode === 'replace' ? 'replaceState' : 'pushState'](null, '', url);
     };
     const showPage = paginate(cards, document.getElementById('resource-pagination'), 12, null, saveURL);
     const filter = (page = 1, mode = 'push') => {
       const query = normalize(search.value);
       const matches = cards.filter(card => (!query || normalize(card.dataset.search).includes(query)) &&
-          (!kind.value || card.dataset.kind === kind.value) && (!disease.value || card.dataset.disease === disease.value));
+          (!disease.value || card.dataset.disease === disease.value));
       const current = showPage(matches, page);
-      const browsing = browsingAll || Boolean(query || kind.value || disease.value);
-      overview.hidden = browsing;
-      catalogue.hidden = !browsing;
-      back.hidden = !browsing;
-      showAll.hidden = browsing;
       document.getElementById('result-count').textContent = `找到 ${matches.length} / ${cards.length} 份资料`;
       document.getElementById('resource-empty').hidden = matches.length > 0;
       saveURL(current, mode);
@@ -114,15 +105,11 @@
       searchHistoryEntry = false;
       const params = new URL(location.href).searchParams;
       search.value = params.get('q') || '';
-      for (const [field, key] of [[kind, 'kind'], [disease, 'disease']]) {
-        const value = params.get(key) || '';
-        field.value = [...field.options].some(option => option.value === value) ? value : '';
-      }
-      browsingAll = params.get('view') === 'all' || location.hash === '#resource-catalog';
+      const value = params.get('disease') || '';
+      disease.value = [...disease.options].some(option => option.value === value) ? value : '';
       const page = Number(params.get('page'));
       filter(Number.isSafeInteger(page) && page > 0 ? page : 1, 'replace');
     };
-    resourceForm.addEventListener('reset', () => {browsingAll = false;});
     const updateFilter = event => {
       // A composing syllable is not a submitted query. One editing session gets one
       // history entry, so Back returns to the previous view instead of undoing letters.
@@ -136,31 +123,8 @@
       }
       searchHistoryEntry = Boolean(editing);
     };
-    bindFilter(resourceForm, [search, kind, disease], updateFilter);
+    bindFilter(resourceForm, [search, disease], updateFilter);
     resourceForm.addEventListener('compositionend', updateFilter);
-    back.addEventListener('click', () => {resourceForm.reset(); search.focus();});
-    showAll.addEventListener('click', event => {
-      event.preventDefault();
-      browsingAll = true;
-      filter();
-      catalogue.scrollIntoView({block: 'start'});
-    });
-    document.querySelectorAll('[data-resource-category]').forEach(link => {
-      const url = new URL(location.href);
-      url.search = '';
-      url.searchParams.set('kind', link.dataset.resourceCategory);
-      url.hash = 'resource-catalog';
-      link.href = url.href;
-      link.addEventListener('click', event => {
-        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-        event.preventDefault();
-        search.value = ''; disease.value = ''; kind.value = link.dataset.resourceCategory;
-        browsingAll = true;
-        filter();
-        resourceForm.scrollIntoView({block: 'start'});
-        kind.focus({preventScroll: true});
-      });
-    });
     document.getElementById('clear-filters').addEventListener('click', () => {resourceForm.reset(); search.focus();});
     window.addEventListener('popstate', restore);
     window.addEventListener('pageshow', restore);

@@ -39,7 +39,7 @@ class LearningScopeTests(MediaMixin, TestCase):
         draft.refresh_from_db()
         self.assertFalse(draft.is_published)
         self.assertEqual(list(Publication.objects.values()), publications)
-        self.assertEqual(website_context('resources')['resource_kinds'], ['指南与共识'])
+        self.assertEqual({r.category for r in website_context('resources')['resources']}, {'指南与共识'})
         html = self.client.get('/resources.html').content.decode()
         self.assertIn('范围测试-诊疗方案', html)
         self.assertNotIn('data-resource-category="诊疗方案"', html)

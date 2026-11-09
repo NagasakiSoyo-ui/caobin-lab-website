@@ -41,11 +41,6 @@ def website_context(slug):
     current = next(page for page in pages if page.slug == slug)
     members = list(Member.objects.filter(is_published=True))
     resources = list(Resource.objects.filter(is_published=True))
-    resource_kinds = sorted({r.category for r in resources}, key=lambda kind: (kind != '指南与共识', kind))
-    resource_groups = []
-    for kind in resource_kinds:
-        items = [r for r in resources if r.category == kind]
-        resource_groups.append({'kind': kind, 'count': len(items), 'preview': items[:3]})
     directions = list(public_directions())
     figures = list(public_figures().prefetch_related("directions"))
     for direction in directions:
@@ -71,8 +66,6 @@ def website_context(slug):
         "member_groups": [{"id": key, "title": title, "members": [m for m in members if m.group == key]}
                           for key, title in Member.GROUPS],
         "resources": resources,
-        "resource_kinds": resource_kinds,
-        "resource_groups": resource_groups,
         "resource_diseases": sorted({r.disease for r in resources}),
         "leader_paragraphs": [p.strip() for p in site.leader_bio.split("\n\n") if p.strip()],
     }
