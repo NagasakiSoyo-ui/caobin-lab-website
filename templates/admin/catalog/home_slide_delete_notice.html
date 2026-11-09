@@ -1,0 +1,6 @@
+{% for model_name, count in model_count %}{% if model_name == "首页轮播" %}
+<div class="editor-notice editor-error">
+  <strong>此操作会删除 {{ count }} 张首页轮播，包括其中单独编辑的标题、介绍和图片引用。</strong>
+  <p>具体条目见下方删除清单。若只想暂时下线，请返回编辑页取消公开，不要删除。</p>
+</div>
+{% endif %}{% endfor %}

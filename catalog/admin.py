@@ -6,11 +6,14 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
+from django.utils.html import format_html_join
+from urllib.parse import urlsplit
 from .forms import VersionedForm
 from .widgets import AdminImageWidget
 from .models import (SiteSettings, HomeSlide, Page, ResearchDirection, Project, Member, Publication, Resource,
                      Figure, PubMedCandidate, PubMedImportRun)
 from .pubmed import ImportFailure, accept, reset_to_pending
+from .presentation import public_home_slides
 
 admin.site.site_header = "后台管理"
 admin.site.site_title = "后台管理"
@@ -85,15 +88,31 @@ class SiteSettingsAdmin(ContentAdmin):
 
 @admin.register(HomeSlide)
 class HomeSlideAdmin(ContentAdmin):
-    list_display = ("title", "position", "is_published", "updated_at")
+    list_display = ("title", "position", "is_published", "front_status", "updated_at")
+    list_select_related = ("source_direction", "source_figure__publication")
+    readonly_fields = ("front_status", "updated_at")
     list_filter = ("is_published",)
     search_fields = ("title", "intro")
     fieldsets = [
         ("轮播内容", {"fields": ["title", "english", "intro", "photo", "image_fit", "edit_version"]}),
         ("来源关联", {"fields": ["source_direction", "source_figure"], "classes": ["collapse"]}),
-        ("展示设置", {"fields": ["position", "is_published", "updated_at"],
+        ("展示设置", {"fields": ["position", "is_published", "front_status", "updated_at"],
                     "description": "数字越小越靠前。取消公开可暂时撤下；全部撤下时首页不显示轮播。"}),
     ]
+
+    @admin.display(description="前台状态")
+    def front_status(self, obj):
+        if not obj or not obj.pk:
+            return "保存后显示"
+        if not obj.is_published:
+            return "草稿"
+        if public_home_slides().filter(pk=obj.pk).exists():
+            return "已显示"
+        if obj.source_direction and not obj.source_direction.is_published:
+            return "来源研究方向未公开，未展示"
+        if obj.source_figure and not obj.source_figure.is_published:
+            return "来源配图未公开，未展示"
+        return "来源配图所属成果未公开，未展示"
 
 
 @admin.register(Page)
@@ -373,3 +392,24 @@ class ResourceAdmin(ContentAdmin):
                                      choices=[('', '---------')] + [(kind, kind) for kind in kinds],
                                      help_text="选择已有资料类型，避免同一类型因不同写法形成重复分类。")
         return super().formfield_for_dbfield(db_field, request, **kwargs)
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        if not obj.source_url or 'source_url' not in form.changed_data:
+            return
+
+        def comparison_key(value):
+            url = urlsplit(value)
+            return url.netloc.casefold(), url.path.rstrip('/'), url.query
+
+        # Different schemes/trailing slashes can be different resources. Flag candidates
+        # for the editor; never rewrite their original URLs or silently merge records.
+        key = comparison_key(obj.source_url)
+        candidates = Resource.objects.exclude(pk=obj.pk).filter(source_url__icontains=key[0])
+        similar = [item for item in candidates if comparison_key(item.source_url) == key][:5]
+        if similar:
+            links = format_html_join('；', '<a href="{}">{}</a>',
+                                     ((reverse('admin:catalog_resource_change', args=[item.pk]), item.title)
+                                      for item in similar))
+            self.message_user(request, format_html('已保存。以下资料的链接可能指向相同内容，请核对（原链接未修改）：{}', links),
+                              level=messages.WARNING)

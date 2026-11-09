@@ -122,3 +122,48 @@ class ReviewRegressionTests(MediaMixin, TestCase):
         existing = set(Resource.objects.values_list('kind', flat=True))
         self.assertEqual({value for value, label in form.fields['kind'].choices if value}, existing)
         self.assertContains(self.client.get('/index.html'), '全部学习资料 →')
+
+    def test_source_visibility_status_and_cascade_delete_notices(self):
+        self.client.force_login(self.owner, backend='django.contrib.auth.backends.ModelBackend')
+        slide = HomeSlide.objects.filter(source_figure__isnull=False).first()
+        sources = [(slide.source_direction, '来源研究方向未公开'),
+                   (slide.source_figure, '来源配图未公开'),
+                   (slide.source_figure.publication, '来源配图所属成果未公开')]
+        for source, message in sources:
+            source.is_published = False
+            source.save()
+            self.assertContains(self.client.get(f'/manage/catalog/homeslide/{slide.pk}/change/'), message)
+            self.assertContains(self.client.get('/manage/catalog/homeslide/'), message)
+            response = self.client.get(f'/manage/catalog/{source._meta.model_name}/{source.pk}/delete/')
+            self.assertContains(response, '此操作会删除 1 张首页轮播')
+            self.assertContains(response, slide.title)
+            source.is_published = True
+            source.save()
+        response = self.client.post('/manage/catalog/figure/',
+                                    {'action': 'delete_selected', '_selected_action': [slide.source_figure_id]})
+        self.assertContains(response, '此操作会删除 1 张首页轮播')
+        self.assertTrue(HomeSlide.objects.filter(pk=slide.pk).exists())
+
+    def test_similar_url_warns_without_rewriting_or_forcing_a_merge(self):
+        self.client.force_login(self.owner, backend='django.contrib.auth.backends.ModelBackend')
+        existing = Resource.objects.first()
+        existing.source_url = 'https://example.com/guidance'
+        existing.save()
+        original = 'http://EXAMPLE.COM/guidance/'
+        response = self.client.post('/manage/catalog/resource/add/', {
+            'title': '另一个来源', 'kind': existing.kind, 'disease': '肺炎', 'position': 100,
+            'source_url': original}, follow=True)
+        self.assertContains(response, '链接可能指向相同内容')
+        self.assertContains(response, existing.title)
+        self.assertTrue(Resource.objects.filter(source_url=original).exists())
+        existing.refresh_from_db()
+        self.assertEqual(existing.source_url, 'https://example.com/guidance')
+
+    def test_pdf_filename_bounds_preserve_title_and_windows_path_margin(self):
+        resource = Resource(title='Long original scientific title ' * 20)
+        original = resource.title
+        self.assertLessEqual(len(resource.download_name), 100)
+        self.assertLessEqual(len(resource.download_name.encode()), 184)
+        self.assertLess(len('C:/Users/Customer Name/Downloads/caobin-lab-offline/caobin-lab-offline/media/initial/documents/'
+                            + resource.download_name), 260)
+        self.assertEqual(resource.title, original)

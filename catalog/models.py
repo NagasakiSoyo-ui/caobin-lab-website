@@ -16,7 +16,8 @@ UNSAFE_FILENAME = re.compile(r'[\x00-\x1f\x7f<>:"/\\|?*]+')
 
 def pdf_download_name(title):
     name = " ".join(UNSAFE_FILENAME.sub(" ", title).split())
-    name = name.encode()[:180].decode(errors="ignore").strip(" .")
+    # Bound both English character count (Windows paths) and UTF-8 bytes (other filesystems).
+    name = name[:96].encode()[:180].decode(errors="ignore").strip(" .")
     return f"{name or 'document'}.pdf"
 
 
