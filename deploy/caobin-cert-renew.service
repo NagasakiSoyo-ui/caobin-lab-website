@@ -1,0 +1,8 @@
+[Unit]
+Description=Renew Caobin Lab IP certificate
+After=network-online.target nginx.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/caobin-certbot/bin/certbot renew --quiet --deploy-hook "/usr/bin/systemctl reload nginx"

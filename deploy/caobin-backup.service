@@ -1,0 +1,16 @@
+[Unit]
+Description=Back up Caobin Lab database and media
+
+[Service]
+Type=oneshot
+User=caobinlab
+Group=caobinlab
+WorkingDirectory=/srv/caobin-lab/current
+EnvironmentFile=/etc/caobin-lab/environment
+ExecStart=/srv/caobin-lab/venv/bin/python manage.py backup_site
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/caobin-lab/data
