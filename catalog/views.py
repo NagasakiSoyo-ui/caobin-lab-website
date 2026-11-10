@@ -1,12 +1,15 @@
+import hashlib
 from pathlib import Path
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, FileResponse, Http404
 from django.views.decorators.http import require_GET
+from django.utils.cache import get_conditional_response
 from .models import Resource, Publication, SiteSettings, Member, HomeSlide, Figure, News
 from .presentation import render_website, render_direction, public_figures, public_home_slides
 from .exporting import website_archive
+from .image_previews import image_preview
 
 CSP = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
 
@@ -66,6 +69,24 @@ def media_file(request, filename):
             break
     if not allowed:
         raise Http404
+    if 'width' in request.GET:
+        try:
+            file = image_preview(file, int(request.GET['width']))
+        except ValueError:
+            return HttpResponse('Unsupported image preview', status=400)
+        content_type, name = 'image/webp', file.name
+    # Revalidate only after checking visibility, so withdrawal immediately blocks reuse.
+    # Private browser caches may reuse bytes on 304; shared caches must not retain them.
+    if content_type.startswith('image/'):
+        stat = file.stat()
+        etag = '"' + hashlib.sha256(f'{file}:{stat.st_mtime_ns}:{stat.st_size}'.encode()).hexdigest() + '"'
+        response = get_conditional_response(request, etag=etag)
+        if response is None:
+            response = FileResponse(file.open('rb'), content_type=content_type, filename=name)
+        response['ETag'] = etag
+        response['Cache-Control'] = 'private, no-cache'
+        response['X-Content-Type-Options'] = 'nosniff'
+        return response
     response = FileResponse(file.open("rb"), content_type=content_type, filename=name)
     response["X-Content-Type-Options"] = "nosniff"
     response["Cache-Control"] = "private, no-store"

@@ -3,12 +3,13 @@ import re
 from html.parser import HTMLParser
 from pathlib import Path
 from tempfile import SpooledTemporaryFile
-from urllib.parse import quote, unquote, urlsplit
+from urllib.parse import quote, unquote, urlsplit, parse_qs
 from zipfile import ZipFile, ZIP_DEFLATED
 from django.conf import settings
 from django.db import transaction
 from django.template.loader import render_to_string
 from .presentation import website_context, page_manifest
+from .image_previews import image_preview
 
 # URL-bearing attributes. srcset holds a comma-separated list of "url descriptor" entries,
 # so each URL in it is handled separately. Only URLs that start with the site-local prefixes
@@ -27,8 +28,10 @@ def attribute_urls(html):
 
 
 def _local(url, renamed=None):
-    if renamed and url in renamed:
-        return quote(renamed[url])
+    if renamed:
+        replacement = renamed.get(url) or renamed.get(unquote(url))
+        if replacement:
+            return quote(replacement)
     for prefix, replacement in LOCAL_PREFIXES:
         if url.startswith(prefix):
             return replacement + url[len(prefix):]
@@ -126,18 +129,25 @@ def website_archive():
         for filename, template, context in page_manifest(shared):
             html = render_to_string(template, context)
             media.update(media_references(html))
-            documents[filename] = localize(html, renamed)
+            documents[filename] = html
     renamed_files = {unquote(url): path for url, path in renamed.items()}
     static_root = settings.BASE_DIR / "static/site"
     static_files = {"assets/" + f.relative_to(static_root).as_posix(): f for f in static_root.rglob("*") if f.is_file()}
     media_root = Path(settings.MEDIA_ROOT).resolve()
     media_files = {}
     for url in sorted(media):
-        relative = url.removeprefix("/media/")
+        parts = urlsplit(url)
+        relative = parts.path.removeprefix("/media/")
         file = (media_root / relative).resolve()
         if not file.is_relative_to(media_root) or not file.is_file():
             raise FileNotFoundError(f"导出中发现缺失的素材：{relative}")
+        query = parse_qs(parts.query)
+        if 'width' in query:
+            file = image_preview(file, int(query['width'][0]))
+            renamed_files[url] = 'media/previews/' + file.name
+            renamed[url] = renamed_files[url]
         media_files[renamed_files.get(url, "media/" + relative)] = file
+    documents = {name: localize(html, renamed) for name, html in documents.items()}
     check_links(documents, set(documents) | set(static_files) | set(media_files))
     stream = SpooledTemporaryFile(max_size=8 * 1024 * 1024)
     try:

@@ -216,7 +216,8 @@ class ResearchSiteTests(MediaMixin, TestCase):
         self.assertNotIn("assets/figures/direction-translation.svg", names)
         self.assertNotIn("assets/favicon.svg", names)
         self.assertEqual(sum(n.endswith(".pdf") for n in names), 9)
-        self.assertEqual(sum("/people/" in n for n in names), 40)
+        self.assertEqual(sum(n.startswith('media/previews/') for n in names), 40)
+        self.assertNotIn('?width=', pages['team.html'])
         for html in pages.values():
             self.assertNotIn('="/media/', html)
             self.assertNotIn('="/static/', html)
