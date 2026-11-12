@@ -30,4 +30,25 @@ IP 证书采用 Let's Encrypt 短期证书；每六小时检查续期，成功�
 
 未来绑定域名时，同时更新 Nginx 的 server_name、证书以及 LAB_ALLOWED_HOSTS，再检查 HTTPS 登录、CSRF、媒体权限及续期任务。
 
+## caobin-lab.com 域名绑定（待备案接入放行）
+
+2026-11-12 实测 `caobin-lab.com` 和 `www.caobin-lab.com` 的 A 记录均为 `47.119.153.171`。公网 HTTP 返回阿里云 `403 / Non-compliance ICP Filing`，服务器内部请求仍到达现有 Nginx。这只能确认接入层拦截，不能据此认定备案被驳回。由备案账号持有人确认审核结果、接入关系和同步状态；无需向维护人员提供账号密码或身份资料。
+
+域名配置见 `deploy/nginx-domain.conf`，在服务器 `/etc/nginx/sites-available/caobin-lab-domain.pending` 暂存，尚未启用，域名证书尚未签发。现有 IP 虚拟主机保持原状。解除备案拦截后按以下顺序完成：
+
+1. 核对两个域名的 A/AAAA 记录；从服务器外验证 `/.well-known/acme-challenge/` 的测试文件能通过现有 HTTP 虚拟主机正确访问。不能以服务器内网请求成功替代公网验证。
+2. 备份现有 Nginx 配置与 `/etc/caobin-lab/environment`，并运行 `systemctl start caobin-backup.service`。
+3. 签发覆盖两个域名的证书：
+
+   ```sh
+   /opt/caobin-certbot/bin/certbot certonly --webroot -w /var/www/caobin-acme --cert-name caobin-lab.com -d caobin-lab.com -d www.caobin-lab.com --non-interactive --agree-tos
+   ```
+
+4. 将生产配置设为 `LAB_ALLOWED_HOSTS=47.119.153.171,caobin-lab.com,www.caobin-lab.com`，保留文件其余配置和权限。运行 Django 部署检查后重启应用，等待健康检查通过。无需开放任意 Host 或关闭 CSRF 检查。
+5. 确认证书已存在，再将暂存配置作为新的域名虚拟主机加入 `sites-enabled`，先运行 `nginx -t`，成功后重载 Nginx。现有 IP 配置不替换。主域名使用 `https://caobin-lab.com`，www 和 HTTP 跳转到主域名并保留路径与查询参数。
+6. 从公网验证证书、跳转、各栏目、图片、PDF、后台登录和保存操作。对域名证书执行 `certbot renew --cert-name caobin-lab.com --dry-run --no-random-sleep-on-renew`；既有续期定时器会自动覆盖新增证书。
+7. 获取真实网站备案号后在网站页脚添加链接至工信部备案查询网站，不能编造或使用其他网站的备案号。
+
+任何一步失败都不要启用缺少证书的域名配置；若切换后出现问题，撤下新域名虚拟主机并恢复本次备份的环境配置，不覆盖内容数据库。备案限制排查依据：[阿里云备案阻断说明](https://help.aliyun.com/zh/icp-filing/basic-icp-service/web-site-for-the-record-to-block-1)。
+
 证书方式依据 [Let's Encrypt 的 Certbot IP 证书说明](https://letsencrypt.org/2026/03/11/shorter-certs-certbot.html)。
